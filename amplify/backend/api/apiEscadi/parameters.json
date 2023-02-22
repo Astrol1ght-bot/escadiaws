@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "apiEscadi",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authescadiauth",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
