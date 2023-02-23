@@ -16,7 +16,7 @@ interface AppState {
   setUserProfile: (client?: Client) => void;
   setIsAdmin: (role?: boolean) => void;
   setIsLogged: (role?: boolean) => void;
-  setProducts: (products: Course[]) => void;
+  setCourses: (courses: Course[]) => void;
   setToogleState: () => void;
   resetUserSession: () => void;
 }
@@ -38,8 +38,8 @@ const useAppStore = create<AppState>()(
       set((state) => ({ ...state, userProfile: client })),
     setIsAdmin: (role) => set((state) => ({ ...state, isAdmin: role })),
     setIsLogged: (isLogged) => set((state) => ({ ...state, isLogged })),
-    setProducts: (product) =>
-      set((state) => ({ ...state, menuProducts: product })),
+    setCourses: (course) =>
+      set((state) => ({ ...state, menuProducts: course })),
     setToogleState: () =>
       set((state) => ({ ...state, toogleState: !state.toogleState })),
     resetUserSession: () =>

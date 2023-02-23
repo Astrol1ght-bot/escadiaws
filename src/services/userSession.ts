@@ -53,16 +53,16 @@ export const getUserInfo = () => {
   };
 };
 
-export const getMainProducts = (authUser: boolean) => {
+export const getMainCourses = (authUser: boolean) => {
   const { data, error, isValidating } = useSWR(
     listCourses,
     (query) => getAllPublicElements(query, authUser),
     { revalidateOnFocus: false }
   );
   return {
-    products: data,
-    isProductsLoading: !error && !data,
-    isProductsError: error,
+    courses: data,
+    isCoursesLoading: !error && !data,
+    isCoursesError: error,
     isValidating,
   };
 };
