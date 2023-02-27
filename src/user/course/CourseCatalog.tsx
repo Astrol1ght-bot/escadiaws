@@ -27,12 +27,10 @@ export const CourseCatalog: React.FC = () => {
   }, [catalogCourses]);
 
   return (
-    <Layout title="Checkout our courses">
-      <Container
-        header={<Header variant="h2">Browse your style and customize!</Header>}
-      >
+    <Layout title="Mis Cursos">
+      <Container>
         {isCoursesError && !isCoursesLoading && (
-          <h3>Error loading the courses</h3>
+          <h3>Error cargando los cursos</h3>
         )}
         {catalogCourses && (
           <Cards
@@ -41,7 +39,7 @@ export const CourseCatalog: React.FC = () => {
                 {
                   id: 'thumbnail',
                   content: (p: Course) => (
-                    <Link to={`/product/${p.id}`}>
+                    <Link to={`/courses/${p.id}`}>
                       <img width="100%" src={p.thumbnail} alt={p.name} />
                     </Link>
                   ),
@@ -61,9 +59,9 @@ export const CourseCatalog: React.FC = () => {
                       <Button
                         iconName="add-plus"
                         iconAlign="right"
-                        onClick={() => navigate(`/product/${p.id}`)}
+                        onClick={() => navigate(`/courses/${p.id}`)}
                       >
-                        See more
+                        Ver mas información
                       </Button>
                     </Box>
                   ),
@@ -79,13 +77,13 @@ export const CourseCatalog: React.FC = () => {
               id: product?.id,
             }))}
             loading={isCoursesLoading || isValidating}
-            loadingText="Loading courses"
+            loadingText="Cargando cursos"
             trackBy="id"
             empty={
               <Box textAlign="center" color="inherit">
-                <b>No courses</b>
+                <b>No hay cursos</b>
                 <Box padding={{ bottom: 's' }} variant="p" color="inherit">
-                  No courses to display.
+                  Intenta añadir un curso nuevo.
                 </Box>
               </Box>
             }

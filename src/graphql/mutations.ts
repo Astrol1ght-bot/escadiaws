@@ -11,8 +11,6 @@ export const createCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -78,8 +76,6 @@ export const updateCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -145,8 +141,6 @@ export const deleteCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -216,8 +210,6 @@ export const createProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -248,8 +240,6 @@ export const updateProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -280,8 +270,6 @@ export const deleteProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -312,8 +300,6 @@ export const createBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -376,8 +362,6 @@ export const updateBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -440,8 +424,6 @@ export const deleteBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -789,8 +771,6 @@ export const createPurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -850,8 +830,6 @@ export const updatePurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -911,8 +889,6 @@ export const deletePurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1050,8 +1026,6 @@ export const createEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1125,8 +1099,6 @@ export const updateEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1200,8 +1172,6 @@ export const deleteEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id

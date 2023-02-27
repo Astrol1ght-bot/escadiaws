@@ -18,8 +18,6 @@ type Course
     id: ID!
     name: String!
     thumbnail: AWSURL!
-    images: [AWSURL!]!
-    available: Boolean!
     description: String
     professor: Professor 
     blocks: [Block] @hasMany

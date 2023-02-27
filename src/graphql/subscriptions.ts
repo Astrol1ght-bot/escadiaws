@@ -15,8 +15,6 @@ export const onCreateProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -47,8 +45,6 @@ export const onUpdateProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -79,8 +75,6 @@ export const onDeleteProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -396,8 +390,6 @@ export const onCreatePurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -457,8 +449,6 @@ export const onUpdatePurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -518,8 +508,6 @@ export const onDeletePurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -653,8 +641,6 @@ export const onCreateCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -720,8 +706,6 @@ export const onUpdateCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -787,8 +771,6 @@ export const onDeleteCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -858,8 +840,6 @@ export const onCreateBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -922,8 +902,6 @@ export const onUpdateBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -986,8 +964,6 @@ export const onDeleteBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1050,8 +1026,6 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1125,8 +1099,6 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -1200,8 +1172,6 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id

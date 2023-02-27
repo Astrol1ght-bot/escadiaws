@@ -6,8 +6,6 @@ export type CreateCourseInput = {
   id?: string | null,
   name: string,
   thumbnail: string,
-  images: Array< string >,
-  available: boolean,
   description?: string | null,
   fileUploadEnabled?: boolean | null,
   price: number,
@@ -25,8 +23,6 @@ export enum CourseStatus {
 export type ModelCourseConditionInput = {
   name?: ModelStringInput | null,
   thumbnail?: ModelStringInput | null,
-  images?: ModelStringInput | null,
-  available?: ModelBooleanInput | null,
   description?: ModelStringInput | null,
   fileUploadEnabled?: ModelBooleanInput | null,
   price?: ModelFloatInput | null,
@@ -122,8 +118,6 @@ export type Course = {
   id: string,
   name: string,
   thumbnail: string,
-  images: Array< string >,
-  available: boolean,
   description?: string | null,
   professor?: Professor | null,
   blocks?: ModelBlockConnection | null,
@@ -290,8 +284,6 @@ export type UpdateCourseInput = {
   id: string,
   name?: string | null,
   thumbnail?: string | null,
-  images?: Array< string > | null,
-  available?: boolean | null,
   description?: string | null,
   fileUploadEnabled?: boolean | null,
   price?: number | null,
@@ -582,8 +574,6 @@ export type ModelCourseFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   thumbnail?: ModelStringInput | null,
-  images?: ModelStringInput | null,
-  available?: ModelBooleanInput | null,
   description?: ModelStringInput | null,
   fileUploadEnabled?: ModelBooleanInput | null,
   price?: ModelFloatInput | null,
@@ -693,8 +683,6 @@ export type ModelSubscriptionCourseFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
   thumbnail?: ModelSubscriptionStringInput | null,
-  images?: ModelSubscriptionStringInput | null,
-  available?: ModelSubscriptionBooleanInput | null,
   description?: ModelSubscriptionStringInput | null,
   fileUploadEnabled?: ModelSubscriptionBooleanInput | null,
   price?: ModelSubscriptionFloatInput | null,
@@ -747,8 +735,6 @@ export type CreateCourseMutation = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -824,8 +810,6 @@ export type UpdateCourseMutation = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -901,8 +885,6 @@ export type DeleteCourseMutation = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -984,8 +966,6 @@ export type CreateProfessorMutation = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -1020,8 +1000,6 @@ export type UpdateProfessorMutation = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -1056,8 +1034,6 @@ export type DeleteProfessorMutation = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -1091,8 +1067,6 @@ export type CreateBlockMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1164,8 +1138,6 @@ export type UpdateBlockMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1237,8 +1209,6 @@ export type DeleteBlockMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1640,8 +1610,6 @@ export type CreatePurchaseMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1711,8 +1679,6 @@ export type UpdatePurchaseMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1782,8 +1748,6 @@ export type DeletePurchaseMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -1943,8 +1907,6 @@ export type CreateEnrollCoursesMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2029,8 +1991,6 @@ export type UpdateEnrollCoursesMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2115,8 +2075,6 @@ export type DeleteEnrollCoursesMutation = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2201,8 +2159,6 @@ export type GetProfessorQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -2454,8 +2410,6 @@ export type GetPurchaseQuery = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2520,8 +2474,6 @@ export type ListPurchasesQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -2618,8 +2570,6 @@ export type GetCourseQuery = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -2698,8 +2648,6 @@ export type ListCoursesQuery = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2748,8 +2696,6 @@ export type GetBlockQuery = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2824,8 +2770,6 @@ export type ListBlocksQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -2869,8 +2813,6 @@ export type GetEnrollCoursesQuery = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -2958,8 +2900,6 @@ export type ListEnrollCoursesQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -2989,16 +2929,16 @@ export type ListEnrollCoursesQuery = {
   } | null,
 };
 
-export type EnrollCoursesByCourseIdQueryVariables = {
-  courseId: string,
+export type EnrollCoursesByCourseIDQueryVariables = {
+  courseID: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnrollCoursesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type EnrollCoursesByCourseIdQuery = {
-  enrollCoursesByCourseId?:  {
+export type EnrollCoursesByCourseIDQuery = {
+  enrollCoursesByCourseID?:  {
     __typename: "ModelEnrollCoursesConnection",
     items:  Array< {
       __typename: "EnrollCourses",
@@ -3010,8 +2950,6 @@ export type EnrollCoursesByCourseIdQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -3041,16 +2979,16 @@ export type EnrollCoursesByCourseIdQuery = {
   } | null,
 };
 
-export type EnrollCoursesByEnrollmentIdQueryVariables = {
-  enrollmentId: string,
+export type EnrollCoursesByEnrollmentIDQueryVariables = {
+  enrollmentID: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnrollCoursesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type EnrollCoursesByEnrollmentIdQuery = {
-  enrollCoursesByEnrollmentId?:  {
+export type EnrollCoursesByEnrollmentIDQuery = {
+  enrollCoursesByEnrollmentID?:  {
     __typename: "ModelEnrollCoursesConnection",
     items:  Array< {
       __typename: "EnrollCourses",
@@ -3062,8 +3000,6 @@ export type EnrollCoursesByEnrollmentIdQuery = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -3110,8 +3046,6 @@ export type OnCreateProfessorSubscription = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -3146,8 +3080,6 @@ export type OnUpdateProfessorSubscription = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -3182,8 +3114,6 @@ export type OnDeleteProfessorSubscription = {
         id: string,
         name: string,
         thumbnail: string,
-        images: Array< string >,
-        available: boolean,
         description?: string | null,
         fileUploadEnabled?: boolean | null,
         price: number,
@@ -3547,8 +3477,6 @@ export type OnCreatePurchaseSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -3618,8 +3546,6 @@ export type OnUpdatePurchaseSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -3689,8 +3615,6 @@ export type OnDeletePurchaseSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -3845,8 +3769,6 @@ export type OnCreateCourseSubscription = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -3922,8 +3844,6 @@ export type OnUpdateCourseSubscription = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -3999,8 +3919,6 @@ export type OnDeleteCourseSubscription = {
     id: string,
     name: string,
     thumbnail: string,
-    images: Array< string >,
-    available: boolean,
     description?: string | null,
     professor?:  {
       __typename: "Professor",
@@ -4081,8 +3999,6 @@ export type OnCreateBlockSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -4154,8 +4070,6 @@ export type OnUpdateBlockSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -4227,8 +4141,6 @@ export type OnDeleteBlockSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -4300,8 +4212,6 @@ export type OnCreateEnrollCoursesSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -4386,8 +4296,6 @@ export type OnUpdateEnrollCoursesSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",
@@ -4472,8 +4380,6 @@ export type OnDeleteEnrollCoursesSubscription = {
       id: string,
       name: string,
       thumbnail: string,
-      images: Array< string >,
-      available: boolean,
       description?: string | null,
       professor?:  {
         __typename: "Professor",

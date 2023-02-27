@@ -29,7 +29,7 @@ export const TopMenu: React.FC = () => {
     navigate('/');
   };
 
-  const authneticatedMenuItems = [
+  const authenticatedMenuItems = [
     {
       id: 'profile',
       text: 'My profile',
@@ -48,21 +48,21 @@ export const TopMenu: React.FC = () => {
     },
   ];
 
-  const signInrMenu = [
+  const signInMenu = [
     {
       id: 'profile/signin',
       text: 'Sign In',
     },
   ];
 
-  const menuItems = userProfile ? authneticatedMenuItems : signInrMenu;
+  const menuItems = userProfile ? authenticatedMenuItems : signInMenu;
 
   return (
     <div id="header">
       <TopNavCustom
         identity={{
           href: '/',
-          title: 'T-shirts',
+          title: 'Escadi',
         }}
         i18nStrings={{
           overflowMenuBackIconAriaLabel: 'back-icon',

@@ -12,8 +12,6 @@ export const getProfessor = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -224,8 +222,6 @@ export const getPurchase = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -281,8 +277,6 @@ export const listPurchases = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -364,8 +358,6 @@ export const getCourse = /* GraphQL */ `
       id
       name
       thumbnail
-      images
-      available
       description
       professor {
         id
@@ -433,8 +425,6 @@ export const listCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -474,8 +464,6 @@ export const getBlock = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -540,8 +528,6 @@ export const listBlocks = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -579,8 +565,6 @@ export const getEnrollCourses = /* GraphQL */ `
         id
         name
         thumbnail
-        images
-        available
         description
         professor {
           id
@@ -656,8 +640,6 @@ export const listEnrollCourses = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -686,16 +668,16 @@ export const listEnrollCourses = /* GraphQL */ `
     }
   }
 `;
-export const enrollCoursesByCourseId = /* GraphQL */ `
-  query EnrollCoursesByCourseId(
-    $courseId: ID!
+export const enrollCoursesByCourseID = /* GraphQL */ `
+  query EnrollCoursesByCourseID(
+    $courseID: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelEnrollCoursesFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    enrollCoursesByCourseId(
-      courseId: $courseId
+    enrollCoursesByCourseID(
+      courseID: $courseID
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -709,8 +691,6 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price
@@ -739,16 +719,16 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
     }
   }
 `;
-export const enrollCoursesByEnrollmentId = /* GraphQL */ `
-  query EnrollCoursesByEnrollmentId(
-    $enrollmentId: ID!
+export const enrollCoursesByEnrollmentID = /* GraphQL */ `
+  query EnrollCoursesByEnrollmentID(
+    $enrollmentID: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelEnrollCoursesFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    enrollCoursesByEnrollmentId(
-      enrollmentId: $enrollmentId
+    enrollCoursesByEnrollmentID(
+      enrollmentID: $enrollmentID
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -762,8 +742,6 @@ export const enrollCoursesByEnrollmentId = /* GraphQL */ `
           id
           name
           thumbnail
-          images
-          available
           description
           fileUploadEnabled
           price

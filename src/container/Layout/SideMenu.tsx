@@ -46,11 +46,9 @@ export const SideMenu: React.FC = () => {
               description: course?.description,
               thumbnail: course?.thumbnail,
               price: course?.price,
-              images: course?.images,
               createdAt: course?.createdAt,
               updatedAt: course?.updatedAt,
               __typename: course?.__typename,
-              available: course?.available,
               id: course?.id,
             }))}
             loadingText="Loading products"
@@ -69,15 +67,9 @@ export const SideMenu: React.FC = () => {
             <Divider orientation="horizontal" />
             <Button
               variant="link"
-              onClick={() => navigate('/owner/products', { replace: true })}
+              onClick={() => navigate('/admin/courses', { replace: true })}
             >
-              Products
-            </Button>
-            <Button
-              variant="link"
-              onClick={() => navigate('/owner/orders', { replace: true })}
-            >
-              Orders
+              Cursos
             </Button>
           </>
         )}
