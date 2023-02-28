@@ -20,6 +20,7 @@ export const TopMenu: React.FC = () => {
   const { totalItems } = useCart();
   const { signOut } = useAuthenticator((context) => [context.user]);
   const userProfile = useAppStore((state) => state.userProfile);
+  const cognitoUser = useAppStore((state) => state.cognitoUser);
   const resetUserSession = useAppStore((state) => state.resetUserSession);
   const navigate = useNavigate();
 
@@ -30,18 +31,18 @@ export const TopMenu: React.FC = () => {
   };
 
   const authenticatedMenuItems = [
-    {
-      id: 'profile',
-      text: 'My profile',
-    },
-    {
-      id: 'address',
-      text: 'My addresses',
-    },
-    {
-      id: 'orders',
-      text: 'My orders',
-    },
+    // {
+    //   id: 'profile',
+    //   text: 'My profile',
+    // },
+    // {
+    //   id: 'address',
+    //   text: 'My addresses',
+    // },
+    // {
+    //   id: 'orders',
+    //   text: 'My orders',
+    // },
     {
       id: 'sign-out',
       text: 'Sign Out',
@@ -55,7 +56,7 @@ export const TopMenu: React.FC = () => {
     },
   ];
 
-  const menuItems = userProfile ? authenticatedMenuItems : signInMenu;
+  const menuItems = cognitoUser ? authenticatedMenuItems : signInMenu;
 
   return (
     <div id="header">
@@ -74,12 +75,6 @@ export const TopMenu: React.FC = () => {
         }}
         utilities={[
           {
-            type: 'button',
-            variant: 'link',
-            text: 'Home',
-            onClick: () => navigate('/'),
-          },
-          {
             type: 'menu-dropdown',
             text: `${
               userProfile ? `Hi ${userProfile.name} - Profile` : 'Profile'
@@ -91,13 +86,6 @@ export const TopMenu: React.FC = () => {
                 ? signOutUser()
                 : navigate(`/${item.detail.id}`);
             },
-          },
-          {
-            type: 'button',
-            iconName: 'notification',
-            badge: totalItems > 0,
-            text: `${totalItems > 0 ? `(${totalItems})` : ''} My Cart`,
-            onClick: () => navigate('/cart'),
           },
         ]}
       />

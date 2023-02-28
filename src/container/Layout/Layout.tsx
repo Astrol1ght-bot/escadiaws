@@ -5,7 +5,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import awsExports from '@aws-exports';
 import { TopMenu } from './TopMenu';
 import { SideMenu } from './SideMenu';
-import { CartSummary } from '../CartLayout/CartSummary';
 import { Footer } from './Footer';
 import { ContentHeader } from './ContentHeader';
 import { ErrorFallback } from '../DataManagement/ErrorFallback';
@@ -38,8 +37,6 @@ export const Layout: React.FC<Props> = ({
       }
       toolsHide
       navigation={<SideMenu />}
-      splitPanelPreferences={{ position: 'side' }}
-      splitPanel={<CartSummary />}
       contentHeader={<ContentHeader title={title} buttons={topButtons} />}
       contentType="form"
       headerSelector="#header"

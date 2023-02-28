@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
       <TopNavigation
         identity={{
           href: '/',
-          title: 'T-shirts',
+          title: '',
         }}
         i18nStrings={{
           overflowMenuBackIconAriaLabel: 'string',
@@ -38,21 +38,6 @@ export const Footer: React.FC = () => {
           searchDismissIconAriaLabel: 'string',
           searchIconAriaLabel: 'string',
         }}
-        utilities={[
-          {
-            type: 'button',
-            variant: 'link',
-            text: 'Home',
-            onClick: () => navigate('/'),
-          },
-          ...productLinks,
-          {
-            type: 'button',
-            variant: 'primary-button',
-            text: 'My Cart',
-            onClick: () => navigate('/cart'),
-          },
-        ]}
       />
     </div>
   );
