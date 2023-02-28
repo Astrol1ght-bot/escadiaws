@@ -19,10 +19,12 @@ export const getProfessor = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         nextToken
       }
+      cognitoId
       createdAt
       updatedAt
       owner
@@ -42,6 +44,7 @@ export const listProfessors = /* GraphQL */ `
         courses {
           nextToken
         }
+        cognitoId
         createdAt
         updatedAt
         owner
@@ -226,6 +229,7 @@ export const getPurchase = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -245,6 +249,7 @@ export const getPurchase = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       date
@@ -284,6 +289,7 @@ export const listPurchases = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         date
@@ -365,6 +371,7 @@ export const getCourse = /* GraphQL */ `
         courses {
           nextToken
         }
+        cognitoId
         createdAt
         updatedAt
         owner
@@ -410,6 +417,7 @@ export const getCourse = /* GraphQL */ `
       createdAt
       updatedAt
       professorCoursesId
+      courseProfessorId
       owner
     }
   }
@@ -429,6 +437,7 @@ export const listCourses = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -448,6 +457,7 @@ export const listCourses = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       nextToken
@@ -468,6 +478,7 @@ export const getBlock = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -487,6 +498,7 @@ export const getBlock = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       uploadedFiles {
@@ -535,6 +547,7 @@ export const listBlocks = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         uploadedFiles {
@@ -569,6 +582,7 @@ export const getEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -588,6 +602,7 @@ export const getEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       enrollment {
@@ -647,6 +662,7 @@ export const listEnrollCourses = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         enrollment {
@@ -668,16 +684,16 @@ export const listEnrollCourses = /* GraphQL */ `
     }
   }
 `;
-export const enrollCoursesByCourseID = /* GraphQL */ `
-  query EnrollCoursesByCourseID(
-    $courseID: ID!
+export const enrollCoursesByCourseId = /* GraphQL */ `
+  query EnrollCoursesByCourseId(
+    $courseId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelEnrollCoursesFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    enrollCoursesByCourseID(
-      courseID: $courseID
+    enrollCoursesByCourseId(
+      courseId: $courseId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -698,6 +714,7 @@ export const enrollCoursesByCourseID = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         enrollment {
@@ -719,16 +736,16 @@ export const enrollCoursesByCourseID = /* GraphQL */ `
     }
   }
 `;
-export const enrollCoursesByEnrollmentID = /* GraphQL */ `
-  query EnrollCoursesByEnrollmentID(
-    $enrollmentID: ID!
+export const enrollCoursesByEnrollmentId = /* GraphQL */ `
+  query EnrollCoursesByEnrollmentId(
+    $enrollmentId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelEnrollCoursesFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    enrollCoursesByEnrollmentID(
-      enrollmentID: $enrollmentID
+    enrollCoursesByEnrollmentId(
+      enrollmentId: $enrollmentId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -749,6 +766,7 @@ export const enrollCoursesByEnrollmentID = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         enrollment {

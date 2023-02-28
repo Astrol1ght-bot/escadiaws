@@ -19,8 +19,8 @@ type Course
     name: String!
     thumbnail: AWSURL!
     description: String
-    professor: Professor 
-    blocks: [Block] @hasMany
+    professor: Professor @hasOne
+    blocks: [Block] @hasMany 
     fileUploadEnabled: Boolean
     price: Float!
     status: CourseStatus
@@ -37,6 +37,7 @@ type Professor
     id: ID!
     name: String!
     courses: [Course] @hasMany
+    cognitoId: String!
 }
 
 type Block 

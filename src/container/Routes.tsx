@@ -8,10 +8,14 @@ import { createCourseRoutes } from '../user/course/course.routes';
 // import { createOrdersRoutes } from '../owner/orders/orders.routes';
 // import { createProductsRoutes } from '../owner/products/products.routes';
 
+import { createAdminProfessorRoutes } from '../admin/professor/adminprofessor.routes';
+
 // const addressRoutes = createAddressRoutes();
 const profileRoutes = createProfileRoutes();
 const courseRoutes = createCourseRoutes();
 const adminCourseRoutes = createAdminCourseRoutes();
+const adminProfessorRoutes = createAdminProfessorRoutes();
+
 // const ordersRoutes = createOrdersRoutes();
 // const productsRoutes = createProductsRoutes();
 
@@ -20,6 +24,8 @@ const routes = (
     {courseRoutes.routes}
     {profileRoutes.routes}
     {adminCourseRoutes.routes}
+    {adminProfessorRoutes.routes}
+
     {/* {addressRoutes.routes}
     {profileRoutes.routes}
     {ordersRoutes.routes}

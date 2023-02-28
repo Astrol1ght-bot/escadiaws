@@ -18,6 +18,7 @@ export const createCourse = /* GraphQL */ `
         courses {
           nextToken
         }
+        cognitoId
         createdAt
         updatedAt
         owner
@@ -63,6 +64,7 @@ export const createCourse = /* GraphQL */ `
       createdAt
       updatedAt
       professorCoursesId
+      courseProfessorId
       owner
     }
   }
@@ -83,6 +85,7 @@ export const updateCourse = /* GraphQL */ `
         courses {
           nextToken
         }
+        cognitoId
         createdAt
         updatedAt
         owner
@@ -128,6 +131,7 @@ export const updateCourse = /* GraphQL */ `
       createdAt
       updatedAt
       professorCoursesId
+      courseProfessorId
       owner
     }
   }
@@ -148,6 +152,7 @@ export const deleteCourse = /* GraphQL */ `
         courses {
           nextToken
         }
+        cognitoId
         createdAt
         updatedAt
         owner
@@ -193,6 +198,7 @@ export const deleteCourse = /* GraphQL */ `
       createdAt
       updatedAt
       professorCoursesId
+      courseProfessorId
       owner
     }
   }
@@ -217,10 +223,12 @@ export const createProfessor = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         nextToken
       }
+      cognitoId
       createdAt
       updatedAt
       owner
@@ -247,10 +255,12 @@ export const updateProfessor = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         nextToken
       }
+      cognitoId
       createdAt
       updatedAt
       owner
@@ -277,10 +287,12 @@ export const deleteProfessor = /* GraphQL */ `
           createdAt
           updatedAt
           professorCoursesId
+          courseProfessorId
           owner
         }
         nextToken
       }
+      cognitoId
       createdAt
       updatedAt
       owner
@@ -304,6 +316,7 @@ export const createBlock = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -323,6 +336,7 @@ export const createBlock = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       uploadedFiles {
@@ -366,6 +380,7 @@ export const updateBlock = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -385,6 +400,7 @@ export const updateBlock = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       uploadedFiles {
@@ -428,6 +444,7 @@ export const deleteBlock = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -447,6 +464,7 @@ export const deleteBlock = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       uploadedFiles {
@@ -775,6 +793,7 @@ export const createPurchase = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -794,6 +813,7 @@ export const createPurchase = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       date
@@ -834,6 +854,7 @@ export const updatePurchase = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -853,6 +874,7 @@ export const updatePurchase = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       date
@@ -893,6 +915,7 @@ export const deletePurchase = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -912,6 +935,7 @@ export const deletePurchase = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       date
@@ -1030,6 +1054,7 @@ export const createEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -1049,6 +1074,7 @@ export const createEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       enrollment {
@@ -1103,6 +1129,7 @@ export const updateEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -1122,6 +1149,7 @@ export const updateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       enrollment {
@@ -1176,6 +1204,7 @@ export const deleteEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
+          cognitoId
           createdAt
           updatedAt
           owner
@@ -1195,6 +1224,7 @@ export const deleteEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         professorCoursesId
+        courseProfessorId
         owner
       }
       enrollment {

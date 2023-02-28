@@ -11,6 +11,7 @@ export type CreateCourseInput = {
   price: number,
   status?: CourseStatus | null,
   professorCoursesId?: string | null,
+  courseProfessorId?: string | null,
 };
 
 export enum CourseStatus {
@@ -31,6 +32,7 @@ export type ModelCourseConditionInput = {
   or?: Array< ModelCourseConditionInput | null > | null,
   not?: ModelCourseConditionInput | null,
   professorCoursesId?: ModelIDInput | null,
+  courseProfessorId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -129,6 +131,7 @@ export type Course = {
   createdAt: string,
   updatedAt: string,
   professorCoursesId?: string | null,
+  courseProfessorId?: string | null,
   owner?: string | null,
 };
 
@@ -137,6 +140,7 @@ export type Professor = {
   id: string,
   name: string,
   courses?: ModelCourseConnection | null,
+  cognitoId: string,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
@@ -289,6 +293,7 @@ export type UpdateCourseInput = {
   price?: number | null,
   status?: CourseStatus | null,
   professorCoursesId?: string | null,
+  courseProfessorId?: string | null,
 };
 
 export type DeleteCourseInput = {
@@ -298,10 +303,12 @@ export type DeleteCourseInput = {
 export type CreateProfessorInput = {
   id?: string | null,
   name: string,
+  cognitoId: string,
 };
 
 export type ModelProfessorConditionInput = {
   name?: ModelStringInput | null,
+  cognitoId?: ModelStringInput | null,
   and?: Array< ModelProfessorConditionInput | null > | null,
   or?: Array< ModelProfessorConditionInput | null > | null,
   not?: ModelProfessorConditionInput | null,
@@ -310,6 +317,7 @@ export type ModelProfessorConditionInput = {
 export type UpdateProfessorInput = {
   id: string,
   name?: string | null,
+  cognitoId?: string | null,
 };
 
 export type DeleteProfessorInput = {
@@ -506,6 +514,7 @@ export type DeleteEnrollCoursesInput = {
 export type ModelProfessorFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  cognitoId?: ModelStringInput | null,
   and?: Array< ModelProfessorFilterInput | null > | null,
   or?: Array< ModelProfessorFilterInput | null > | null,
   not?: ModelProfessorFilterInput | null,
@@ -582,6 +591,7 @@ export type ModelCourseFilterInput = {
   or?: Array< ModelCourseFilterInput | null > | null,
   not?: ModelCourseFilterInput | null,
   professorCoursesId?: ModelIDInput | null,
+  courseProfessorId?: ModelIDInput | null,
 };
 
 export type ModelBlockFilterInput = {
@@ -612,6 +622,7 @@ export enum ModelSortDirection {
 export type ModelSubscriptionProfessorFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
+  cognitoId?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
   or?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
 };
@@ -744,6 +755,7 @@ export type CreateCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -795,6 +807,7 @@ export type CreateCourseMutation = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -819,6 +832,7 @@ export type UpdateCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -870,6 +884,7 @@ export type UpdateCourseMutation = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -894,6 +909,7 @@ export type DeleteCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -945,6 +961,7 @@ export type DeleteCourseMutation = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -973,10 +990,12 @@ export type CreateProfessorMutation = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1007,10 +1026,12 @@ export type UpdateProfessorMutation = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1041,10 +1062,12 @@ export type DeleteProfessorMutation = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1072,6 +1095,7 @@ export type CreateBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1094,6 +1118,7 @@ export type CreateBlockMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -1143,6 +1168,7 @@ export type UpdateBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1165,6 +1191,7 @@ export type UpdateBlockMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -1214,6 +1241,7 @@ export type DeleteBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1236,6 +1264,7 @@ export type DeleteBlockMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -1615,6 +1644,7 @@ export type CreatePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1637,6 +1667,7 @@ export type CreatePurchaseMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -1684,6 +1715,7 @@ export type UpdatePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1706,6 +1738,7 @@ export type UpdatePurchaseMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -1753,6 +1786,7 @@ export type DeletePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1775,6 +1809,7 @@ export type DeletePurchaseMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -1912,6 +1947,7 @@ export type CreateEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1934,6 +1970,7 @@ export type CreateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -1996,6 +2033,7 @@ export type UpdateEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2018,6 +2056,7 @@ export type UpdateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -2080,6 +2119,7 @@ export type DeleteEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2102,6 +2142,7 @@ export type DeleteEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -2166,10 +2207,12 @@ export type GetProfessorQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -2193,6 +2236,7 @@ export type ListProfessorsQuery = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -2415,6 +2459,7 @@ export type GetPurchaseQuery = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2437,6 +2482,7 @@ export type GetPurchaseQuery = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -2481,6 +2527,7 @@ export type ListPurchasesQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       },
       date: string,
@@ -2579,6 +2626,7 @@ export type GetCourseQuery = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -2630,6 +2678,7 @@ export type GetCourseQuery = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2653,6 +2702,7 @@ export type ListCoursesQuery = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2675,6 +2725,7 @@ export type ListCoursesQuery = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -2701,6 +2752,7 @@ export type GetBlockQuery = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2723,6 +2775,7 @@ export type GetBlockQuery = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -2777,6 +2830,7 @@ export type ListBlocksQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null,
       uploadedFiles?:  Array< {
@@ -2818,6 +2872,7 @@ export type GetEnrollCoursesQuery = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -2840,6 +2895,7 @@ export type GetEnrollCoursesQuery = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -2907,6 +2963,7 @@ export type ListEnrollCoursesQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       },
       enrollment:  {
@@ -2929,16 +2986,16 @@ export type ListEnrollCoursesQuery = {
   } | null,
 };
 
-export type EnrollCoursesByCourseIDQueryVariables = {
-  courseID: string,
+export type EnrollCoursesByCourseIdQueryVariables = {
+  courseId: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnrollCoursesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type EnrollCoursesByCourseIDQuery = {
-  enrollCoursesByCourseID?:  {
+export type EnrollCoursesByCourseIdQuery = {
+  enrollCoursesByCourseId?:  {
     __typename: "ModelEnrollCoursesConnection",
     items:  Array< {
       __typename: "EnrollCourses",
@@ -2957,6 +3014,7 @@ export type EnrollCoursesByCourseIDQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       },
       enrollment:  {
@@ -2979,16 +3037,16 @@ export type EnrollCoursesByCourseIDQuery = {
   } | null,
 };
 
-export type EnrollCoursesByEnrollmentIDQueryVariables = {
-  enrollmentID: string,
+export type EnrollCoursesByEnrollmentIdQueryVariables = {
+  enrollmentId: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnrollCoursesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type EnrollCoursesByEnrollmentIDQuery = {
-  enrollCoursesByEnrollmentID?:  {
+export type EnrollCoursesByEnrollmentIdQuery = {
+  enrollCoursesByEnrollmentId?:  {
     __typename: "ModelEnrollCoursesConnection",
     items:  Array< {
       __typename: "EnrollCourses",
@@ -3007,6 +3065,7 @@ export type EnrollCoursesByEnrollmentIDQuery = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       },
       enrollment:  {
@@ -3053,10 +3112,12 @@ export type OnCreateProfessorSubscription = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -3087,10 +3148,12 @@ export type OnUpdateProfessorSubscription = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -3121,10 +3184,12 @@ export type OnDeleteProfessorSubscription = {
         createdAt: string,
         updatedAt: string,
         professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
+    cognitoId: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -3482,6 +3547,7 @@ export type OnCreatePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -3504,6 +3570,7 @@ export type OnCreatePurchaseSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -3551,6 +3618,7 @@ export type OnUpdatePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -3573,6 +3641,7 @@ export type OnUpdatePurchaseSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -3620,6 +3689,7 @@ export type OnDeletePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -3642,6 +3712,7 @@ export type OnDeletePurchaseSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     date: string,
@@ -3778,6 +3849,7 @@ export type OnCreateCourseSubscription = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -3829,6 +3901,7 @@ export type OnCreateCourseSubscription = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -3853,6 +3926,7 @@ export type OnUpdateCourseSubscription = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -3904,6 +3978,7 @@ export type OnUpdateCourseSubscription = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -3928,6 +4003,7 @@ export type OnDeleteCourseSubscription = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
+      cognitoId: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -3979,6 +4055,7 @@ export type OnDeleteCourseSubscription = {
     createdAt: string,
     updatedAt: string,
     professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -4004,6 +4081,7 @@ export type OnCreateBlockSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4026,6 +4104,7 @@ export type OnCreateBlockSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -4075,6 +4154,7 @@ export type OnUpdateBlockSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4097,6 +4177,7 @@ export type OnUpdateBlockSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -4146,6 +4227,7 @@ export type OnDeleteBlockSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4168,6 +4250,7 @@ export type OnDeleteBlockSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
@@ -4217,6 +4300,7 @@ export type OnCreateEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4239,6 +4323,7 @@ export type OnCreateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -4301,6 +4386,7 @@ export type OnUpdateEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4323,6 +4409,7 @@ export type OnUpdateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
@@ -4385,6 +4472,7 @@ export type OnDeleteEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
+        cognitoId: string,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -4407,6 +4495,7 @@ export type OnDeleteEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
       owner?: string | null,
     },
     enrollment:  {
