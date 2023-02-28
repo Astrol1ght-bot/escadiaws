@@ -14,9 +14,7 @@ export const ContentHeader: React.FC<Props> = ({ title, buttons }) => (
         {buttons}
       </SpaceBetween>
     }
-  >
-    {title}
-  </Header>
+  ></Header>
 );
 
 ContentHeader.defaultProps = {

@@ -8,6 +8,7 @@ import { SideMenu } from './SideMenu';
 import { Footer } from './Footer';
 import { ContentHeader } from './ContentHeader';
 import { ErrorFallback } from '../DataManagement/ErrorFallback';
+import useAppStore from '@use-AppStore';
 
 Amplify.configure(awsExports);
 
@@ -26,28 +27,32 @@ export const Layout: React.FC<Props> = ({
   children,
   title,
   topButtons,
-}) => (
-  <>
-    <TopMenu />
-    <AppLayout
-      content={
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          {children}
-        </ErrorBoundary>
-      }
-      toolsHide
-      navigation={<SideMenu />}
-      contentHeader={<ContentHeader title={title} buttons={topButtons} />}
-      contentType="form"
-      headerSelector="#header"
-      footerSelector="#footer"
-      breadcrumbs={
-        <BreadcrumbGroup items={breadCrumbs || []} ariaLabel="Breadcrumbs" />
-      }
-    />
-    <Footer />
-  </>
-);
+}) => {
+  const cognitoUser = useAppStore((state) => state.cognitoUser);
+  return (
+    <>
+      <TopMenu />
+      <AppLayout
+        content={
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {children}
+          </ErrorBoundary>
+        }
+        toolsHide
+        navigation={<SideMenu />}
+        navigationHide={!cognitoUser}
+        contentHeader={<ContentHeader title={title} buttons={topButtons} />}
+        contentType="form"
+        headerSelector="#header"
+        footerSelector="#footer"
+        breadcrumbs={
+          <BreadcrumbGroup items={breadCrumbs || []} ariaLabel="Breadcrumbs" />
+        }
+      />
+      <Footer />
+    </>
+  );
+};
 
 Layout.defaultProps = {
   topButtons: <span />,

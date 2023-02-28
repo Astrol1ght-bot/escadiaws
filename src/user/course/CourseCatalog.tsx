@@ -39,7 +39,7 @@ export const CourseCatalog: React.FC = () => {
                 {
                   id: 'thumbnail',
                   content: (p: Course) => (
-                    <Link to={`/courses/${p.id}`}>
+                    <Link to={`/catalog/courses/view/${p.id}`}>
                       <img width="100%" src={p.thumbnail} alt={p.name} />
                     </Link>
                   ),
@@ -59,7 +59,9 @@ export const CourseCatalog: React.FC = () => {
                       <Button
                         iconName="add-plus"
                         iconAlign="right"
-                        onClick={() => navigate(`/courses/${p.id}`)}
+                        onClick={() =>
+                          navigate(`/catalog/courses/view/${p.id}`)
+                        }
                       >
                         Ver mas información
                       </Button>

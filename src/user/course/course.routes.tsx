@@ -6,9 +6,9 @@ import { CourseSignUp } from './CourseSignUp';
 
 export const createCourseRoutes = () => {
   const routes = (
-    <Route path="/">
+    <Route path="/catalog/courses">
       <Route index element={<CourseCatalog />} />
-      <Route path="courses/:id" element={<CourseSignUp />}/>
+      <Route path="view/:id" element={<CourseSignUp />} />
     </Route>
   );
   return { routes };

@@ -7,16 +7,16 @@ import { Layout } from '@layout/Layout';
 import useAppStore from '@use-AppStore';
 
 export const SignIn: React.FC = () => {
-  const userProfile = useAppStore((state) => state.userProfile);
+  const cognitoUser = useAppStore((state) => state.cognitoUser);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userProfile) navigate('/profile');
-  }, [userProfile]);
+    if (cognitoUser) navigate('/');
+  }, [cognitoUser]);
 
   return (
     <Layout title="">
-      <Authenticator hideSignUp/>
+      <Authenticator hideSignUp />
     </Layout>
   );
 };

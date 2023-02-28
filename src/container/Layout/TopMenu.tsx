@@ -31,32 +31,11 @@ export const TopMenu: React.FC = () => {
   };
 
   const authenticatedMenuItems = [
-    // {
-    //   id: 'profile',
-    //   text: 'My profile',
-    // },
-    // {
-    //   id: 'address',
-    //   text: 'My addresses',
-    // },
-    // {
-    //   id: 'orders',
-    //   text: 'My orders',
-    // },
     {
       id: 'sign-out',
       text: 'Sign Out',
     },
   ];
-
-  const signInMenu = [
-    {
-      id: 'profile/signin',
-      text: 'Sign In',
-    },
-  ];
-
-  const menuItems = cognitoUser ? authenticatedMenuItems : signInMenu;
 
   return (
     <div id="header">
@@ -74,19 +53,24 @@ export const TopMenu: React.FC = () => {
           searchIconAriaLabel: 'search-icon',
         }}
         utilities={[
-          {
-            type: 'menu-dropdown',
-            text: `${
-              userProfile ? `Hi ${userProfile.name} - Profile` : 'Profile'
-            }`,
-            iconName: 'user-profile',
-            items: menuItems,
-            onItemClick: (item) => {
-              item.detail.id === 'sign-out'
-                ? signOutUser()
-                : navigate(`/${item.detail.id}`);
-            },
-          },
+          cognitoUser
+            ? {
+                type: 'menu-dropdown',
+                text: `Profile`,
+                iconName: 'user-profile',
+                items: authenticatedMenuItems,
+                onItemClick: (item) => {
+                  item.detail.id === 'sign-out'
+                    ? signOutUser()
+                    : navigate(`/${item.detail.id}`);
+                },
+              }
+            : {
+                type: 'button',
+                variant: 'link',
+                text: 'Iniciar Sesión',
+                onClick: () => navigate('profile/signin'),
+              },
         ]}
       />
     </div>

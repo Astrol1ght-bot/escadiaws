@@ -28,7 +28,7 @@ export const CourseSignUp: React.FC = () => {
     <Layout
       title=""
       breadCrumbs={[
-        { text: 'Catálogo de Cursos', href: '/' },
+        { text: 'Catálogo de Cursos', href: '/catalog/courses' },
         { text: data?.getCourse?.name || '', href: '#' },
       ]}
     >
