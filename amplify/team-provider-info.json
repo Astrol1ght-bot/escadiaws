@@ -15,7 +15,8 @@
     "categories": {
       "auth": {
         "escadiauth": {},
-        "userPoolGroups": {}
+        "userPoolGroups": {},
+        "true": {}
       },
       "function": {
         "escadiauthCustomMessage": {

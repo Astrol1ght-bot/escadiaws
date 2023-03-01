@@ -31,9 +31,11 @@
     ],
     "userpoolClientLambdaRole": "escadi8bfb0d00_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
+    "identityPoolName": "escadiauth_identitypool_6f5ef709",
+    "allowUnauthenticatedIdentities": true,
     "sharedId": "8bfb0d00",
     "resourceName": "escadiauth",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "useDefault": "manual",
     "usernameAttributes": [
       "email"
@@ -45,7 +47,8 @@
     "userPoolGroupList": [
       "Clients",
       "Professors",
-      "Admins"
+      "Admins",
+      "Students"
     ],
     "serviceName": "Cognito",
     "verificationBucketName": "escadiauthverificationbucket",

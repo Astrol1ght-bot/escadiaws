@@ -72,7 +72,6 @@ export const getAllPublicElements = (
   getAllQuery: string,
   authUser: boolean
 ) => {
-  debugger;
   const getAllPublicElementsResult: Promise<GraphQLResult<any>> = API.graphql({
     query: getAllQuery,
     authMode: authUser

@@ -15,11 +15,12 @@ Amplify.configure(awsExports);
 type Props = {
   children: React.ReactElement;
   title: string;
-  topButtons?: JSX.Element;
+  topButtons?: React.ReactElement;
   breadCrumbs?: {
     text: string;
     href: string;
   }[];
+  banner?: JSX.Element;
 };
 
 export const Layout: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const Layout: React.FC<Props> = ({
   children,
   title,
   topButtons,
+  banner,
 }) => {
   const cognitoUser = useAppStore((state) => state.cognitoUser);
   return (
@@ -41,7 +43,9 @@ export const Layout: React.FC<Props> = ({
         toolsHide
         navigation={<SideMenu />}
         navigationHide={!cognitoUser}
-        contentHeader={<ContentHeader title={title} buttons={topButtons} />}
+        contentHeader={
+          <ContentHeader title={title} buttons={topButtons} banner={banner} />
+        }
         contentType="form"
         headerSelector="#header"
         footerSelector="#footer"

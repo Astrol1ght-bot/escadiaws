@@ -8,11 +8,25 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "auth": {
         "escadiauth": {
+            "IdentityPoolId": "string",
+            "IdentityPoolName": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string"
+        },
+        "userPoolGroups": {
+            "ClientsGroupRole": "string",
+            "ProfessorsGroupRole": "string",
+            "AdminsGroupRole": "string",
+            "StudentsGroupRole": "string"
+        }
+    },
+    "storage": {
+        "storage": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }

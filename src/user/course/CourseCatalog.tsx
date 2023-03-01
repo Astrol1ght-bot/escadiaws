@@ -11,6 +11,8 @@ import { Course } from '@api-types';
 import { Layout } from '@layout/Layout';
 import { getMainCourses } from '@services/userSession';
 import useAppStore from '@use-AppStore';
+import { catalogBanner } from 'src/landing-page/Banner';
+import { topButtons } from 'src/landing-page/TopButtons';
 
 export const CourseCatalog: React.FC = () => {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ export const CourseCatalog: React.FC = () => {
   }, [catalogCourses]);
 
   return (
-    <Layout title="Mis Cursos">
+    <Layout title="" banner={catalogBanner} topButtons={topButtons}>
       <Container>
         {isCoursesError && !isCoursesLoading && (
           <h3>Error cargando los cursos</h3>

@@ -1,22 +1,16 @@
 import React from 'react';
-import { Header, SpaceBetween } from '@cloudscape-design/components';
 
 type Props = {
-  title: string;
-  buttons?: JSX.Element;
+  banner?: JSX.Element;
+  buttons?: React.ReactElement;
 };
 
-export const ContentHeader: React.FC<Props> = ({ title, buttons }) => (
-  <Header
-    variant="h1"
-    actions={
-      <SpaceBetween direction="horizontal" size="xs">
-        {buttons}
-      </SpaceBetween>
-    }
-  ></Header>
-);
-
-ContentHeader.defaultProps = {
-  buttons: <span />,
+export const ContentHeader: React.FC<Props> = ({ banner, buttons }) => {
+  const TopButtons = buttons;
+  return (
+    <div>
+      <div>{buttons}</div>
+      <div>{banner}</div>
+    </div>
+  );
 };

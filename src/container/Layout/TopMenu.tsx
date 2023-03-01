@@ -42,7 +42,11 @@ export const TopMenu: React.FC = () => {
       <TopNavCustom
         identity={{
           href: '/',
-          title: 'Escadi',
+          title: 'Escuela Centroamericana de Informática e Idiomas',
+          logo: {
+            src: 'https://escadi-public-images.s3.amazonaws.com/logo.jpg',
+            alt: 'Escuela Centroamericana de Informática e Idiomas',
+          },
         }}
         i18nStrings={{
           overflowMenuBackIconAriaLabel: 'back-icon',
