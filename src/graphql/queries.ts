@@ -2,362 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getProfessor = /* GraphQL */ `
-  query GetProfessor($id: ID!) {
-    getProfessor(id: $id) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          fileUploadEnabled
-          price
-          status
-          createdAt
-          updatedAt
-          professorCoursesId
-          courseProfessorId
-          owner
-        }
-        nextToken
-      }
-      cognitoId
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listProfessors = /* GraphQL */ `
-  query ListProfessors(
-    $filter: ModelProfessorFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProfessors(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        courses {
-          nextToken
-        }
-        cognitoId
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getClient = /* GraphQL */ `
-  query GetClient($id: ID!) {
-    getClient(id: $id) {
-      id
-      name
-      email
-      enrolledCourses {
-        items {
-          id
-          date
-          status
-          paymentStatus
-          paymentType
-          createdAt
-          updatedAt
-          clientEnrolledCoursesId
-          owner
-        }
-        nextToken
-      }
-      purchases {
-        items {
-          id
-          date
-          createdAt
-          updatedAt
-          coursePurchasesId
-          clientPurchasesId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listClients = /* GraphQL */ `
-  query ListClients(
-    $filter: ModelClientFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        email
-        enrolledCourses {
-          nextToken
-        }
-        purchases {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getEnrollment = /* GraphQL */ `
-  query GetEnrollment($id: ID!) {
-    getEnrollment(id: $id) {
-      id
-      course {
-        items {
-          id
-          courseId
-          enrollmentId
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      client {
-        id
-        name
-        email
-        enrolledCourses {
-          nextToken
-        }
-        purchases {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      date
-      status
-      paymentStatus
-      paymentType
-      enrollDetails {
-        courseID
-        courseName
-        courseThumbnail
-        quantity
-        total
-      }
-      createdAt
-      updatedAt
-      clientEnrolledCoursesId
-      owner
-    }
-  }
-`;
-export const listEnrollments = /* GraphQL */ `
-  query ListEnrollments(
-    $filter: ModelEnrollmentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEnrollments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        course {
-          nextToken
-        }
-        client {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        date
-        status
-        paymentStatus
-        paymentType
-        enrollDetails {
-          courseID
-          courseName
-          courseThumbnail
-          quantity
-          total
-        }
-        createdAt
-        updatedAt
-        clientEnrolledCoursesId
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getPurchase = /* GraphQL */ `
-  query GetPurchase($id: ID!) {
-    getPurchase(id: $id) {
-      id
-      client {
-        id
-        name
-        email
-        enrolledCourses {
-          nextToken
-        }
-        purchases {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      course {
-        id
-        name
-        thumbnail
-        description
-        professor {
-          id
-          name
-          cognitoId
-          createdAt
-          updatedAt
-          owner
-        }
-        blocks {
-          nextToken
-        }
-        fileUploadEnabled
-        price
-        status
-        purchases {
-          nextToken
-        }
-        enrollment {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        professorCoursesId
-        courseProfessorId
-        owner
-      }
-      date
-      createdAt
-      updatedAt
-      coursePurchasesId
-      clientPurchasesId
-      owner
-    }
-  }
-`;
-export const listPurchases = /* GraphQL */ `
-  query ListPurchases(
-    $filter: ModelPurchaseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        client {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        course {
-          id
-          name
-          thumbnail
-          description
-          fileUploadEnabled
-          price
-          status
-          createdAt
-          updatedAt
-          professorCoursesId
-          courseProfessorId
-          owner
-        }
-        date
-        createdAt
-        updatedAt
-        coursePurchasesId
-        clientPurchasesId
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getFile = /* GraphQL */ `
-  query GetFile($id: ID!) {
-    getFile(id: $id) {
-      id
-      name
-      url
-      uploadedBy {
-        id
-        name
-        email
-        enrolledCourses {
-          nextToken
-        }
-        purchases {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      fileUploadedById
-      owner
-    }
-  }
-`;
-export const listFiles = /* GraphQL */ `
-  query ListFiles(
-    $filter: ModelFileFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listFiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        url
-        uploadedBy {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        fileUploadedById
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 export const getCourse = /* GraphQL */ `
   query GetCourse($id: ID!) {
     getCourse(id: $id) {
@@ -371,20 +15,18 @@ export const getCourse = /* GraphQL */ `
         courses {
           nextToken
         }
-        cognitoId
         createdAt
         updatedAt
-        owner
       }
       blocks {
         items {
           id
           name
           description
+          authorId
           createdAt
           updatedAt
           courseBlocksId
-          owner
         }
         nextToken
       }
@@ -394,12 +36,13 @@ export const getCourse = /* GraphQL */ `
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
@@ -410,7 +53,7 @@ export const getCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -418,7 +61,6 @@ export const getCourse = /* GraphQL */ `
       updatedAt
       professorCoursesId
       courseProfessorId
-      owner
     }
   }
 `;
@@ -437,10 +79,8 @@ export const listCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -458,7 +98,52 @@ export const listCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getProfessor = /* GraphQL */ `
+  query GetProfessor($id: ID!) {
+    getProfessor(id: $id) {
+      id
+      name
+      courses {
+        items {
+          id
+          name
+          thumbnail
+          description
+          fileUploadEnabled
+          price
+          status
+          createdAt
+          updatedAt
+          professorCoursesId
+          courseProfessorId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProfessors = /* GraphQL */ `
+  query ListProfessors(
+    $filter: ModelProfessorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProfessors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -478,10 +163,8 @@ export const getBlock = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -499,7 +182,6 @@ export const getBlock = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       uploadedFiles {
         id
@@ -511,17 +193,25 @@ export const getBlock = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         createdAt
         updatedAt
         fileUploadedById
-        owner
       }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
       createdAt
       updatedAt
       courseBlocksId
-      owner
     }
   }
 `;
@@ -548,21 +238,325 @@ export const listBlocks = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         uploadedFiles {
           id
           name
           url
+          cliendId
           createdAt
           updatedAt
           fileUploadedById
-          owner
         }
+        author {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        authorId
         createdAt
         updatedAt
         courseBlocksId
-        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getClient = /* GraphQL */ `
+  query GetClient($id: ID!) {
+    getClient(id: $id) {
+      id
+      name
+      email
+      enrolledCourses {
+        items {
+          id
+          cliendId
+          date
+          status
+          paymentStatus
+          paymentType
+          createdAt
+          updatedAt
+          clientEnrolledCoursesId
+          clientId
+        }
+        nextToken
+      }
+      purchases {
+        items {
+          id
+          clientId
+          date
+          createdAt
+          updatedAt
+          coursePurchasesId
+          clientPurchasesId
+          cliendId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listClients = /* GraphQL */ `
+  query ListClients(
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        email
+        enrolledCourses {
+          nextToken
+        }
+        purchases {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getEnrollment = /* GraphQL */ `
+  query GetEnrollment($id: ID!) {
+    getEnrollment(id: $id) {
+      id
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+          clientId
+        }
+        nextToken
+      }
+      client {
+        id
+        name
+        email
+        enrolledCourses {
+          nextToken
+        }
+        purchases {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      cliendId
+      date
+      status
+      paymentStatus
+      paymentType
+      enrollDetails {
+        courseID
+        courseName
+        courseThumbnail
+        quantity
+        total
+      }
+      createdAt
+      updatedAt
+      clientEnrolledCoursesId
+      clientId
+    }
+  }
+`;
+export const listEnrollments = /* GraphQL */ `
+  query ListEnrollments(
+    $filter: ModelEnrollmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEnrollments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        course {
+          nextToken
+        }
+        client {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        cliendId
+        date
+        status
+        paymentStatus
+        paymentType
+        enrollDetails {
+          courseID
+          courseName
+          courseThumbnail
+          quantity
+          total
+        }
+        createdAt
+        updatedAt
+        clientEnrolledCoursesId
+        clientId
+      }
+      nextToken
+    }
+  }
+`;
+export const getPurchase = /* GraphQL */ `
+  query GetPurchase($id: ID!) {
+    getPurchase(id: $id) {
+      id
+      client {
+        id
+        name
+        email
+        enrolledCourses {
+          nextToken
+        }
+        purchases {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      clientId
+      course {
+        id
+        name
+        thumbnail
+        description
+        professor {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        blocks {
+          nextToken
+        }
+        fileUploadEnabled
+        price
+        status
+        purchases {
+          nextToken
+        }
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        professorCoursesId
+        courseProfessorId
+      }
+      date
+      createdAt
+      updatedAt
+      coursePurchasesId
+      clientPurchasesId
+      cliendId
+    }
+  }
+`;
+export const listPurchases = /* GraphQL */ `
+  query ListPurchases(
+    $filter: ModelPurchaseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        client {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        clientId
+        course {
+          id
+          name
+          thumbnail
+          description
+          fileUploadEnabled
+          price
+          status
+          createdAt
+          updatedAt
+          professorCoursesId
+          courseProfessorId
+        }
+        date
+        createdAt
+        updatedAt
+        coursePurchasesId
+        clientPurchasesId
+        cliendId
+      }
+      nextToken
+    }
+  }
+`;
+export const getFile = /* GraphQL */ `
+  query GetFile($id: ID!) {
+    getFile(id: $id) {
+      id
+      name
+      url
+      uploadedBy {
+        id
+        name
+        email
+        enrolledCourses {
+          nextToken
+        }
+        purchases {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      cliendId
+      createdAt
+      updatedAt
+      fileUploadedById
+    }
+  }
+`;
+export const listFiles = /* GraphQL */ `
+  query ListFiles(
+    $filter: ModelFileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        url
+        uploadedBy {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        cliendId
+        createdAt
+        updatedAt
+        fileUploadedById
       }
       nextToken
     }
@@ -582,10 +576,8 @@ export const getEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -603,7 +595,6 @@ export const getEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -616,8 +607,8 @@ export const getEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -632,11 +623,11 @@ export const getEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
@@ -663,10 +654,10 @@ export const listEnrollCourses = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         enrollment {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -674,11 +665,11 @@ export const listEnrollCourses = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         createdAt
         updatedAt
-        owner
+        clientId
       }
       nextToken
     }
@@ -715,10 +706,10 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         enrollment {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -726,11 +717,11 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         createdAt
         updatedAt
-        owner
+        clientId
       }
       nextToken
     }
@@ -767,10 +758,10 @@ export const enrollCoursesByEnrollmentId = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         enrollment {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -778,11 +769,11 @@ export const enrollCoursesByEnrollmentId = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         createdAt
         updatedAt
-        owner
+        clientId
       }
       nextToken
     }

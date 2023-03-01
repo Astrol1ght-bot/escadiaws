@@ -1,6 +1,6 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+#input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 enum CourseStatus {
     UPCOMING
@@ -11,8 +11,10 @@ enum CourseStatus {
 type Course 
     @model
     @auth(rules: [
-        {allow: public, operations: [read], provider: iam},
-        {allow: owner, provider: userPools}
+        {allow: owner, ownerField: "id", operations: [create, update, delete]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
         ])
     {
     id: ID!
@@ -31,34 +33,44 @@ type Course
 type Professor
     @model
     @auth(rules: [
-        {allow: owner, provider: userPools}
+        {allow: owner, ownerField: "id", operations: [read]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
     ])
 {
     id: ID!
     name: String!
     courses: [Course] @hasMany
-    cognitoId: String!
 }
 
 type Block 
 @model
 @auth(rules: [
-    {allow: public, operations: [read]},
-    {allow: owner, provider: userPools}
-])
+        {allow: owner, ownerField: "authorId" ,operations: [create, update, delete]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
+    ])
 {
     id: ID!
     name: String!
     description: String
     course: Course 
     uploadedFiles: [File]
+    author: Professor! 
+    authorId: String!
 }
 
 type Client
     @model
     @auth(rules: [
-        {allow: owner, provider: userPools}
+        {allow: owner, ownerField: "id", operations: [update]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
     ])
+
 {
     id: ID!
     name: String!
@@ -68,14 +80,18 @@ type Client
 }
 
 type Enrollment
-    @model 
+    @model
     @auth(rules: [
-        { allow: owner, provider: userPools }
-        ])
+        {allow: owner, ownerField: "clientId", operations: [create]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
+    ])
 {
     id: ID!
     course: [Course!] @manyToMany(relationName: "EnrollCourses")
     client: Client! @belongsTo
+    cliendId: String!
     date: AWSDateTime!
     status: EnrollStatus!
     paymentStatus: PaymentStatus!
@@ -94,25 +110,34 @@ type EnrollDetail {
 type Purchase 
 @model
 @auth(rules: [
-    {allow: owner, provider: userPools}
-])
+        {allow: owner, ownerField: "cliendId", operations: [create, update, delete]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
+    ])
 {
     id: ID!
     client: Client!
-    course: Course!
+    clientId: String!
+    course: [Course!]!
     date: String!
 }
 
 type File 
 @model
 @auth(rules: [
-    {allow: owner, provider: userPools}
-])
+        {allow: owner, ownerField: "cliendId", operations: [create, update, delete]}
+        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
+        {allow: private, operations: [read]}
+        {allow: public, operations: [read]}
+    ])
+
 {
     id: ID!
     name: String!
     url: String!
     uploadedBy: Client @hasOne
+    cliendId: String!
 }
 
 enum EnrollStatus {

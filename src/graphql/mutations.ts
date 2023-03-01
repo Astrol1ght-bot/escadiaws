@@ -18,20 +18,18 @@ export const createCourse = /* GraphQL */ `
         courses {
           nextToken
         }
-        cognitoId
         createdAt
         updatedAt
-        owner
       }
       blocks {
         items {
           id
           name
           description
+          authorId
           createdAt
           updatedAt
           courseBlocksId
-          owner
         }
         nextToken
       }
@@ -41,12 +39,13 @@ export const createCourse = /* GraphQL */ `
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
@@ -57,7 +56,7 @@ export const createCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -65,7 +64,6 @@ export const createCourse = /* GraphQL */ `
       updatedAt
       professorCoursesId
       courseProfessorId
-      owner
     }
   }
 `;
@@ -85,20 +83,18 @@ export const updateCourse = /* GraphQL */ `
         courses {
           nextToken
         }
-        cognitoId
         createdAt
         updatedAt
-        owner
       }
       blocks {
         items {
           id
           name
           description
+          authorId
           createdAt
           updatedAt
           courseBlocksId
-          owner
         }
         nextToken
       }
@@ -108,12 +104,13 @@ export const updateCourse = /* GraphQL */ `
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
@@ -124,7 +121,7 @@ export const updateCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -132,7 +129,6 @@ export const updateCourse = /* GraphQL */ `
       updatedAt
       professorCoursesId
       courseProfessorId
-      owner
     }
   }
 `;
@@ -152,20 +148,18 @@ export const deleteCourse = /* GraphQL */ `
         courses {
           nextToken
         }
-        cognitoId
         createdAt
         updatedAt
-        owner
       }
       blocks {
         items {
           id
           name
           description
+          authorId
           createdAt
           updatedAt
           courseBlocksId
-          owner
         }
         nextToken
       }
@@ -175,12 +169,13 @@ export const deleteCourse = /* GraphQL */ `
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
@@ -191,7 +186,7 @@ export const deleteCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -199,7 +194,6 @@ export const deleteCourse = /* GraphQL */ `
       updatedAt
       professorCoursesId
       courseProfessorId
-      owner
     }
   }
 `;
@@ -224,14 +218,11 @@ export const createProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -256,14 +247,11 @@ export const updateProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -288,14 +276,11 @@ export const deleteProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -316,10 +301,8 @@ export const createBlock = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -337,7 +320,6 @@ export const createBlock = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       uploadedFiles {
         id
@@ -349,17 +331,25 @@ export const createBlock = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         createdAt
         updatedAt
         fileUploadedById
-        owner
       }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
       createdAt
       updatedAt
       courseBlocksId
-      owner
     }
   }
 `;
@@ -380,10 +370,8 @@ export const updateBlock = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -401,7 +389,6 @@ export const updateBlock = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       uploadedFiles {
         id
@@ -413,17 +400,25 @@ export const updateBlock = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         createdAt
         updatedAt
         fileUploadedById
-        owner
       }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
       createdAt
       updatedAt
       courseBlocksId
-      owner
     }
   }
 `;
@@ -444,10 +439,8 @@ export const deleteBlock = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -465,7 +458,6 @@ export const deleteBlock = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       uploadedFiles {
         id
@@ -477,17 +469,25 @@ export const deleteBlock = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         createdAt
         updatedAt
         fileUploadedById
-        owner
       }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
       createdAt
       updatedAt
       courseBlocksId
-      owner
     }
   }
 `;
@@ -503,6 +503,7 @@ export const createClient = /* GraphQL */ `
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -510,25 +511,25 @@ export const createClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -544,6 +545,7 @@ export const updateClient = /* GraphQL */ `
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -551,25 +553,25 @@ export const updateClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -585,6 +587,7 @@ export const deleteClient = /* GraphQL */ `
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -592,25 +595,25 @@ export const deleteClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -628,7 +631,7 @@ export const createEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -644,8 +647,8 @@ export const createEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -660,7 +663,7 @@ export const createEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
@@ -678,7 +681,7 @@ export const updateEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -694,8 +697,8 @@ export const updateEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -710,7 +713,7 @@ export const updateEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
@@ -728,7 +731,7 @@ export const deleteEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -744,8 +747,8 @@ export const deleteEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -760,7 +763,7 @@ export const deleteEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
@@ -783,8 +786,8 @@ export const createPurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -793,10 +796,8 @@ export const createPurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -814,14 +815,13 @@ export const createPurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
@@ -844,8 +844,8 @@ export const updatePurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -854,10 +854,8 @@ export const updatePurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -875,14 +873,13 @@ export const updatePurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
@@ -905,8 +902,8 @@ export const deletePurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -915,10 +912,8 @@ export const deletePurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -936,14 +931,13 @@ export const deletePurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
@@ -968,12 +962,11 @@ export const createFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
     }
   }
 `;
@@ -998,12 +991,11 @@ export const updateFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
     }
   }
 `;
@@ -1028,12 +1020,11 @@ export const deleteFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
     }
   }
 `;
@@ -1054,10 +1045,8 @@ export const createEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1075,7 +1064,6 @@ export const createEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1088,8 +1076,8 @@ export const createEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1104,11 +1092,11 @@ export const createEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
@@ -1129,10 +1117,8 @@ export const updateEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1150,7 +1136,6 @@ export const updateEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1163,8 +1148,8 @@ export const updateEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1179,11 +1164,11 @@ export const updateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
@@ -1204,10 +1189,8 @@ export const deleteEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1225,7 +1208,6 @@ export const deleteEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1238,8 +1220,8 @@ export const deleteEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1254,11 +1236,11 @@ export const deleteEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;

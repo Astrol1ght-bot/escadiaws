@@ -132,7 +132,6 @@ export type Course = {
   updatedAt: string,
   professorCoursesId?: string | null,
   courseProfessorId?: string | null,
-  owner?: string | null,
 };
 
 export type Professor = {
@@ -140,10 +139,8 @@ export type Professor = {
   id: string,
   name: string,
   courses?: ModelCourseConnection | null,
-  cognitoId: string,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type ModelCourseConnection = {
@@ -165,10 +162,11 @@ export type Block = {
   description?: string | null,
   course?: Course | null,
   uploadedFiles?:  Array<File | null > | null,
+  author: Professor,
+  authorId: string,
   createdAt: string,
   updatedAt: string,
   courseBlocksId?: string | null,
-  owner?: string | null,
 };
 
 export type File = {
@@ -177,10 +175,10 @@ export type File = {
   name: string,
   url: string,
   uploadedBy?: Client | null,
+  cliendId: string,
   createdAt: string,
   updatedAt: string,
   fileUploadedById?: string | null,
-  owner?: string | null,
 };
 
 export type Client = {
@@ -192,7 +190,6 @@ export type Client = {
   purchases?: ModelPurchaseConnection | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type ModelEnrollmentConnection = {
@@ -206,6 +203,7 @@ export type Enrollment = {
   id: string,
   course?: ModelEnrollCoursesConnection | null,
   client: Client,
+  cliendId: string,
   date: string,
   status: EnrollStatus,
   paymentStatus: PaymentStatus,
@@ -214,7 +212,7 @@ export type Enrollment = {
   createdAt: string,
   updatedAt: string,
   clientEnrolledCoursesId?: string | null,
-  owner?: string | null,
+  clientId?: string | null,
 };
 
 export type ModelEnrollCoursesConnection = {
@@ -232,7 +230,7 @@ export type EnrollCourses = {
   enrollment: Enrollment,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
+  clientId?: string | null,
 };
 
 export enum EnrollStatus {
@@ -275,13 +273,14 @@ export type Purchase = {
   __typename: "Purchase",
   id: string,
   client: Client,
-  course: Course,
+  clientId: string,
+  course:  Array<Course >,
   date: string,
   createdAt: string,
   updatedAt: string,
   coursePurchasesId?: string | null,
   clientPurchasesId?: string | null,
-  owner?: string | null,
+  cliendId?: string | null,
 };
 
 export type UpdateCourseInput = {
@@ -303,12 +302,10 @@ export type DeleteCourseInput = {
 export type CreateProfessorInput = {
   id?: string | null,
   name: string,
-  cognitoId: string,
 };
 
 export type ModelProfessorConditionInput = {
   name?: ModelStringInput | null,
-  cognitoId?: ModelStringInput | null,
   and?: Array< ModelProfessorConditionInput | null > | null,
   or?: Array< ModelProfessorConditionInput | null > | null,
   not?: ModelProfessorConditionInput | null,
@@ -317,7 +314,6 @@ export type ModelProfessorConditionInput = {
 export type UpdateProfessorInput = {
   id: string,
   name?: string | null,
-  cognitoId?: string | null,
 };
 
 export type DeleteProfessorInput = {
@@ -328,12 +324,14 @@ export type CreateBlockInput = {
   id?: string | null,
   name: string,
   description?: string | null,
+  authorId: string,
   courseBlocksId?: string | null,
 };
 
 export type ModelBlockConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  authorId?: ModelStringInput | null,
   and?: Array< ModelBlockConditionInput | null > | null,
   or?: Array< ModelBlockConditionInput | null > | null,
   not?: ModelBlockConditionInput | null,
@@ -344,6 +342,7 @@ export type UpdateBlockInput = {
   id: string,
   name?: string | null,
   description?: string | null,
+  authorId?: string | null,
   courseBlocksId?: string | null,
 };
 
@@ -377,6 +376,7 @@ export type DeleteClientInput = {
 
 export type CreateEnrollmentInput = {
   id?: string | null,
+  cliendId: string,
   date: string,
   status: EnrollStatus,
   paymentStatus: PaymentStatus,
@@ -394,6 +394,7 @@ export type EnrollDetailInput = {
 };
 
 export type ModelEnrollmentConditionInput = {
+  cliendId?: ModelStringInput | null,
   date?: ModelStringInput | null,
   status?: ModelEnrollStatusInput | null,
   paymentStatus?: ModelPaymentStatusInput | null,
@@ -421,6 +422,7 @@ export type ModelPaymentTypeInput = {
 
 export type UpdateEnrollmentInput = {
   id: string,
+  cliendId?: string | null,
   date?: string | null,
   status?: EnrollStatus | null,
   paymentStatus?: PaymentStatus | null,
@@ -435,12 +437,14 @@ export type DeleteEnrollmentInput = {
 
 export type CreatePurchaseInput = {
   id?: string | null,
+  clientId: string,
   date: string,
   coursePurchasesId?: string | null,
   clientPurchasesId?: string | null,
 };
 
 export type ModelPurchaseConditionInput = {
+  clientId?: ModelStringInput | null,
   date?: ModelStringInput | null,
   and?: Array< ModelPurchaseConditionInput | null > | null,
   or?: Array< ModelPurchaseConditionInput | null > | null,
@@ -451,6 +455,7 @@ export type ModelPurchaseConditionInput = {
 
 export type UpdatePurchaseInput = {
   id: string,
+  clientId?: string | null,
   date?: string | null,
   coursePurchasesId?: string | null,
   clientPurchasesId?: string | null,
@@ -464,12 +469,14 @@ export type CreateFileInput = {
   id?: string | null,
   name: string,
   url: string,
+  cliendId: string,
   fileUploadedById?: string | null,
 };
 
 export type ModelFileConditionInput = {
   name?: ModelStringInput | null,
   url?: ModelStringInput | null,
+  cliendId?: ModelStringInput | null,
   and?: Array< ModelFileConditionInput | null > | null,
   or?: Array< ModelFileConditionInput | null > | null,
   not?: ModelFileConditionInput | null,
@@ -480,6 +487,7 @@ export type UpdateFileInput = {
   id: string,
   name?: string | null,
   url?: string | null,
+  cliendId?: string | null,
   fileUploadedById?: string | null,
 };
 
@@ -511,10 +519,24 @@ export type DeleteEnrollCoursesInput = {
   id: string,
 };
 
+export type ModelCourseFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  thumbnail?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  fileUploadEnabled?: ModelBooleanInput | null,
+  price?: ModelFloatInput | null,
+  status?: ModelCourseStatusInput | null,
+  and?: Array< ModelCourseFilterInput | null > | null,
+  or?: Array< ModelCourseFilterInput | null > | null,
+  not?: ModelCourseFilterInput | null,
+  professorCoursesId?: ModelIDInput | null,
+  courseProfessorId?: ModelIDInput | null,
+};
+
 export type ModelProfessorFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  cognitoId?: ModelStringInput | null,
   and?: Array< ModelProfessorFilterInput | null > | null,
   or?: Array< ModelProfessorFilterInput | null > | null,
   not?: ModelProfessorFilterInput | null,
@@ -524,6 +546,17 @@ export type ModelProfessorConnection = {
   __typename: "ModelProfessorConnection",
   items:  Array<Professor | null >,
   nextToken?: string | null,
+};
+
+export type ModelBlockFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  authorId?: ModelStringInput | null,
+  and?: Array< ModelBlockFilterInput | null > | null,
+  or?: Array< ModelBlockFilterInput | null > | null,
+  not?: ModelBlockFilterInput | null,
+  courseBlocksId?: ModelIDInput | null,
 };
 
 export type ModelClientFilterInput = {
@@ -543,6 +576,7 @@ export type ModelClientConnection = {
 
 export type ModelEnrollmentFilterInput = {
   id?: ModelIDInput | null,
+  cliendId?: ModelStringInput | null,
   date?: ModelStringInput | null,
   status?: ModelEnrollStatusInput | null,
   paymentStatus?: ModelPaymentStatusInput | null,
@@ -555,6 +589,7 @@ export type ModelEnrollmentFilterInput = {
 
 export type ModelPurchaseFilterInput = {
   id?: ModelIDInput | null,
+  clientId?: ModelStringInput | null,
   date?: ModelStringInput | null,
   and?: Array< ModelPurchaseFilterInput | null > | null,
   or?: Array< ModelPurchaseFilterInput | null > | null,
@@ -567,6 +602,7 @@ export type ModelFileFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   url?: ModelStringInput | null,
+  cliendId?: ModelStringInput | null,
   and?: Array< ModelFileFilterInput | null > | null,
   or?: Array< ModelFileFilterInput | null > | null,
   not?: ModelFileFilterInput | null,
@@ -577,31 +613,6 @@ export type ModelFileConnection = {
   __typename: "ModelFileConnection",
   items:  Array<File | null >,
   nextToken?: string | null,
-};
-
-export type ModelCourseFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  thumbnail?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  fileUploadEnabled?: ModelBooleanInput | null,
-  price?: ModelFloatInput | null,
-  status?: ModelCourseStatusInput | null,
-  and?: Array< ModelCourseFilterInput | null > | null,
-  or?: Array< ModelCourseFilterInput | null > | null,
-  not?: ModelCourseFilterInput | null,
-  professorCoursesId?: ModelIDInput | null,
-  courseProfessorId?: ModelIDInput | null,
-};
-
-export type ModelBlockFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelBlockFilterInput | null > | null,
-  or?: Array< ModelBlockFilterInput | null > | null,
-  not?: ModelBlockFilterInput | null,
-  courseBlocksId?: ModelIDInput | null,
 };
 
 export type ModelEnrollCoursesFilterInput = {
@@ -619,27 +630,15 @@ export enum ModelSortDirection {
 }
 
 
-export type ModelSubscriptionProfessorFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
+export type ModelSubscriptionCourseFilterInput = {
   name?: ModelSubscriptionStringInput | null,
-  cognitoId?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
-  or?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
+  thumbnail?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  fileUploadEnabled?: ModelSubscriptionBooleanInput | null,
+  price?: ModelSubscriptionFloatInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionCourseFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCourseFilterInput | null > | null,
 };
 
 export type ModelSubscriptionStringInput = {
@@ -655,51 +654,6 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionClientFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionClientFilterInput | null > | null,
-  or?: Array< ModelSubscriptionClientFilterInput | null > | null,
-};
-
-export type ModelSubscriptionEnrollmentFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  date?: ModelSubscriptionStringInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  paymentStatus?: ModelSubscriptionStringInput | null,
-  paymentType?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionEnrollmentFilterInput | null > | null,
-  or?: Array< ModelSubscriptionEnrollmentFilterInput | null > | null,
-};
-
-export type ModelSubscriptionPurchaseFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  date?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPurchaseFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPurchaseFilterInput | null > | null,
-};
-
-export type ModelSubscriptionFileFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  url?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionFileFilterInput | null > | null,
-  or?: Array< ModelSubscriptionFileFilterInput | null > | null,
-};
-
-export type ModelSubscriptionCourseFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  thumbnail?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  fileUploadEnabled?: ModelSubscriptionBooleanInput | null,
-  price?: ModelSubscriptionFloatInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionCourseFilterInput | null > | null,
-  or?: Array< ModelSubscriptionCourseFilterInput | null > | null,
 };
 
 export type ModelSubscriptionBooleanInput = {
@@ -719,6 +673,12 @@ export type ModelSubscriptionFloatInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionProfessorFilterInput = {
+  name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
+  or?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
+};
+
 export type ModelSubscriptionBlockFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
@@ -727,8 +687,56 @@ export type ModelSubscriptionBlockFilterInput = {
   or?: Array< ModelSubscriptionBlockFilterInput | null > | null,
 };
 
-export type ModelSubscriptionEnrollCoursesFilterInput = {
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionClientFilterInput = {
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionClientFilterInput | null > | null,
+  or?: Array< ModelSubscriptionClientFilterInput | null > | null,
+};
+
+export type ModelSubscriptionEnrollmentFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  cliendId?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  paymentStatus?: ModelSubscriptionStringInput | null,
+  paymentType?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionEnrollmentFilterInput | null > | null,
+  or?: Array< ModelSubscriptionEnrollmentFilterInput | null > | null,
+};
+
+export type ModelSubscriptionPurchaseFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  clientId?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPurchaseFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPurchaseFilterInput | null > | null,
+};
+
+export type ModelSubscriptionFileFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  url?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionFileFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFileFilterInput | null > | null,
+};
+
+export type ModelSubscriptionEnrollCoursesFilterInput = {
   courseId?: ModelSubscriptionIDInput | null,
   enrollmentId?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionEnrollCoursesFilterInput | null > | null,
@@ -755,10 +763,8 @@ export type CreateCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
-      cognitoId: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     blocks?:  {
       __typename: "ModelBlockConnection",
@@ -767,10 +773,10 @@ export type CreateCourseMutation = {
         id: string,
         name: string,
         description?: string | null,
+        authorId: string,
         createdAt: string,
         updatedAt: string,
         courseBlocksId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -782,12 +788,13 @@ export type CreateCourseMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -800,7 +807,7 @@ export type CreateCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -808,7 +815,6 @@ export type CreateCourseMutation = {
     updatedAt: string,
     professorCoursesId?: string | null,
     courseProfessorId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -832,10 +838,8 @@ export type UpdateCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
-      cognitoId: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     blocks?:  {
       __typename: "ModelBlockConnection",
@@ -844,10 +848,10 @@ export type UpdateCourseMutation = {
         id: string,
         name: string,
         description?: string | null,
+        authorId: string,
         createdAt: string,
         updatedAt: string,
         courseBlocksId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -859,12 +863,13 @@ export type UpdateCourseMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -877,7 +882,7 @@ export type UpdateCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -885,7 +890,6 @@ export type UpdateCourseMutation = {
     updatedAt: string,
     professorCoursesId?: string | null,
     courseProfessorId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -909,10 +913,8 @@ export type DeleteCourseMutation = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
-      cognitoId: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     blocks?:  {
       __typename: "ModelBlockConnection",
@@ -921,10 +923,10 @@ export type DeleteCourseMutation = {
         id: string,
         name: string,
         description?: string | null,
+        authorId: string,
         createdAt: string,
         updatedAt: string,
         courseBlocksId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -936,12 +938,13 @@ export type DeleteCourseMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -954,7 +957,7 @@ export type DeleteCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -962,7 +965,6 @@ export type DeleteCourseMutation = {
     updatedAt: string,
     professorCoursesId?: string | null,
     courseProfessorId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -991,14 +993,11 @@ export type CreateProfessorMutation = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1027,14 +1026,11 @@ export type UpdateProfessorMutation = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1063,14 +1059,11 @@ export type DeleteProfessorMutation = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1095,10 +1088,8 @@ export type CreateBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1119,7 +1110,6 @@ export type CreateBlockMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
       __typename: "File",
@@ -1133,17 +1123,27 @@ export type CreateBlockMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
+      cliendId: string,
       createdAt: string,
       updatedAt: string,
       fileUploadedById?: string | null,
-      owner?: string | null,
     } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
     createdAt: string,
     updatedAt: string,
     courseBlocksId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1168,10 +1168,8 @@ export type UpdateBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1192,7 +1190,6 @@ export type UpdateBlockMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
       __typename: "File",
@@ -1206,17 +1203,27 @@ export type UpdateBlockMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
+      cliendId: string,
       createdAt: string,
       updatedAt: string,
       fileUploadedById?: string | null,
-      owner?: string | null,
     } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
     createdAt: string,
     updatedAt: string,
     courseBlocksId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1241,10 +1248,8 @@ export type DeleteBlockMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1265,7 +1270,6 @@ export type DeleteBlockMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
       __typename: "File",
@@ -1279,17 +1283,27 @@ export type DeleteBlockMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
+      cliendId: string,
       createdAt: string,
       updatedAt: string,
       fileUploadedById?: string | null,
-      owner?: string | null,
     } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
     createdAt: string,
     updatedAt: string,
     courseBlocksId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1309,6 +1323,7 @@ export type CreateClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1316,7 +1331,7 @@ export type CreateClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1325,18 +1340,18 @@ export type CreateClientMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1356,6 +1371,7 @@ export type UpdateClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1363,7 +1379,7 @@ export type UpdateClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1372,18 +1388,18 @@ export type UpdateClientMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1403,6 +1419,7 @@ export type DeleteClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1410,7 +1427,7 @@ export type DeleteClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1419,18 +1436,18 @@ export type DeleteClientMutation = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1452,7 +1469,7 @@ export type CreateEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1471,8 +1488,8 @@ export type CreateEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1488,7 +1505,7 @@ export type CreateEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -1510,7 +1527,7 @@ export type UpdateEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1529,8 +1546,8 @@ export type UpdateEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1546,7 +1563,7 @@ export type UpdateEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -1568,7 +1585,7 @@ export type DeleteEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1587,8 +1604,8 @@ export type DeleteEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1604,7 +1621,7 @@ export type DeleteEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -1632,9 +1649,9 @@ export type CreatePurchaseMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -1644,10 +1661,8 @@ export type CreatePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1668,14 +1683,13 @@ export type CreatePurchaseMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
@@ -1703,9 +1717,9 @@ export type UpdatePurchaseMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -1715,10 +1729,8 @@ export type UpdatePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1739,14 +1751,13 @@ export type UpdatePurchaseMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
@@ -1774,9 +1785,9 @@ export type DeletePurchaseMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -1786,10 +1797,8 @@ export type DeletePurchaseMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1810,14 +1819,13 @@ export type DeletePurchaseMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
@@ -1847,12 +1855,11 @@ export type CreateFileMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1882,12 +1889,11 @@ export type UpdateFileMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1917,12 +1923,11 @@ export type DeleteFileMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -1947,10 +1952,8 @@ export type CreateEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -1971,7 +1974,6 @@ export type CreateEnrollCoursesMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -1987,8 +1989,8 @@ export type CreateEnrollCoursesMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2004,11 +2006,11 @@ export type CreateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -2033,10 +2035,8 @@ export type UpdateEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -2057,7 +2057,6 @@ export type UpdateEnrollCoursesMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -2073,8 +2072,8 @@ export type UpdateEnrollCoursesMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2090,11 +2089,11 @@ export type UpdateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -2119,10 +2118,8 @@ export type DeleteEnrollCoursesMutation = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -2143,7 +2140,6 @@ export type DeleteEnrollCoursesMutation = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -2159,8 +2155,8 @@ export type DeleteEnrollCoursesMutation = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2176,11 +2172,131 @@ export type DeleteEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
+  } | null,
+};
+
+export type GetCourseQueryVariables = {
+  id: string,
+};
+
+export type GetCourseQuery = {
+  getCourse?:  {
+    __typename: "Course",
+    id: string,
+    name: string,
+    thumbnail: string,
+    description?: string | null,
+    professor?:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    blocks?:  {
+      __typename: "ModelBlockConnection",
+      items:  Array< {
+        __typename: "Block",
+        id: string,
+        name: string,
+        description?: string | null,
+        authorId: string,
+        createdAt: string,
+        updatedAt: string,
+        courseBlocksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    fileUploadEnabled?: boolean | null,
+    price: number,
+    status?: CourseStatus | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      items:  Array< {
+        __typename: "Purchase",
+        id: string,
+        clientId: string,
+        date: string,
+        createdAt: string,
+        updatedAt: string,
+        coursePurchasesId?: string | null,
+        clientPurchasesId?: string | null,
+        cliendId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    enrollment?:  {
+      __typename: "ModelEnrollCoursesConnection",
+      items:  Array< {
+        __typename: "EnrollCourses",
+        id: string,
+        courseId: string,
+        enrollmentId: string,
+        createdAt: string,
+        updatedAt: string,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
+  } | null,
+};
+
+export type ListCoursesQueryVariables = {
+  filter?: ModelCourseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCoursesQuery = {
+  listCourses?:  {
+    __typename: "ModelCourseConnection",
+    items:  Array< {
+      __typename: "Course",
+      id: string,
+      name: string,
+      thumbnail: string,
+      description?: string | null,
+      professor?:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      blocks?:  {
+        __typename: "ModelBlockConnection",
+        nextToken?: string | null,
+      } | null,
+      fileUploadEnabled?: boolean | null,
+      price: number,
+      status?: CourseStatus | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      enrollment?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -2208,14 +2324,11 @@ export type GetProfessorQuery = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -2236,497 +2349,8 @@ export type ListProfessorsQuery = {
         __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
-      cognitoId: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetClientQueryVariables = {
-  id: string,
-};
-
-export type GetClientQuery = {
-  getClient?:  {
-    __typename: "Client",
-    id: string,
-    name: string,
-    email: string,
-    enrolledCourses?:  {
-      __typename: "ModelEnrollmentConnection",
-      items:  Array< {
-        __typename: "Enrollment",
-        id: string,
-        date: string,
-        status: EnrollStatus,
-        paymentStatus: PaymentStatus,
-        paymentType: PaymentType,
-        createdAt: string,
-        updatedAt: string,
-        clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
-      items:  Array< {
-        __typename: "Purchase",
-        id: string,
-        date: string,
-        createdAt: string,
-        updatedAt: string,
-        coursePurchasesId?: string | null,
-        clientPurchasesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListClientsQueryVariables = {
-  filter?: ModelClientFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListClientsQuery = {
-  listClients?:  {
-    __typename: "ModelClientConnection",
-    items:  Array< {
-      __typename: "Client",
-      id: string,
-      name: string,
-      email: string,
-      enrolledCourses?:  {
-        __typename: "ModelEnrollmentConnection",
-        nextToken?: string | null,
-      } | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetEnrollmentQueryVariables = {
-  id: string,
-};
-
-export type GetEnrollmentQuery = {
-  getEnrollment?:  {
-    __typename: "Enrollment",
-    id: string,
-    course?:  {
-      __typename: "ModelEnrollCoursesConnection",
-      items:  Array< {
-        __typename: "EnrollCourses",
-        id: string,
-        courseId: string,
-        enrollmentId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    client:  {
-      __typename: "Client",
-      id: string,
-      name: string,
-      email: string,
-      enrolledCourses?:  {
-        __typename: "ModelEnrollmentConnection",
-        nextToken?: string | null,
-      } | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    date: string,
-    status: EnrollStatus,
-    paymentStatus: PaymentStatus,
-    paymentType: PaymentType,
-    enrollDetails:  Array< {
-      __typename: "EnrollDetail",
-      courseID: string,
-      courseName: string,
-      courseThumbnail: string,
-      quantity: number,
-      total: number,
-    } >,
-    createdAt: string,
-    updatedAt: string,
-    clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListEnrollmentsQueryVariables = {
-  filter?: ModelEnrollmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListEnrollmentsQuery = {
-  listEnrollments?:  {
-    __typename: "ModelEnrollmentConnection",
-    items:  Array< {
-      __typename: "Enrollment",
-      id: string,
-      course?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      client:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      },
-      date: string,
-      status: EnrollStatus,
-      paymentStatus: PaymentStatus,
-      paymentType: PaymentType,
-      enrollDetails:  Array< {
-        __typename: "EnrollDetail",
-        courseID: string,
-        courseName: string,
-        courseThumbnail: string,
-        quantity: number,
-        total: number,
-      } >,
-      createdAt: string,
-      updatedAt: string,
-      clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetPurchaseQueryVariables = {
-  id: string,
-};
-
-export type GetPurchaseQuery = {
-  getPurchase?:  {
-    __typename: "Purchase",
-    id: string,
-    client:  {
-      __typename: "Client",
-      id: string,
-      name: string,
-      email: string,
-      enrolledCourses?:  {
-        __typename: "ModelEnrollmentConnection",
-        nextToken?: string | null,
-      } | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    course:  {
-      __typename: "Course",
-      id: string,
-      name: string,
-      thumbnail: string,
-      description?: string | null,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        cognitoId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      blocks?:  {
-        __typename: "ModelBlockConnection",
-        nextToken?: string | null,
-      } | null,
-      fileUploadEnabled?: boolean | null,
-      price: number,
-      status?: CourseStatus | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      enrollment?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-      courseProfessorId?: string | null,
-      owner?: string | null,
-    },
-    date: string,
-    createdAt: string,
-    updatedAt: string,
-    coursePurchasesId?: string | null,
-    clientPurchasesId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListPurchasesQueryVariables = {
-  filter?: ModelPurchaseFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPurchasesQuery = {
-  listPurchases?:  {
-    __typename: "ModelPurchaseConnection",
-    items:  Array< {
-      __typename: "Purchase",
-      id: string,
-      client:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      },
-      course:  {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        fileUploadEnabled?: boolean | null,
-        price: number,
-        status?: CourseStatus | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-        courseProfessorId?: string | null,
-        owner?: string | null,
-      },
-      date: string,
-      createdAt: string,
-      updatedAt: string,
-      coursePurchasesId?: string | null,
-      clientPurchasesId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetFileQueryVariables = {
-  id: string,
-};
-
-export type GetFileQuery = {
-  getFile?:  {
-    __typename: "File",
-    id: string,
-    name: string,
-    url: string,
-    uploadedBy?:  {
-      __typename: "Client",
-      id: string,
-      name: string,
-      email: string,
-      enrolledCourses?:  {
-        __typename: "ModelEnrollmentConnection",
-        nextToken?: string | null,
-      } | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    fileUploadedById?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListFilesQueryVariables = {
-  filter?: ModelFileFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListFilesQuery = {
-  listFiles?:  {
-    __typename: "ModelFileConnection",
-    items:  Array< {
-      __typename: "File",
-      id: string,
-      name: string,
-      url: string,
-      uploadedBy?:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      fileUploadedById?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetCourseQueryVariables = {
-  id: string,
-};
-
-export type GetCourseQuery = {
-  getCourse?:  {
-    __typename: "Course",
-    id: string,
-    name: string,
-    thumbnail: string,
-    description?: string | null,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      cognitoId: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-    blocks?:  {
-      __typename: "ModelBlockConnection",
-      items:  Array< {
-        __typename: "Block",
-        id: string,
-        name: string,
-        description?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        courseBlocksId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    fileUploadEnabled?: boolean | null,
-    price: number,
-    status?: CourseStatus | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
-      items:  Array< {
-        __typename: "Purchase",
-        id: string,
-        date: string,
-        createdAt: string,
-        updatedAt: string,
-        coursePurchasesId?: string | null,
-        clientPurchasesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    enrollment?:  {
-      __typename: "ModelEnrollCoursesConnection",
-      items:  Array< {
-        __typename: "EnrollCourses",
-        id: string,
-        courseId: string,
-        enrollmentId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-    courseProfessorId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListCoursesQueryVariables = {
-  filter?: ModelCourseFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCoursesQuery = {
-  listCourses?:  {
-    __typename: "ModelCourseConnection",
-    items:  Array< {
-      __typename: "Course",
-      id: string,
-      name: string,
-      thumbnail: string,
-      description?: string | null,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        cognitoId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      blocks?:  {
-        __typename: "ModelBlockConnection",
-        nextToken?: string | null,
-      } | null,
-      fileUploadEnabled?: boolean | null,
-      price: number,
-      status?: CourseStatus | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      enrollment?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-      courseProfessorId?: string | null,
-      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2752,10 +2376,8 @@ export type GetBlockQuery = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -2776,7 +2398,6 @@ export type GetBlockQuery = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     } | null,
     uploadedFiles?:  Array< {
       __typename: "File",
@@ -2790,17 +2411,27 @@ export type GetBlockQuery = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
+      cliendId: string,
       createdAt: string,
       updatedAt: string,
       fileUploadedById?: string | null,
-      owner?: string | null,
     } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
     createdAt: string,
     updatedAt: string,
     courseBlocksId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -2831,22 +2462,384 @@ export type ListBlocksQuery = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null,
       uploadedFiles?:  Array< {
         __typename: "File",
         id: string,
         name: string,
         url: string,
+        cliendId: string,
         createdAt: string,
         updatedAt: string,
         fileUploadedById?: string | null,
-        owner?: string | null,
       } | null > | null,
+      author:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      authorId: string,
       createdAt: string,
       updatedAt: string,
       courseBlocksId?: string | null,
-      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetClientQueryVariables = {
+  id: string,
+};
+
+export type GetClientQuery = {
+  getClient?:  {
+    __typename: "Client",
+    id: string,
+    name: string,
+    email: string,
+    enrolledCourses?:  {
+      __typename: "ModelEnrollmentConnection",
+      items:  Array< {
+        __typename: "Enrollment",
+        id: string,
+        cliendId: string,
+        date: string,
+        status: EnrollStatus,
+        paymentStatus: PaymentStatus,
+        paymentType: PaymentType,
+        createdAt: string,
+        updatedAt: string,
+        clientEnrolledCoursesId?: string | null,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      items:  Array< {
+        __typename: "Purchase",
+        id: string,
+        clientId: string,
+        date: string,
+        createdAt: string,
+        updatedAt: string,
+        coursePurchasesId?: string | null,
+        clientPurchasesId?: string | null,
+        cliendId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListClientsQueryVariables = {
+  filter?: ModelClientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClientsQuery = {
+  listClients?:  {
+    __typename: "ModelClientConnection",
+    items:  Array< {
+      __typename: "Client",
+      id: string,
+      name: string,
+      email: string,
+      enrolledCourses?:  {
+        __typename: "ModelEnrollmentConnection",
+        nextToken?: string | null,
+      } | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetEnrollmentQueryVariables = {
+  id: string,
+};
+
+export type GetEnrollmentQuery = {
+  getEnrollment?:  {
+    __typename: "Enrollment",
+    id: string,
+    course?:  {
+      __typename: "ModelEnrollCoursesConnection",
+      items:  Array< {
+        __typename: "EnrollCourses",
+        id: string,
+        courseId: string,
+        enrollmentId: string,
+        createdAt: string,
+        updatedAt: string,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    client:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      email: string,
+      enrolledCourses?:  {
+        __typename: "ModelEnrollmentConnection",
+        nextToken?: string | null,
+      } | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    cliendId: string,
+    date: string,
+    status: EnrollStatus,
+    paymentStatus: PaymentStatus,
+    paymentType: PaymentType,
+    enrollDetails:  Array< {
+      __typename: "EnrollDetail",
+      courseID: string,
+      courseName: string,
+      courseThumbnail: string,
+      quantity: number,
+      total: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+    clientEnrolledCoursesId?: string | null,
+    clientId?: string | null,
+  } | null,
+};
+
+export type ListEnrollmentsQueryVariables = {
+  filter?: ModelEnrollmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEnrollmentsQuery = {
+  listEnrollments?:  {
+    __typename: "ModelEnrollmentConnection",
+    items:  Array< {
+      __typename: "Enrollment",
+      id: string,
+      course?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      client:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      cliendId: string,
+      date: string,
+      status: EnrollStatus,
+      paymentStatus: PaymentStatus,
+      paymentType: PaymentType,
+      enrollDetails:  Array< {
+        __typename: "EnrollDetail",
+        courseID: string,
+        courseName: string,
+        courseThumbnail: string,
+        quantity: number,
+        total: number,
+      } >,
+      createdAt: string,
+      updatedAt: string,
+      clientEnrolledCoursesId?: string | null,
+      clientId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPurchaseQueryVariables = {
+  id: string,
+};
+
+export type GetPurchaseQuery = {
+  getPurchase?:  {
+    __typename: "Purchase",
+    id: string,
+    client:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      email: string,
+      enrolledCourses?:  {
+        __typename: "ModelEnrollmentConnection",
+        nextToken?: string | null,
+      } | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    clientId: string,
+    course:  Array< {
+      __typename: "Course",
+      id: string,
+      name: string,
+      thumbnail: string,
+      description?: string | null,
+      professor?:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      blocks?:  {
+        __typename: "ModelBlockConnection",
+        nextToken?: string | null,
+      } | null,
+      fileUploadEnabled?: boolean | null,
+      price: number,
+      status?: CourseStatus | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      enrollment?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+    coursePurchasesId?: string | null,
+    clientPurchasesId?: string | null,
+    cliendId?: string | null,
+  } | null,
+};
+
+export type ListPurchasesQueryVariables = {
+  filter?: ModelPurchaseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPurchasesQuery = {
+  listPurchases?:  {
+    __typename: "ModelPurchaseConnection",
+    items:  Array< {
+      __typename: "Purchase",
+      id: string,
+      client:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      clientId: string,
+      course:  Array< {
+        __typename: "Course",
+        id: string,
+        name: string,
+        thumbnail: string,
+        description?: string | null,
+        fileUploadEnabled?: boolean | null,
+        price: number,
+        status?: CourseStatus | null,
+        createdAt: string,
+        updatedAt: string,
+        professorCoursesId?: string | null,
+        courseProfessorId?: string | null,
+      } >,
+      date: string,
+      createdAt: string,
+      updatedAt: string,
+      coursePurchasesId?: string | null,
+      clientPurchasesId?: string | null,
+      cliendId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFileQueryVariables = {
+  id: string,
+};
+
+export type GetFileQuery = {
+  getFile?:  {
+    __typename: "File",
+    id: string,
+    name: string,
+    url: string,
+    uploadedBy?:  {
+      __typename: "Client",
+      id: string,
+      name: string,
+      email: string,
+      enrolledCourses?:  {
+        __typename: "ModelEnrollmentConnection",
+        nextToken?: string | null,
+      } | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    cliendId: string,
+    createdAt: string,
+    updatedAt: string,
+    fileUploadedById?: string | null,
+  } | null,
+};
+
+export type ListFilesQueryVariables = {
+  filter?: ModelFileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFilesQuery = {
+  listFiles?:  {
+    __typename: "ModelFileConnection",
+    items:  Array< {
+      __typename: "File",
+      id: string,
+      name: string,
+      url: string,
+      uploadedBy?:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      cliendId: string,
+      createdAt: string,
+      updatedAt: string,
+      fileUploadedById?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2872,10 +2865,8 @@ export type GetEnrollCoursesQuery = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -2896,7 +2887,6 @@ export type GetEnrollCoursesQuery = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -2912,8 +2902,8 @@ export type GetEnrollCoursesQuery = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2929,11 +2919,11 @@ export type GetEnrollCoursesQuery = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
@@ -2964,11 +2954,11 @@ export type ListEnrollCoursesQuery = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -2976,11 +2966,11 @@ export type ListEnrollCoursesQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
+      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3015,11 +3005,11 @@ export type EnrollCoursesByCourseIdQuery = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3027,11 +3017,11 @@ export type EnrollCoursesByCourseIdQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
+      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3066,11 +3056,11 @@ export type EnrollCoursesByEnrollmentIdQuery = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3078,19 +3068,241 @@ export type EnrollCoursesByEnrollmentIdQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
+      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
+export type OnCreateCourseSubscriptionVariables = {
+  filter?: ModelSubscriptionCourseFilterInput | null,
+};
+
+export type OnCreateCourseSubscription = {
+  onCreateCourse?:  {
+    __typename: "Course",
+    id: string,
+    name: string,
+    thumbnail: string,
+    description?: string | null,
+    professor?:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    blocks?:  {
+      __typename: "ModelBlockConnection",
+      items:  Array< {
+        __typename: "Block",
+        id: string,
+        name: string,
+        description?: string | null,
+        authorId: string,
+        createdAt: string,
+        updatedAt: string,
+        courseBlocksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    fileUploadEnabled?: boolean | null,
+    price: number,
+    status?: CourseStatus | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      items:  Array< {
+        __typename: "Purchase",
+        id: string,
+        clientId: string,
+        date: string,
+        createdAt: string,
+        updatedAt: string,
+        coursePurchasesId?: string | null,
+        clientPurchasesId?: string | null,
+        cliendId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    enrollment?:  {
+      __typename: "ModelEnrollCoursesConnection",
+      items:  Array< {
+        __typename: "EnrollCourses",
+        id: string,
+        courseId: string,
+        enrollmentId: string,
+        createdAt: string,
+        updatedAt: string,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
+  } | null,
+};
+
+export type OnUpdateCourseSubscriptionVariables = {
+  filter?: ModelSubscriptionCourseFilterInput | null,
+};
+
+export type OnUpdateCourseSubscription = {
+  onUpdateCourse?:  {
+    __typename: "Course",
+    id: string,
+    name: string,
+    thumbnail: string,
+    description?: string | null,
+    professor?:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    blocks?:  {
+      __typename: "ModelBlockConnection",
+      items:  Array< {
+        __typename: "Block",
+        id: string,
+        name: string,
+        description?: string | null,
+        authorId: string,
+        createdAt: string,
+        updatedAt: string,
+        courseBlocksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    fileUploadEnabled?: boolean | null,
+    price: number,
+    status?: CourseStatus | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      items:  Array< {
+        __typename: "Purchase",
+        id: string,
+        clientId: string,
+        date: string,
+        createdAt: string,
+        updatedAt: string,
+        coursePurchasesId?: string | null,
+        clientPurchasesId?: string | null,
+        cliendId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    enrollment?:  {
+      __typename: "ModelEnrollCoursesConnection",
+      items:  Array< {
+        __typename: "EnrollCourses",
+        id: string,
+        courseId: string,
+        enrollmentId: string,
+        createdAt: string,
+        updatedAt: string,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
+  } | null,
+};
+
+export type OnDeleteCourseSubscriptionVariables = {
+  filter?: ModelSubscriptionCourseFilterInput | null,
+};
+
+export type OnDeleteCourseSubscription = {
+  onDeleteCourse?:  {
+    __typename: "Course",
+    id: string,
+    name: string,
+    thumbnail: string,
+    description?: string | null,
+    professor?:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    blocks?:  {
+      __typename: "ModelBlockConnection",
+      items:  Array< {
+        __typename: "Block",
+        id: string,
+        name: string,
+        description?: string | null,
+        authorId: string,
+        createdAt: string,
+        updatedAt: string,
+        courseBlocksId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    fileUploadEnabled?: boolean | null,
+    price: number,
+    status?: CourseStatus | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      items:  Array< {
+        __typename: "Purchase",
+        id: string,
+        clientId: string,
+        date: string,
+        createdAt: string,
+        updatedAt: string,
+        coursePurchasesId?: string | null,
+        clientPurchasesId?: string | null,
+        cliendId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    enrollment?:  {
+      __typename: "ModelEnrollCoursesConnection",
+      items:  Array< {
+        __typename: "EnrollCourses",
+        id: string,
+        courseId: string,
+        enrollmentId: string,
+        createdAt: string,
+        updatedAt: string,
+        clientId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    professorCoursesId?: string | null,
+    courseProfessorId?: string | null,
+  } | null,
+};
+
 export type OnCreateProfessorSubscriptionVariables = {
   filter?: ModelSubscriptionProfessorFilterInput | null,
-  owner?: string | null,
+  id?: string | null,
 };
 
 export type OnCreateProfessorSubscription = {
@@ -3113,20 +3325,17 @@ export type OnCreateProfessorSubscription = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateProfessorSubscriptionVariables = {
   filter?: ModelSubscriptionProfessorFilterInput | null,
-  owner?: string | null,
+  id?: string | null,
 };
 
 export type OnUpdateProfessorSubscription = {
@@ -3149,20 +3358,17 @@ export type OnUpdateProfessorSubscription = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteProfessorSubscriptionVariables = {
   filter?: ModelSubscriptionProfessorFilterInput | null,
-  owner?: string | null,
+  id?: string | null,
 };
 
 export type OnDeleteProfessorSubscription = {
@@ -3185,20 +3391,253 @@ export type OnDeleteProfessorSubscription = {
         updatedAt: string,
         professorCoursesId?: string | null,
         courseProfessorId?: string | null,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    cognitoId: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateBlockSubscriptionVariables = {
+  filter?: ModelSubscriptionBlockFilterInput | null,
+};
+
+export type OnCreateBlockSubscription = {
+  onCreateBlock?:  {
+    __typename: "Block",
+    id: string,
+    name: string,
+    description?: string | null,
+    course?:  {
+      __typename: "Course",
+      id: string,
+      name: string,
+      thumbnail: string,
+      description?: string | null,
+      professor?:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      blocks?:  {
+        __typename: "ModelBlockConnection",
+        nextToken?: string | null,
+      } | null,
+      fileUploadEnabled?: boolean | null,
+      price: number,
+      status?: CourseStatus | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      enrollment?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
+    } | null,
+    uploadedFiles?:  Array< {
+      __typename: "File",
+      id: string,
+      name: string,
+      url: string,
+      uploadedBy?:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      cliendId: string,
+      createdAt: string,
+      updatedAt: string,
+      fileUploadedById?: string | null,
+    } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
+    createdAt: string,
+    updatedAt: string,
+    courseBlocksId?: string | null,
+  } | null,
+};
+
+export type OnUpdateBlockSubscriptionVariables = {
+  filter?: ModelSubscriptionBlockFilterInput | null,
+};
+
+export type OnUpdateBlockSubscription = {
+  onUpdateBlock?:  {
+    __typename: "Block",
+    id: string,
+    name: string,
+    description?: string | null,
+    course?:  {
+      __typename: "Course",
+      id: string,
+      name: string,
+      thumbnail: string,
+      description?: string | null,
+      professor?:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      blocks?:  {
+        __typename: "ModelBlockConnection",
+        nextToken?: string | null,
+      } | null,
+      fileUploadEnabled?: boolean | null,
+      price: number,
+      status?: CourseStatus | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      enrollment?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
+    } | null,
+    uploadedFiles?:  Array< {
+      __typename: "File",
+      id: string,
+      name: string,
+      url: string,
+      uploadedBy?:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      cliendId: string,
+      createdAt: string,
+      updatedAt: string,
+      fileUploadedById?: string | null,
+    } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
+    createdAt: string,
+    updatedAt: string,
+    courseBlocksId?: string | null,
+  } | null,
+};
+
+export type OnDeleteBlockSubscriptionVariables = {
+  filter?: ModelSubscriptionBlockFilterInput | null,
+};
+
+export type OnDeleteBlockSubscription = {
+  onDeleteBlock?:  {
+    __typename: "Block",
+    id: string,
+    name: string,
+    description?: string | null,
+    course?:  {
+      __typename: "Course",
+      id: string,
+      name: string,
+      thumbnail: string,
+      description?: string | null,
+      professor?:  {
+        __typename: "Professor",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      blocks?:  {
+        __typename: "ModelBlockConnection",
+        nextToken?: string | null,
+      } | null,
+      fileUploadEnabled?: boolean | null,
+      price: number,
+      status?: CourseStatus | null,
+      purchases?:  {
+        __typename: "ModelPurchaseConnection",
+        nextToken?: string | null,
+      } | null,
+      enrollment?:  {
+        __typename: "ModelEnrollCoursesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      professorCoursesId?: string | null,
+      courseProfessorId?: string | null,
+    } | null,
+    uploadedFiles?:  Array< {
+      __typename: "File",
+      id: string,
+      name: string,
+      url: string,
+      uploadedBy?:  {
+        __typename: "Client",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      cliendId: string,
+      createdAt: string,
+      updatedAt: string,
+      fileUploadedById?: string | null,
+    } | null > | null,
+    author:  {
+      __typename: "Professor",
+      id: string,
+      name: string,
+      courses?:  {
+        __typename: "ModelCourseConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    authorId: string,
+    createdAt: string,
+    updatedAt: string,
+    courseBlocksId?: string | null,
   } | null,
 };
 
 export type OnCreateClientSubscriptionVariables = {
   filter?: ModelSubscriptionClientFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreateClientSubscription = {
@@ -3212,6 +3651,7 @@ export type OnCreateClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3219,7 +3659,7 @@ export type OnCreateClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3228,24 +3668,23 @@ export type OnCreateClientSubscription = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateClientSubscriptionVariables = {
   filter?: ModelSubscriptionClientFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdateClientSubscription = {
@@ -3259,6 +3698,7 @@ export type OnUpdateClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3266,7 +3706,7 @@ export type OnUpdateClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3275,24 +3715,23 @@ export type OnUpdateClientSubscription = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteClientSubscriptionVariables = {
   filter?: ModelSubscriptionClientFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeleteClientSubscription = {
@@ -3306,6 +3745,7 @@ export type OnDeleteClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
+        cliendId: string,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3313,7 +3753,7 @@ export type OnDeleteClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3322,24 +3762,23 @@ export type OnDeleteClientSubscription = {
       items:  Array< {
         __typename: "Purchase",
         id: string,
+        clientId: string,
         date: string,
         createdAt: string,
         updatedAt: string,
         coursePurchasesId?: string | null,
         clientPurchasesId?: string | null,
-        owner?: string | null,
+        cliendId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
 export type OnCreateEnrollmentSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollmentFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreateEnrollmentSubscription = {
@@ -3355,7 +3794,7 @@ export type OnCreateEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3374,8 +3813,8 @@ export type OnCreateEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3391,13 +3830,12 @@ export type OnCreateEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
 export type OnUpdateEnrollmentSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollmentFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdateEnrollmentSubscription = {
@@ -3413,7 +3851,7 @@ export type OnUpdateEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3432,8 +3870,8 @@ export type OnUpdateEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3449,13 +3887,12 @@ export type OnUpdateEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
 export type OnDeleteEnrollmentSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollmentFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeleteEnrollmentSubscription = {
@@ -3471,7 +3908,7 @@ export type OnDeleteEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
+        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3490,8 +3927,8 @@ export type OnDeleteEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
+    cliendId: string,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3507,13 +3944,12 @@ export type OnDeleteEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
 export type OnCreatePurchaseSubscriptionVariables = {
   filter?: ModelSubscriptionPurchaseFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreatePurchaseSubscription = {
@@ -3535,9 +3971,9 @@ export type OnCreatePurchaseSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -3547,10 +3983,8 @@ export type OnCreatePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -3571,20 +4005,18 @@ export type OnCreatePurchaseSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
 export type OnUpdatePurchaseSubscriptionVariables = {
   filter?: ModelSubscriptionPurchaseFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdatePurchaseSubscription = {
@@ -3606,9 +4038,9 @@ export type OnUpdatePurchaseSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -3618,10 +4050,8 @@ export type OnUpdatePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -3642,20 +4072,18 @@ export type OnUpdatePurchaseSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
 export type OnDeletePurchaseSubscriptionVariables = {
   filter?: ModelSubscriptionPurchaseFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeletePurchaseSubscription = {
@@ -3677,9 +4105,9 @@ export type OnDeletePurchaseSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
-    course:  {
+    clientId: string,
+    course:  Array< {
       __typename: "Course",
       id: string,
       name: string,
@@ -3689,10 +4117,8 @@ export type OnDeletePurchaseSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -3713,20 +4139,18 @@ export type OnDeletePurchaseSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
-    },
+    } >,
     date: string,
     createdAt: string,
     updatedAt: string,
     coursePurchasesId?: string | null,
     clientPurchasesId?: string | null,
-    owner?: string | null,
+    cliendId?: string | null,
   } | null,
 };
 
 export type OnCreateFileSubscriptionVariables = {
   filter?: ModelSubscriptionFileFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreateFileSubscription = {
@@ -3750,18 +4174,16 @@ export type OnCreateFileSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateFileSubscriptionVariables = {
   filter?: ModelSubscriptionFileFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdateFileSubscription = {
@@ -3785,18 +4207,16 @@ export type OnUpdateFileSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteFileSubscriptionVariables = {
   filter?: ModelSubscriptionFileFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeleteFileSubscription = {
@@ -3820,468 +4240,16 @@ export type OnDeleteFileSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
+    cliendId: string,
     createdAt: string,
     updatedAt: string,
     fileUploadedById?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateCourseSubscriptionVariables = {
-  filter?: ModelSubscriptionCourseFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateCourseSubscription = {
-  onCreateCourse?:  {
-    __typename: "Course",
-    id: string,
-    name: string,
-    thumbnail: string,
-    description?: string | null,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      cognitoId: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-    blocks?:  {
-      __typename: "ModelBlockConnection",
-      items:  Array< {
-        __typename: "Block",
-        id: string,
-        name: string,
-        description?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        courseBlocksId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    fileUploadEnabled?: boolean | null,
-    price: number,
-    status?: CourseStatus | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
-      items:  Array< {
-        __typename: "Purchase",
-        id: string,
-        date: string,
-        createdAt: string,
-        updatedAt: string,
-        coursePurchasesId?: string | null,
-        clientPurchasesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    enrollment?:  {
-      __typename: "ModelEnrollCoursesConnection",
-      items:  Array< {
-        __typename: "EnrollCourses",
-        id: string,
-        courseId: string,
-        enrollmentId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-    courseProfessorId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateCourseSubscriptionVariables = {
-  filter?: ModelSubscriptionCourseFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdateCourseSubscription = {
-  onUpdateCourse?:  {
-    __typename: "Course",
-    id: string,
-    name: string,
-    thumbnail: string,
-    description?: string | null,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      cognitoId: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-    blocks?:  {
-      __typename: "ModelBlockConnection",
-      items:  Array< {
-        __typename: "Block",
-        id: string,
-        name: string,
-        description?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        courseBlocksId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    fileUploadEnabled?: boolean | null,
-    price: number,
-    status?: CourseStatus | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
-      items:  Array< {
-        __typename: "Purchase",
-        id: string,
-        date: string,
-        createdAt: string,
-        updatedAt: string,
-        coursePurchasesId?: string | null,
-        clientPurchasesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    enrollment?:  {
-      __typename: "ModelEnrollCoursesConnection",
-      items:  Array< {
-        __typename: "EnrollCourses",
-        id: string,
-        courseId: string,
-        enrollmentId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-    courseProfessorId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteCourseSubscriptionVariables = {
-  filter?: ModelSubscriptionCourseFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeleteCourseSubscription = {
-  onDeleteCourse?:  {
-    __typename: "Course",
-    id: string,
-    name: string,
-    thumbnail: string,
-    description?: string | null,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      cognitoId: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-    blocks?:  {
-      __typename: "ModelBlockConnection",
-      items:  Array< {
-        __typename: "Block",
-        id: string,
-        name: string,
-        description?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        courseBlocksId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    fileUploadEnabled?: boolean | null,
-    price: number,
-    status?: CourseStatus | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
-      items:  Array< {
-        __typename: "Purchase",
-        id: string,
-        date: string,
-        createdAt: string,
-        updatedAt: string,
-        coursePurchasesId?: string | null,
-        clientPurchasesId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    enrollment?:  {
-      __typename: "ModelEnrollCoursesConnection",
-      items:  Array< {
-        __typename: "EnrollCourses",
-        id: string,
-        courseId: string,
-        enrollmentId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-    courseProfessorId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateBlockSubscriptionVariables = {
-  filter?: ModelSubscriptionBlockFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateBlockSubscription = {
-  onCreateBlock?:  {
-    __typename: "Block",
-    id: string,
-    name: string,
-    description?: string | null,
-    course?:  {
-      __typename: "Course",
-      id: string,
-      name: string,
-      thumbnail: string,
-      description?: string | null,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        cognitoId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      blocks?:  {
-        __typename: "ModelBlockConnection",
-        nextToken?: string | null,
-      } | null,
-      fileUploadEnabled?: boolean | null,
-      price: number,
-      status?: CourseStatus | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      enrollment?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-      courseProfessorId?: string | null,
-      owner?: string | null,
-    } | null,
-    uploadedFiles?:  Array< {
-      __typename: "File",
-      id: string,
-      name: string,
-      url: string,
-      uploadedBy?:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      fileUploadedById?: string | null,
-      owner?: string | null,
-    } | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    courseBlocksId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateBlockSubscriptionVariables = {
-  filter?: ModelSubscriptionBlockFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdateBlockSubscription = {
-  onUpdateBlock?:  {
-    __typename: "Block",
-    id: string,
-    name: string,
-    description?: string | null,
-    course?:  {
-      __typename: "Course",
-      id: string,
-      name: string,
-      thumbnail: string,
-      description?: string | null,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        cognitoId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      blocks?:  {
-        __typename: "ModelBlockConnection",
-        nextToken?: string | null,
-      } | null,
-      fileUploadEnabled?: boolean | null,
-      price: number,
-      status?: CourseStatus | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      enrollment?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-      courseProfessorId?: string | null,
-      owner?: string | null,
-    } | null,
-    uploadedFiles?:  Array< {
-      __typename: "File",
-      id: string,
-      name: string,
-      url: string,
-      uploadedBy?:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      fileUploadedById?: string | null,
-      owner?: string | null,
-    } | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    courseBlocksId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteBlockSubscriptionVariables = {
-  filter?: ModelSubscriptionBlockFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeleteBlockSubscription = {
-  onDeleteBlock?:  {
-    __typename: "Block",
-    id: string,
-    name: string,
-    description?: string | null,
-    course?:  {
-      __typename: "Course",
-      id: string,
-      name: string,
-      thumbnail: string,
-      description?: string | null,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        cognitoId: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      blocks?:  {
-        __typename: "ModelBlockConnection",
-        nextToken?: string | null,
-      } | null,
-      fileUploadEnabled?: boolean | null,
-      price: number,
-      status?: CourseStatus | null,
-      purchases?:  {
-        __typename: "ModelPurchaseConnection",
-        nextToken?: string | null,
-      } | null,
-      enrollment?:  {
-        __typename: "ModelEnrollCoursesConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-      courseProfessorId?: string | null,
-      owner?: string | null,
-    } | null,
-    uploadedFiles?:  Array< {
-      __typename: "File",
-      id: string,
-      name: string,
-      url: string,
-      uploadedBy?:  {
-        __typename: "Client",
-        id: string,
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      fileUploadedById?: string | null,
-      owner?: string | null,
-    } | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    courseBlocksId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
 export type OnCreateEnrollCoursesSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollCoursesFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreateEnrollCoursesSubscription = {
@@ -4300,10 +4268,8 @@ export type OnCreateEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -4324,7 +4290,6 @@ export type OnCreateEnrollCoursesSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -4340,8 +4305,8 @@ export type OnCreateEnrollCoursesSubscription = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4357,17 +4322,16 @@ export type OnCreateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
 export type OnUpdateEnrollCoursesSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollCoursesFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdateEnrollCoursesSubscription = {
@@ -4386,10 +4350,8 @@ export type OnUpdateEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -4410,7 +4372,6 @@ export type OnUpdateEnrollCoursesSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -4426,8 +4387,8 @@ export type OnUpdateEnrollCoursesSubscription = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4443,17 +4404,16 @@ export type OnUpdateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };
 
 export type OnDeleteEnrollCoursesSubscriptionVariables = {
   filter?: ModelSubscriptionEnrollCoursesFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeleteEnrollCoursesSubscription = {
@@ -4472,10 +4432,8 @@ export type OnDeleteEnrollCoursesSubscription = {
         __typename: "Professor",
         id: string,
         name: string,
-        cognitoId: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       blocks?:  {
         __typename: "ModelBlockConnection",
@@ -4496,7 +4454,6 @@ export type OnDeleteEnrollCoursesSubscription = {
       updatedAt: string,
       professorCoursesId?: string | null,
       courseProfessorId?: string | null,
-      owner?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -4512,8 +4469,8 @@ export type OnDeleteEnrollCoursesSubscription = {
         email: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       },
+      cliendId: string,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4529,10 +4486,10 @@ export type OnDeleteEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      owner?: string | null,
+      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    clientId?: string | null,
   } | null,
 };

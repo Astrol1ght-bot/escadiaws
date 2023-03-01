@@ -2,12 +2,198 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCourse = /* GraphQL */ `
+  subscription OnCreateCourse($filter: ModelSubscriptionCourseFilterInput) {
+    onCreateCourse(filter: $filter) {
+      id
+      name
+      thumbnail
+      description
+      professor {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      blocks {
+        items {
+          id
+          name
+          description
+          authorId
+          createdAt
+          updatedAt
+          courseBlocksId
+        }
+        nextToken
+      }
+      fileUploadEnabled
+      price
+      status
+      purchases {
+        items {
+          id
+          clientId
+          date
+          createdAt
+          updatedAt
+          coursePurchasesId
+          clientPurchasesId
+          cliendId
+        }
+        nextToken
+      }
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+          clientId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      professorCoursesId
+      courseProfessorId
+    }
+  }
+`;
+export const onUpdateCourse = /* GraphQL */ `
+  subscription OnUpdateCourse($filter: ModelSubscriptionCourseFilterInput) {
+    onUpdateCourse(filter: $filter) {
+      id
+      name
+      thumbnail
+      description
+      professor {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      blocks {
+        items {
+          id
+          name
+          description
+          authorId
+          createdAt
+          updatedAt
+          courseBlocksId
+        }
+        nextToken
+      }
+      fileUploadEnabled
+      price
+      status
+      purchases {
+        items {
+          id
+          clientId
+          date
+          createdAt
+          updatedAt
+          coursePurchasesId
+          clientPurchasesId
+          cliendId
+        }
+        nextToken
+      }
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+          clientId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      professorCoursesId
+      courseProfessorId
+    }
+  }
+`;
+export const onDeleteCourse = /* GraphQL */ `
+  subscription OnDeleteCourse($filter: ModelSubscriptionCourseFilterInput) {
+    onDeleteCourse(filter: $filter) {
+      id
+      name
+      thumbnail
+      description
+      professor {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      blocks {
+        items {
+          id
+          name
+          description
+          authorId
+          createdAt
+          updatedAt
+          courseBlocksId
+        }
+        nextToken
+      }
+      fileUploadEnabled
+      price
+      status
+      purchases {
+        items {
+          id
+          clientId
+          date
+          createdAt
+          updatedAt
+          coursePurchasesId
+          clientPurchasesId
+          cliendId
+        }
+        nextToken
+      }
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+          clientId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      professorCoursesId
+      courseProfessorId
+    }
+  }
+`;
 export const onCreateProfessor = /* GraphQL */ `
   subscription OnCreateProfessor(
     $filter: ModelSubscriptionProfessorFilterInput
-    $owner: String
+    $id: String
   ) {
-    onCreateProfessor(filter: $filter, owner: $owner) {
+    onCreateProfessor(filter: $filter, id: $id) {
       id
       name
       courses {
@@ -23,23 +209,20 @@ export const onCreateProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateProfessor = /* GraphQL */ `
   subscription OnUpdateProfessor(
     $filter: ModelSubscriptionProfessorFilterInput
-    $owner: String
+    $id: String
   ) {
-    onUpdateProfessor(filter: $filter, owner: $owner) {
+    onUpdateProfessor(filter: $filter, id: $id) {
       id
       name
       courses {
@@ -55,23 +238,20 @@ export const onUpdateProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteProfessor = /* GraphQL */ `
   subscription OnDeleteProfessor(
     $filter: ModelSubscriptionProfessorFilterInput
-    $owner: String
+    $id: String
   ) {
-    onDeleteProfessor(filter: $filter, owner: $owner) {
+    onDeleteProfessor(filter: $filter, id: $id) {
       id
       name
       courses {
@@ -87,29 +267,222 @@ export const onDeleteProfessor = /* GraphQL */ `
           updatedAt
           professorCoursesId
           courseProfessorId
-          owner
         }
         nextToken
       }
-      cognitoId
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+export const onCreateBlock = /* GraphQL */ `
+  subscription OnCreateBlock($filter: ModelSubscriptionBlockFilterInput) {
+    onCreateBlock(filter: $filter) {
+      id
+      name
+      description
+      course {
+        id
+        name
+        thumbnail
+        description
+        professor {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        blocks {
+          nextToken
+        }
+        fileUploadEnabled
+        price
+        status
+        purchases {
+          nextToken
+        }
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        professorCoursesId
+        courseProfessorId
+      }
+      uploadedFiles {
+        id
+        name
+        url
+        uploadedBy {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        cliendId
+        createdAt
+        updatedAt
+        fileUploadedById
+      }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
+      createdAt
+      updatedAt
+      courseBlocksId
+    }
+  }
+`;
+export const onUpdateBlock = /* GraphQL */ `
+  subscription OnUpdateBlock($filter: ModelSubscriptionBlockFilterInput) {
+    onUpdateBlock(filter: $filter) {
+      id
+      name
+      description
+      course {
+        id
+        name
+        thumbnail
+        description
+        professor {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        blocks {
+          nextToken
+        }
+        fileUploadEnabled
+        price
+        status
+        purchases {
+          nextToken
+        }
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        professorCoursesId
+        courseProfessorId
+      }
+      uploadedFiles {
+        id
+        name
+        url
+        uploadedBy {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        cliendId
+        createdAt
+        updatedAt
+        fileUploadedById
+      }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
+      createdAt
+      updatedAt
+      courseBlocksId
+    }
+  }
+`;
+export const onDeleteBlock = /* GraphQL */ `
+  subscription OnDeleteBlock($filter: ModelSubscriptionBlockFilterInput) {
+    onDeleteBlock(filter: $filter) {
+      id
+      name
+      description
+      course {
+        id
+        name
+        thumbnail
+        description
+        professor {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        blocks {
+          nextToken
+        }
+        fileUploadEnabled
+        price
+        status
+        purchases {
+          nextToken
+        }
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        professorCoursesId
+        courseProfessorId
+      }
+      uploadedFiles {
+        id
+        name
+        url
+        uploadedBy {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+        }
+        cliendId
+        createdAt
+        updatedAt
+        fileUploadedById
+      }
+      author {
+        id
+        name
+        courses {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
+      createdAt
+      updatedAt
+      courseBlocksId
     }
   }
 `;
 export const onCreateClient = /* GraphQL */ `
-  subscription OnCreateClient(
-    $filter: ModelSubscriptionClientFilterInput
-    $owner: String
-  ) {
-    onCreateClient(filter: $filter, owner: $owner) {
+  subscription OnCreateClient($filter: ModelSubscriptionClientFilterInput) {
+    onCreateClient(filter: $filter) {
       id
       name
       email
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -117,40 +490,38 @@ export const onCreateClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateClient = /* GraphQL */ `
-  subscription OnUpdateClient(
-    $filter: ModelSubscriptionClientFilterInput
-    $owner: String
-  ) {
-    onUpdateClient(filter: $filter, owner: $owner) {
+  subscription OnUpdateClient($filter: ModelSubscriptionClientFilterInput) {
+    onUpdateClient(filter: $filter) {
       id
       name
       email
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -158,40 +529,38 @@ export const onUpdateClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteClient = /* GraphQL */ `
-  subscription OnDeleteClient(
-    $filter: ModelSubscriptionClientFilterInput
-    $owner: String
-  ) {
-    onDeleteClient(filter: $filter, owner: $owner) {
+  subscription OnDeleteClient($filter: ModelSubscriptionClientFilterInput) {
+    onDeleteClient(filter: $filter) {
       id
       name
       email
       enrolledCourses {
         items {
           id
+          cliendId
           date
           status
           paymentStatus
@@ -199,34 +568,33 @@ export const onDeleteClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          owner
+          clientId
         }
         nextToken
       }
       purchases {
         items {
           id
+          clientId
           date
           createdAt
           updatedAt
           coursePurchasesId
           clientPurchasesId
-          owner
+          cliendId
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateEnrollment = /* GraphQL */ `
   subscription OnCreateEnrollment(
     $filter: ModelSubscriptionEnrollmentFilterInput
-    $owner: String
   ) {
-    onCreateEnrollment(filter: $filter, owner: $owner) {
+    onCreateEnrollment(filter: $filter) {
       id
       course {
         items {
@@ -235,7 +603,7 @@ export const onCreateEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -251,8 +619,8 @@ export const onCreateEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -267,16 +635,15 @@ export const onCreateEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
 export const onUpdateEnrollment = /* GraphQL */ `
   subscription OnUpdateEnrollment(
     $filter: ModelSubscriptionEnrollmentFilterInput
-    $owner: String
   ) {
-    onUpdateEnrollment(filter: $filter, owner: $owner) {
+    onUpdateEnrollment(filter: $filter) {
       id
       course {
         items {
@@ -285,7 +652,7 @@ export const onUpdateEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -301,8 +668,8 @@ export const onUpdateEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -317,16 +684,15 @@ export const onUpdateEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
 export const onDeleteEnrollment = /* GraphQL */ `
   subscription OnDeleteEnrollment(
     $filter: ModelSubscriptionEnrollmentFilterInput
-    $owner: String
   ) {
-    onDeleteEnrollment(filter: $filter, owner: $owner) {
+    onDeleteEnrollment(filter: $filter) {
       id
       course {
         items {
@@ -335,7 +701,7 @@ export const onDeleteEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          owner
+          clientId
         }
         nextToken
       }
@@ -351,8 +717,8 @@ export const onDeleteEnrollment = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       date
       status
       paymentStatus
@@ -367,16 +733,13 @@ export const onDeleteEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      owner
+      clientId
     }
   }
 `;
 export const onCreatePurchase = /* GraphQL */ `
-  subscription OnCreatePurchase(
-    $filter: ModelSubscriptionPurchaseFilterInput
-    $owner: String
-  ) {
-    onCreatePurchase(filter: $filter, owner: $owner) {
+  subscription OnCreatePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
+    onCreatePurchase(filter: $filter) {
       id
       client {
         id
@@ -390,8 +753,8 @@ export const onCreatePurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -400,10 +763,8 @@ export const onCreatePurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -421,23 +782,19 @@ export const onCreatePurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
 export const onUpdatePurchase = /* GraphQL */ `
-  subscription OnUpdatePurchase(
-    $filter: ModelSubscriptionPurchaseFilterInput
-    $owner: String
-  ) {
-    onUpdatePurchase(filter: $filter, owner: $owner) {
+  subscription OnUpdatePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
+    onUpdatePurchase(filter: $filter) {
       id
       client {
         id
@@ -451,8 +808,8 @@ export const onUpdatePurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -461,10 +818,8 @@ export const onUpdatePurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -482,23 +837,19 @@ export const onUpdatePurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
 export const onDeletePurchase = /* GraphQL */ `
-  subscription OnDeletePurchase(
-    $filter: ModelSubscriptionPurchaseFilterInput
-    $owner: String
-  ) {
-    onDeletePurchase(filter: $filter, owner: $owner) {
+  subscription OnDeletePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
+    onDeletePurchase(filter: $filter) {
       id
       client {
         id
@@ -512,8 +863,8 @@ export const onDeletePurchase = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      clientId
       course {
         id
         name
@@ -522,10 +873,8 @@ export const onDeletePurchase = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -543,23 +892,19 @@ export const onDeletePurchase = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       date
       createdAt
       updatedAt
       coursePurchasesId
       clientPurchasesId
-      owner
+      cliendId
     }
   }
 `;
 export const onCreateFile = /* GraphQL */ `
-  subscription OnCreateFile(
-    $filter: ModelSubscriptionFileFilterInput
-    $owner: String
-  ) {
-    onCreateFile(filter: $filter, owner: $owner) {
+  subscription OnCreateFile($filter: ModelSubscriptionFileFilterInput) {
+    onCreateFile(filter: $filter) {
       id
       name
       url
@@ -575,21 +920,17 @@ export const onCreateFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
     }
   }
 `;
 export const onUpdateFile = /* GraphQL */ `
-  subscription OnUpdateFile(
-    $filter: ModelSubscriptionFileFilterInput
-    $owner: String
-  ) {
-    onUpdateFile(filter: $filter, owner: $owner) {
+  subscription OnUpdateFile($filter: ModelSubscriptionFileFilterInput) {
+    onUpdateFile(filter: $filter) {
       id
       name
       url
@@ -605,21 +946,17 @@ export const onUpdateFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
     }
   }
 `;
 export const onDeleteFile = /* GraphQL */ `
-  subscription OnDeleteFile(
-    $filter: ModelSubscriptionFileFilterInput
-    $owner: String
-  ) {
-    onDeleteFile(filter: $filter, owner: $owner) {
+  subscription OnDeleteFile($filter: ModelSubscriptionFileFilterInput) {
+    onDeleteFile(filter: $filter) {
       id
       name
       url
@@ -635,414 +972,19 @@ export const onDeleteFile = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
+      cliendId
       createdAt
       updatedAt
       fileUploadedById
-      owner
-    }
-  }
-`;
-export const onCreateCourse = /* GraphQL */ `
-  subscription OnCreateCourse(
-    $filter: ModelSubscriptionCourseFilterInput
-    $owner: String
-  ) {
-    onCreateCourse(filter: $filter, owner: $owner) {
-      id
-      name
-      thumbnail
-      description
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        cognitoId
-        createdAt
-        updatedAt
-        owner
-      }
-      blocks {
-        items {
-          id
-          name
-          description
-          createdAt
-          updatedAt
-          courseBlocksId
-          owner
-        }
-        nextToken
-      }
-      fileUploadEnabled
-      price
-      status
-      purchases {
-        items {
-          id
-          date
-          createdAt
-          updatedAt
-          coursePurchasesId
-          clientPurchasesId
-          owner
-        }
-        nextToken
-      }
-      enrollment {
-        items {
-          id
-          courseId
-          enrollmentId
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      professorCoursesId
-      courseProfessorId
-      owner
-    }
-  }
-`;
-export const onUpdateCourse = /* GraphQL */ `
-  subscription OnUpdateCourse(
-    $filter: ModelSubscriptionCourseFilterInput
-    $owner: String
-  ) {
-    onUpdateCourse(filter: $filter, owner: $owner) {
-      id
-      name
-      thumbnail
-      description
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        cognitoId
-        createdAt
-        updatedAt
-        owner
-      }
-      blocks {
-        items {
-          id
-          name
-          description
-          createdAt
-          updatedAt
-          courseBlocksId
-          owner
-        }
-        nextToken
-      }
-      fileUploadEnabled
-      price
-      status
-      purchases {
-        items {
-          id
-          date
-          createdAt
-          updatedAt
-          coursePurchasesId
-          clientPurchasesId
-          owner
-        }
-        nextToken
-      }
-      enrollment {
-        items {
-          id
-          courseId
-          enrollmentId
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      professorCoursesId
-      courseProfessorId
-      owner
-    }
-  }
-`;
-export const onDeleteCourse = /* GraphQL */ `
-  subscription OnDeleteCourse(
-    $filter: ModelSubscriptionCourseFilterInput
-    $owner: String
-  ) {
-    onDeleteCourse(filter: $filter, owner: $owner) {
-      id
-      name
-      thumbnail
-      description
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        cognitoId
-        createdAt
-        updatedAt
-        owner
-      }
-      blocks {
-        items {
-          id
-          name
-          description
-          createdAt
-          updatedAt
-          courseBlocksId
-          owner
-        }
-        nextToken
-      }
-      fileUploadEnabled
-      price
-      status
-      purchases {
-        items {
-          id
-          date
-          createdAt
-          updatedAt
-          coursePurchasesId
-          clientPurchasesId
-          owner
-        }
-        nextToken
-      }
-      enrollment {
-        items {
-          id
-          courseId
-          enrollmentId
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      professorCoursesId
-      courseProfessorId
-      owner
-    }
-  }
-`;
-export const onCreateBlock = /* GraphQL */ `
-  subscription OnCreateBlock(
-    $filter: ModelSubscriptionBlockFilterInput
-    $owner: String
-  ) {
-    onCreateBlock(filter: $filter, owner: $owner) {
-      id
-      name
-      description
-      course {
-        id
-        name
-        thumbnail
-        description
-        professor {
-          id
-          name
-          cognitoId
-          createdAt
-          updatedAt
-          owner
-        }
-        blocks {
-          nextToken
-        }
-        fileUploadEnabled
-        price
-        status
-        purchases {
-          nextToken
-        }
-        enrollment {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        professorCoursesId
-        courseProfessorId
-        owner
-      }
-      uploadedFiles {
-        id
-        name
-        url
-        uploadedBy {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        fileUploadedById
-        owner
-      }
-      createdAt
-      updatedAt
-      courseBlocksId
-      owner
-    }
-  }
-`;
-export const onUpdateBlock = /* GraphQL */ `
-  subscription OnUpdateBlock(
-    $filter: ModelSubscriptionBlockFilterInput
-    $owner: String
-  ) {
-    onUpdateBlock(filter: $filter, owner: $owner) {
-      id
-      name
-      description
-      course {
-        id
-        name
-        thumbnail
-        description
-        professor {
-          id
-          name
-          cognitoId
-          createdAt
-          updatedAt
-          owner
-        }
-        blocks {
-          nextToken
-        }
-        fileUploadEnabled
-        price
-        status
-        purchases {
-          nextToken
-        }
-        enrollment {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        professorCoursesId
-        courseProfessorId
-        owner
-      }
-      uploadedFiles {
-        id
-        name
-        url
-        uploadedBy {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        fileUploadedById
-        owner
-      }
-      createdAt
-      updatedAt
-      courseBlocksId
-      owner
-    }
-  }
-`;
-export const onDeleteBlock = /* GraphQL */ `
-  subscription OnDeleteBlock(
-    $filter: ModelSubscriptionBlockFilterInput
-    $owner: String
-  ) {
-    onDeleteBlock(filter: $filter, owner: $owner) {
-      id
-      name
-      description
-      course {
-        id
-        name
-        thumbnail
-        description
-        professor {
-          id
-          name
-          cognitoId
-          createdAt
-          updatedAt
-          owner
-        }
-        blocks {
-          nextToken
-        }
-        fileUploadEnabled
-        price
-        status
-        purchases {
-          nextToken
-        }
-        enrollment {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        professorCoursesId
-        courseProfessorId
-        owner
-      }
-      uploadedFiles {
-        id
-        name
-        url
-        uploadedBy {
-          id
-          name
-          email
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        fileUploadedById
-        owner
-      }
-      createdAt
-      updatedAt
-      courseBlocksId
-      owner
     }
   }
 `;
 export const onCreateEnrollCourses = /* GraphQL */ `
   subscription OnCreateEnrollCourses(
     $filter: ModelSubscriptionEnrollCoursesFilterInput
-    $owner: String
   ) {
-    onCreateEnrollCourses(filter: $filter, owner: $owner) {
+    onCreateEnrollCourses(filter: $filter) {
       id
       courseId
       enrollmentId
@@ -1054,10 +996,8 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1075,7 +1015,6 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1088,8 +1027,8 @@ export const onCreateEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1104,20 +1043,19 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
 export const onUpdateEnrollCourses = /* GraphQL */ `
   subscription OnUpdateEnrollCourses(
     $filter: ModelSubscriptionEnrollCoursesFilterInput
-    $owner: String
   ) {
-    onUpdateEnrollCourses(filter: $filter, owner: $owner) {
+    onUpdateEnrollCourses(filter: $filter) {
       id
       courseId
       enrollmentId
@@ -1129,10 +1067,8 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1150,7 +1086,6 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1163,8 +1098,8 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1179,20 +1114,19 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
 export const onDeleteEnrollCourses = /* GraphQL */ `
   subscription OnDeleteEnrollCourses(
     $filter: ModelSubscriptionEnrollCoursesFilterInput
-    $owner: String
   ) {
-    onDeleteEnrollCourses(filter: $filter, owner: $owner) {
+    onDeleteEnrollCourses(filter: $filter) {
       id
       courseId
       enrollmentId
@@ -1204,10 +1138,8 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         professor {
           id
           name
-          cognitoId
           createdAt
           updatedAt
-          owner
         }
         blocks {
           nextToken
@@ -1225,7 +1157,6 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         updatedAt
         professorCoursesId
         courseProfessorId
-        owner
       }
       enrollment {
         id
@@ -1238,8 +1169,8 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
-          owner
         }
+        cliendId
         date
         status
         paymentStatus
@@ -1254,11 +1185,11 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        owner
+        clientId
       }
       createdAt
       updatedAt
-      owner
+      clientId
     }
   }
 `;
