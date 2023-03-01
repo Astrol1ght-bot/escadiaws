@@ -40,11 +40,7 @@
     ],
     "userPoolGroups": true,
     "adminQueries": false,
-    "triggers": {
-      "CustomMessage": [
-        "verification-link"
-      ]
-    },
+    "triggers": {},
     "hostedUI": false,
     "userPoolGroupList": [
       "Clients",
@@ -54,6 +50,25 @@
     "serviceName": "Cognito",
     "verificationBucketName": "escadiauthverificationbucket",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [],
+    "permissions": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "authProviders": []
   }
 }

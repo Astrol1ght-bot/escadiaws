@@ -37,32 +37,22 @@
   "auth": {
     "escadiauth": {
       "customAuth": false,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage",
-          "triggerProvider": "Cognito"
-        }
-      ],
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "mfaConfiguration": "OPTIONAL",
-        "mfaTypes": [
-          "TOTP"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
         "socialProviders": [],
         "usernameAttributes": [
           "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OPTIONAL",
+        "mfaTypes": [
+          "TOTP"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -74,26 +64,20 @@
     "userPoolGroups": {
       "dependsOn": [
         {
+          "category": "auth",
+          "resourceName": "escadiauth",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
             "AppClientID"
-          ],
-          "category": "auth",
-          "resourceName": "escadiauth"
+          ]
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "Cognito-UserPool-Groups"
     }
   },
-  "function": {
-    "escadiauthCustomMessage": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
+  "function": {},
   "parameters": {
     "AMPLIFY_function_escadiauthCustomMessage_EMAILMESSAGE": {
       "usedBy": [

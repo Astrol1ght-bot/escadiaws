@@ -14,14 +14,5 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
-    },
-    "function": {
-        "escadiauthCustomMessage": {
-            "Name": "string",
-            "Arn": "string",
-            "LambdaExecutionRole": "string",
-            "LambdaExecutionRoleArn": "string",
-            "Region": "string"
-        }
     }
 }
