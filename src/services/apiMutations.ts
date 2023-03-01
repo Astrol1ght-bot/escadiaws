@@ -55,7 +55,7 @@ export const getPublicElement = (
     ...graphqlOperation(getQuery, { id: elementId }),
     authMode: authUser
       ? GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      : GRAPHQL_AUTH_MODE.AWS_IAM,
+      : GRAPHQL_AUTH_MODE.API_KEY,
   });
   return getElementResult;
 };
@@ -72,11 +72,12 @@ export const getAllPublicElements = (
   getAllQuery: string,
   authUser: boolean
 ) => {
+  debugger;
   const getAllPublicElementsResult: Promise<GraphQLResult<any>> = API.graphql({
     query: getAllQuery,
     authMode: authUser
       ? GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      : GRAPHQL_AUTH_MODE.AWS_IAM,
+      : GRAPHQL_AUTH_MODE.API_KEY,
   });
   return getAllPublicElementsResult;
 };

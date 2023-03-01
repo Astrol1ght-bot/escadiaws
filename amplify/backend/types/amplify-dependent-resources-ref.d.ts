@@ -1,27 +1,27 @@
 export type AmplifyDependentResourcesAttributes = {
-  "api": {
-    "apiEscadi": {
-      "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string",
-      "GraphQLAPIKeyOutput": "string"
+    "api": {
+        "apiEscadi": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
+    "auth": {
+        "escadiauth": {
+            "UserPoolId": "string",
+            "UserPoolArn": "string",
+            "UserPoolName": "string",
+            "AppClientIDWeb": "string",
+            "AppClientID": "string"
+        }
+    },
+    "function": {
+        "escadiauthCustomMessage": {
+            "Name": "string",
+            "Arn": "string",
+            "LambdaExecutionRole": "string",
+            "LambdaExecutionRoleArn": "string",
+            "Region": "string"
+        }
     }
-  },
-  "auth": {
-    "escadiauth": {
-      "AppClientID": "string",
-      "AppClientIDWeb": "string",
-      "UserPoolArn": "string",
-      "UserPoolId": "string",
-      "UserPoolName": "string"
-    }
-  },
-  "function": {
-    "escadiauthCustomMessage": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    }
-  }
 }

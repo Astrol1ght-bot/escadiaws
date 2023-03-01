@@ -18,7 +18,6 @@ import { ErrorNotification } from '@data-management/ErrorNotification';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
-  debugger;
   const { data, isLoading, error, isValidating } =
     useElements<ListCoursesQuery>(listCourses);
   const items = data?.listCourses?.items ? data.listCourses.items : [];
