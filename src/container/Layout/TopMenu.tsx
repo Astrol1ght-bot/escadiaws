@@ -64,7 +64,7 @@ export const TopMenu: React.FC = () => {
                 iconName: 'user-profile',
                 items: authenticatedMenuItems,
                 onItemClick: (item) => {
-                  item.detail.id === 'sign-out'
+                  item.detail.id === 'Cerrar Sesión'
                     ? signOutUser()
                     : navigate(`/${item.detail.id}`);
                 },

@@ -53,7 +53,6 @@ export const onCreateCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
@@ -115,7 +114,6 @@ export const onUpdateCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
@@ -177,7 +175,6 @@ export const onDeleteCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
@@ -315,6 +312,7 @@ export const onCreateBlock = /* GraphQL */ `
         url
         uploadedBy {
           id
+          user
           name
           email
           createdAt
@@ -381,6 +379,7 @@ export const onUpdateBlock = /* GraphQL */ `
         url
         uploadedBy {
           id
+          user
           name
           email
           createdAt
@@ -447,6 +446,7 @@ export const onDeleteBlock = /* GraphQL */ `
         url
         uploadedBy {
           id
+          user
           name
           email
           createdAt
@@ -477,12 +477,13 @@ export const onCreateClient = /* GraphQL */ `
   subscription OnCreateClient($filter: ModelSubscriptionClientFilterInput) {
     onCreateClient(filter: $filter) {
       id
+      user
       name
       email
       enrolledCourses {
         items {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -490,7 +491,6 @@ export const onCreateClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         nextToken
       }
@@ -516,12 +516,13 @@ export const onUpdateClient = /* GraphQL */ `
   subscription OnUpdateClient($filter: ModelSubscriptionClientFilterInput) {
     onUpdateClient(filter: $filter) {
       id
+      user
       name
       email
       enrolledCourses {
         items {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -529,7 +530,6 @@ export const onUpdateClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         nextToken
       }
@@ -555,12 +555,13 @@ export const onDeleteClient = /* GraphQL */ `
   subscription OnDeleteClient($filter: ModelSubscriptionClientFilterInput) {
     onDeleteClient(filter: $filter) {
       id
+      user
       name
       email
       enrolledCourses {
         items {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -568,7 +569,6 @@ export const onDeleteClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         nextToken
       }
@@ -603,12 +603,12 @@ export const onCreateEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -620,7 +620,7 @@ export const onCreateEnrollment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      cliendId
+      total
       date
       status
       paymentStatus
@@ -635,7 +635,6 @@ export const onCreateEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      clientId
     }
   }
 `;
@@ -652,12 +651,12 @@ export const onUpdateEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -669,7 +668,7 @@ export const onUpdateEnrollment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      cliendId
+      total
       date
       status
       paymentStatus
@@ -684,7 +683,6 @@ export const onUpdateEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      clientId
     }
   }
 `;
@@ -701,12 +699,12 @@ export const onDeleteEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -718,7 +716,7 @@ export const onDeleteEnrollment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      cliendId
+      total
       date
       status
       paymentStatus
@@ -733,7 +731,6 @@ export const onDeleteEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      clientId
     }
   }
 `;
@@ -743,6 +740,7 @@ export const onCreatePurchase = /* GraphQL */ `
       id
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -798,6 +796,7 @@ export const onUpdatePurchase = /* GraphQL */ `
       id
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -853,6 +852,7 @@ export const onDeletePurchase = /* GraphQL */ `
       id
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -910,6 +910,7 @@ export const onCreateFile = /* GraphQL */ `
       url
       uploadedBy {
         id
+        user
         name
         email
         enrolledCourses {
@@ -936,6 +937,7 @@ export const onUpdateFile = /* GraphQL */ `
       url
       uploadedBy {
         id
+        user
         name
         email
         enrolledCourses {
@@ -962,6 +964,7 @@ export const onDeleteFile = /* GraphQL */ `
       url
       uploadedBy {
         id
+        user
         name
         email
         enrolledCourses {
@@ -1023,12 +1026,13 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         }
         client {
           id
+          user
           name
           email
           createdAt
           updatedAt
         }
-        cliendId
+        total
         date
         status
         paymentStatus
@@ -1043,11 +1047,9 @@ export const onCreateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        clientId
       }
       createdAt
       updatedAt
-      clientId
     }
   }
 `;
@@ -1094,12 +1096,13 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         }
         client {
           id
+          user
           name
           email
           createdAt
           updatedAt
         }
-        cliendId
+        total
         date
         status
         paymentStatus
@@ -1114,11 +1117,9 @@ export const onUpdateEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        clientId
       }
       createdAt
       updatedAt
-      clientId
     }
   }
 `;
@@ -1165,12 +1166,13 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         }
         client {
           id
+          user
           name
           email
           createdAt
           updatedAt
         }
-        cliendId
+        total
         date
         status
         paymentStatus
@@ -1185,11 +1187,9 @@ export const onDeleteEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        clientId
       }
       createdAt
       updatedAt
-      clientId
     }
   }
 `;

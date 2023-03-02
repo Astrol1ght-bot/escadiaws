@@ -15,9 +15,10 @@ export const CreateProduct: React.FC = () => {
   const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
 
-  const addCourse = (data: CreateCourseInput) => {
+  const addCourse = (course: CreateCourseInput) => {
+    debugger;
     setLoading(true);
-    addElement({ ...data }, createCourse)
+    addElement( {...course}, createCourse)
       .then(() => navigate('/admin/courses/', { replace: true }))
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -32,7 +33,7 @@ export const CreateProduct: React.FC = () => {
         {error && <ErrorNotification errors={[error]} />}
         <CourseForm
           isLoading={isLoading}
-          onSubmit={(data) => addCourse(data)}
+          onSubmit={(course) => addCourse(course)}
           title="Crea un nuevo Curso"
         />
       </>

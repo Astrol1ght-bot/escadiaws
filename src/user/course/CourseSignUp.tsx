@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Heading, Flex } from '@aws-amplify/ui-react';
 import { useParams } from 'react-router-dom';
 import {
@@ -17,6 +17,7 @@ import { usePublicElement } from '@services/swrHooks';
 import { DataContainer } from '@data-management/DataContainer';
 
 export const CourseSignUp: React.FC = () => {
+  
   const cognitoUser = useAppStore((state) => state.cognitoUser);
   const userAuth = cognitoUser !== undefined;
   const params = useParams();
@@ -95,8 +96,16 @@ export const CourseSignUp: React.FC = () => {
               alignContent="flex-start"
               wrap="nowrap"
               gap="1rem"
+              
             >
-              <Button>Matricular</Button>
+              <Button 
+
+              iconAlign="right"
+              iconName="add-plus"
+              variant="primary"
+              >
+                Matricular
+              </Button>
             </Flex>
           </DataContainer>
         )}

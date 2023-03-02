@@ -53,7 +53,6 @@ export const getCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
@@ -189,6 +188,7 @@ export const getBlock = /* GraphQL */ `
         url
         uploadedBy {
           id
+          user
           name
           email
           createdAt
@@ -267,12 +267,13 @@ export const getClient = /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {
       id
+      user
       name
       email
       enrolledCourses {
         items {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -280,7 +281,6 @@ export const getClient = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         nextToken
       }
@@ -311,6 +311,7 @@ export const listClients = /* GraphQL */ `
     listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        user
         name
         email
         enrolledCourses {
@@ -337,12 +338,12 @@ export const getEnrollment = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-          clientId
         }
         nextToken
       }
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -354,7 +355,7 @@ export const getEnrollment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      cliendId
+      total
       date
       status
       paymentStatus
@@ -369,7 +370,6 @@ export const getEnrollment = /* GraphQL */ `
       createdAt
       updatedAt
       clientEnrolledCoursesId
-      clientId
     }
   }
 `;
@@ -387,12 +387,13 @@ export const listEnrollments = /* GraphQL */ `
         }
         client {
           id
+          user
           name
           email
           createdAt
           updatedAt
         }
-        cliendId
+        total
         date
         status
         paymentStatus
@@ -407,7 +408,6 @@ export const listEnrollments = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        clientId
       }
       nextToken
     }
@@ -419,6 +419,7 @@ export const getPurchase = /* GraphQL */ `
       id
       client {
         id
+        user
         name
         email
         enrolledCourses {
@@ -479,6 +480,7 @@ export const listPurchases = /* GraphQL */ `
         id
         client {
           id
+          user
           name
           email
           createdAt
@@ -517,6 +519,7 @@ export const getFile = /* GraphQL */ `
       url
       uploadedBy {
         id
+        user
         name
         email
         enrolledCourses {
@@ -548,6 +551,7 @@ export const listFiles = /* GraphQL */ `
         url
         uploadedBy {
           id
+          user
           name
           email
           createdAt
@@ -603,12 +607,13 @@ export const getEnrollCourses = /* GraphQL */ `
         }
         client {
           id
+          user
           name
           email
           createdAt
           updatedAt
         }
-        cliendId
+        total
         date
         status
         paymentStatus
@@ -623,11 +628,9 @@ export const getEnrollCourses = /* GraphQL */ `
         createdAt
         updatedAt
         clientEnrolledCoursesId
-        clientId
       }
       createdAt
       updatedAt
-      clientId
     }
   }
 `;
@@ -657,7 +660,7 @@ export const listEnrollCourses = /* GraphQL */ `
         }
         enrollment {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -665,11 +668,9 @@ export const listEnrollCourses = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         createdAt
         updatedAt
-        clientId
       }
       nextToken
     }
@@ -709,7 +710,7 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
         }
         enrollment {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -717,11 +718,9 @@ export const enrollCoursesByCourseId = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         createdAt
         updatedAt
-        clientId
       }
       nextToken
     }
@@ -761,7 +760,7 @@ export const enrollCoursesByEnrollmentId = /* GraphQL */ `
         }
         enrollment {
           id
-          cliendId
+          total
           date
           status
           paymentStatus
@@ -769,11 +768,9 @@ export const enrollCoursesByEnrollmentId = /* GraphQL */ `
           createdAt
           updatedAt
           clientEnrolledCoursesId
-          clientId
         }
         createdAt
         updatedAt
-        clientId
       }
       nextToken
     }

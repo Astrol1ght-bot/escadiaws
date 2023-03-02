@@ -184,6 +184,7 @@ export type File = {
 export type Client = {
   __typename: "Client",
   id: string,
+  user: string,
   name: string,
   email: string,
   enrolledCourses?: ModelEnrollmentConnection | null,
@@ -202,8 +203,8 @@ export type Enrollment = {
   __typename: "Enrollment",
   id: string,
   course?: ModelEnrollCoursesConnection | null,
-  client: Client,
-  cliendId: string,
+  client?: Client | null,
+  total: number,
   date: string,
   status: EnrollStatus,
   paymentStatus: PaymentStatus,
@@ -212,7 +213,6 @@ export type Enrollment = {
   createdAt: string,
   updatedAt: string,
   clientEnrolledCoursesId?: string | null,
-  clientId?: string | null,
 };
 
 export type ModelEnrollCoursesConnection = {
@@ -230,7 +230,6 @@ export type EnrollCourses = {
   enrollment: Enrollment,
   createdAt: string,
   updatedAt: string,
-  clientId?: string | null,
 };
 
 export enum EnrollStatus {
@@ -352,11 +351,13 @@ export type DeleteBlockInput = {
 
 export type CreateClientInput = {
   id?: string | null,
+  user: string,
   name: string,
   email: string,
 };
 
 export type ModelClientConditionInput = {
+  user?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   and?: Array< ModelClientConditionInput | null > | null,
@@ -366,6 +367,7 @@ export type ModelClientConditionInput = {
 
 export type UpdateClientInput = {
   id: string,
+  user?: string | null,
   name?: string | null,
   email?: string | null,
 };
@@ -376,7 +378,7 @@ export type DeleteClientInput = {
 
 export type CreateEnrollmentInput = {
   id?: string | null,
-  cliendId: string,
+  total: number,
   date: string,
   status: EnrollStatus,
   paymentStatus: PaymentStatus,
@@ -394,7 +396,7 @@ export type EnrollDetailInput = {
 };
 
 export type ModelEnrollmentConditionInput = {
-  cliendId?: ModelStringInput | null,
+  total?: ModelFloatInput | null,
   date?: ModelStringInput | null,
   status?: ModelEnrollStatusInput | null,
   paymentStatus?: ModelPaymentStatusInput | null,
@@ -422,7 +424,7 @@ export type ModelPaymentTypeInput = {
 
 export type UpdateEnrollmentInput = {
   id: string,
-  cliendId?: string | null,
+  total?: number | null,
   date?: string | null,
   status?: EnrollStatus | null,
   paymentStatus?: PaymentStatus | null,
@@ -561,6 +563,7 @@ export type ModelBlockFilterInput = {
 
 export type ModelClientFilterInput = {
   id?: ModelIDInput | null,
+  user?: ModelStringInput | null,
   name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   and?: Array< ModelClientFilterInput | null > | null,
@@ -576,7 +579,7 @@ export type ModelClientConnection = {
 
 export type ModelEnrollmentFilterInput = {
   id?: ModelIDInput | null,
-  cliendId?: ModelStringInput | null,
+  total?: ModelFloatInput | null,
   date?: ModelStringInput | null,
   status?: ModelEnrollStatusInput | null,
   paymentStatus?: ModelPaymentStatusInput | null,
@@ -703,6 +706,7 @@ export type ModelSubscriptionIDInput = {
 };
 
 export type ModelSubscriptionClientFilterInput = {
+  user?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionClientFilterInput | null > | null,
@@ -710,8 +714,7 @@ export type ModelSubscriptionClientFilterInput = {
 };
 
 export type ModelSubscriptionEnrollmentFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  cliendId?: ModelSubscriptionStringInput | null,
+  total?: ModelSubscriptionFloatInput | null,
   date?: ModelSubscriptionStringInput | null,
   status?: ModelSubscriptionStringInput | null,
   paymentStatus?: ModelSubscriptionStringInput | null,
@@ -807,7 +810,6 @@ export type CreateCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -882,7 +884,6 @@ export type UpdateCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -957,7 +958,6 @@ export type DeleteCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1119,6 +1119,7 @@ export type CreateBlockMutation = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -1199,6 +1200,7 @@ export type UpdateBlockMutation = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -1279,6 +1281,7 @@ export type DeleteBlockMutation = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -1316,6 +1319,7 @@ export type CreateClientMutation = {
   createClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -1323,7 +1327,7 @@ export type CreateClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1331,7 +1335,6 @@ export type CreateClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1364,6 +1367,7 @@ export type UpdateClientMutation = {
   updateClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -1371,7 +1375,7 @@ export type UpdateClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1379,7 +1383,6 @@ export type UpdateClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1412,6 +1415,7 @@ export type DeleteClientMutation = {
   deleteClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -1419,7 +1423,7 @@ export type DeleteClientMutation = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -1427,7 +1431,6 @@ export type DeleteClientMutation = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1469,13 +1472,13 @@ export type CreateEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1488,8 +1491,8 @@ export type CreateEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1505,7 +1508,6 @@ export type CreateEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -1527,13 +1529,13 @@ export type UpdateEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1546,8 +1548,8 @@ export type UpdateEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1563,7 +1565,6 @@ export type UpdateEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -1585,13 +1586,13 @@ export type DeleteEnrollmentMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1604,8 +1605,8 @@ export type DeleteEnrollmentMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -1621,7 +1622,6 @@ export type DeleteEnrollmentMutation = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -1637,6 +1637,7 @@ export type CreatePurchaseMutation = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1705,6 +1706,7 @@ export type UpdatePurchaseMutation = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1773,6 +1775,7 @@ export type DeletePurchaseMutation = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1843,6 +1846,7 @@ export type CreateFileMutation = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1877,6 +1881,7 @@ export type UpdateFileMutation = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1911,6 +1916,7 @@ export type DeleteFileMutation = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -1982,15 +1988,16 @@ export type CreateEnrollCoursesMutation = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2006,11 +2013,9 @@ export type CreateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -2065,15 +2070,16 @@ export type UpdateEnrollCoursesMutation = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2089,11 +2095,9 @@ export type UpdateEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -2148,15 +2152,16 @@ export type DeleteEnrollCoursesMutation = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2172,11 +2177,9 @@ export type DeleteEnrollCoursesMutation = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -2243,7 +2246,6 @@ export type GetCourseQuery = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2407,6 +2409,7 @@ export type GetBlockQuery = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -2497,6 +2500,7 @@ export type GetClientQuery = {
   getClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -2504,7 +2508,7 @@ export type GetClientQuery = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -2512,7 +2516,6 @@ export type GetClientQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2548,6 +2551,7 @@ export type ListClientsQuery = {
     items:  Array< {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -2582,13 +2586,13 @@ export type GetEnrollmentQuery = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -2601,8 +2605,8 @@ export type GetEnrollmentQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -2618,7 +2622,6 @@ export type GetEnrollmentQuery = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -2638,15 +2641,16 @@ export type ListEnrollmentsQuery = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2662,7 +2666,6 @@ export type ListEnrollmentsQuery = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2679,6 +2682,7 @@ export type GetPurchaseQuery = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -2750,6 +2754,7 @@ export type ListPurchasesQuery = {
       client:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -2794,6 +2799,7 @@ export type GetFileQuery = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -2831,6 +2837,7 @@ export type ListFilesQuery = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -2895,15 +2902,16 @@ export type GetEnrollCoursesQuery = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -2919,11 +2927,9 @@ export type GetEnrollCoursesQuery = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -2958,7 +2964,7 @@ export type ListEnrollCoursesQuery = {
       enrollment:  {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -2966,11 +2972,9 @@ export type ListEnrollCoursesQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3009,7 +3013,7 @@ export type EnrollCoursesByCourseIdQuery = {
       enrollment:  {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3017,11 +3021,9 @@ export type EnrollCoursesByCourseIdQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3060,7 +3062,7 @@ export type EnrollCoursesByEnrollmentIdQuery = {
       enrollment:  {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3068,11 +3070,9 @@ export type EnrollCoursesByEnrollmentIdQuery = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       },
       createdAt: string,
       updatedAt: string,
-      clientId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -3141,7 +3141,6 @@ export type OnCreateCourseSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3215,7 +3214,6 @@ export type OnUpdateCourseSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3289,7 +3287,6 @@ export type OnDeleteCourseSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3450,6 +3447,7 @@ export type OnCreateBlockSubscription = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -3529,6 +3527,7 @@ export type OnUpdateBlockSubscription = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -3608,6 +3607,7 @@ export type OnDeleteBlockSubscription = {
       uploadedBy?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
@@ -3644,6 +3644,7 @@ export type OnCreateClientSubscription = {
   onCreateClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -3651,7 +3652,7 @@ export type OnCreateClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3659,7 +3660,6 @@ export type OnCreateClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3691,6 +3691,7 @@ export type OnUpdateClientSubscription = {
   onUpdateClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -3698,7 +3699,7 @@ export type OnUpdateClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3706,7 +3707,6 @@ export type OnUpdateClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3738,6 +3738,7 @@ export type OnDeleteClientSubscription = {
   onDeleteClient?:  {
     __typename: "Client",
     id: string,
+    user: string,
     name: string,
     email: string,
     enrolledCourses?:  {
@@ -3745,7 +3746,7 @@ export type OnDeleteClientSubscription = {
       items:  Array< {
         __typename: "Enrollment",
         id: string,
-        cliendId: string,
+        total: number,
         date: string,
         status: EnrollStatus,
         paymentStatus: PaymentStatus,
@@ -3753,7 +3754,6 @@ export type OnDeleteClientSubscription = {
         createdAt: string,
         updatedAt: string,
         clientEnrolledCoursesId?: string | null,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3794,13 +3794,13 @@ export type OnCreateEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -3813,8 +3813,8 @@ export type OnCreateEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3830,7 +3830,6 @@ export type OnCreateEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -3851,13 +3850,13 @@ export type OnUpdateEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -3870,8 +3869,8 @@ export type OnUpdateEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3887,7 +3886,6 @@ export type OnUpdateEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -3908,13 +3906,13 @@ export type OnDeleteEnrollmentSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-        clientId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
-    client:  {
+    client?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -3927,8 +3925,8 @@ export type OnDeleteEnrollmentSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    },
-    cliendId: string,
+    } | null,
+    total: number,
     date: string,
     status: EnrollStatus,
     paymentStatus: PaymentStatus,
@@ -3944,7 +3942,6 @@ export type OnDeleteEnrollmentSubscription = {
     createdAt: string,
     updatedAt: string,
     clientEnrolledCoursesId?: string | null,
-    clientId?: string | null,
   } | null,
 };
 
@@ -3959,6 +3956,7 @@ export type OnCreatePurchaseSubscription = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4026,6 +4024,7 @@ export type OnUpdatePurchaseSubscription = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4093,6 +4092,7 @@ export type OnDeletePurchaseSubscription = {
     client:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4162,6 +4162,7 @@ export type OnCreateFileSubscription = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4195,6 +4196,7 @@ export type OnUpdateFileSubscription = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4228,6 +4230,7 @@ export type OnDeleteFileSubscription = {
     uploadedBy?:  {
       __typename: "Client",
       id: string,
+      user: string,
       name: string,
       email: string,
       enrolledCourses?:  {
@@ -4298,15 +4301,16 @@ export type OnCreateEnrollCoursesSubscription = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4322,11 +4326,9 @@ export type OnCreateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -4380,15 +4382,16 @@ export type OnUpdateEnrollCoursesSubscription = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4404,11 +4407,9 @@ export type OnUpdateEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };
 
@@ -4462,15 +4463,16 @@ export type OnDeleteEnrollCoursesSubscription = {
         __typename: "ModelEnrollCoursesConnection",
         nextToken?: string | null,
       } | null,
-      client:  {
+      client?:  {
         __typename: "Client",
         id: string,
+        user: string,
         name: string,
         email: string,
         createdAt: string,
         updatedAt: string,
-      },
-      cliendId: string,
+      } | null,
+      total: number,
       date: string,
       status: EnrollStatus,
       paymentStatus: PaymentStatus,
@@ -4486,10 +4488,8 @@ export type OnDeleteEnrollCoursesSubscription = {
       createdAt: string,
       updatedAt: string,
       clientEnrolledCoursesId?: string | null,
-      clientId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
-    clientId?: string | null,
   } | null,
 };

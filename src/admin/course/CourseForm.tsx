@@ -17,6 +17,7 @@ import { CreateCourseInput, GetCourseQuery } from '@api-types';
 
 type Props = {
   isLoading: boolean;
+  
   onSubmit: (data: CreateCourseInput) => void;
   title: string;
   course?: GetCourseQuery;

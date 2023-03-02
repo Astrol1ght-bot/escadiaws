@@ -1,32 +1,32 @@
 export type AmplifyDependentResourcesAttributes = {
-    "api": {
-        "apiEscadi": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
-    "auth": {
-        "escadiauth": {
-            "IdentityPoolId": "string",
-            "IdentityPoolName": "string",
-            "UserPoolId": "string",
-            "UserPoolArn": "string",
-            "UserPoolName": "string",
-            "AppClientIDWeb": "string",
-            "AppClientID": "string"
-        },
-        "userPoolGroups": {
-            "ClientsGroupRole": "string",
-            "ProfessorsGroupRole": "string",
-            "AdminsGroupRole": "string",
-            "StudentsGroupRole": "string"
-        }
-    },
-    "storage": {
-        "storage": {
-            "BucketName": "string",
-            "Region": "string"
-        }
+  "api": {
+    "apiEscadi": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string",
+      "GraphQLAPIKeyOutput": "string"
     }
+  },
+  "auth": {
+    "escadiauth": {
+      "AppClientID": "string",
+      "AppClientIDWeb": "string",
+      "IdentityPoolId": "string",
+      "IdentityPoolName": "string",
+      "UserPoolArn": "string",
+      "UserPoolId": "string",
+      "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "AdminsGroupRole": "string",
+      "ClientsGroupRole": "string",
+      "ProfessorsGroupRole": "string",
+      "StudentsGroupRole": "string"
+    }
+  },
+  "storage": {
+    "storage": {
+      "BucketName": "string",
+      "Region": "string"
+    }
+  }
 }

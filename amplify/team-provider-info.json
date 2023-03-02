@@ -10,7 +10,8 @@
       "StackName": "amplify-escadi-dev-90353",
       "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-dev-90353/d1287650-a7c1-11ed-b74d-0eae06d1b85d",
       "AmplifyAppId": "d2qktra0fp94ub",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-escadi-dev-90353-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-escadi-dev-90353-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json",
+      "AuthModeLastUpdated": ""
     },
     "categories": {
       "auth": {
@@ -29,6 +30,9 @@
       },
       "api": {
         "apiEscadi": {}
+      },
+      "storage": {
+        "storage": {}
       }
     }
   }
