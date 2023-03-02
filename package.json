@@ -40,8 +40,8 @@
     "vite-tsconfig-paths": "^3.5.0"
   },
   "dependencies": {
-    "@aws-amplify/api": "^4.0.48",
-    "@aws-amplify/api-graphql": "^2.3.28",
+    "@aws-amplify/api": "^5.0.16",
+    "@aws-amplify/api-graphql": "^3.1.4",
     "@aws-amplify/ui-react": "^4.3.9",
     "@cloudscape-design/components": "^3.0.219",
     "@cloudscape-design/global-styles": "^1.0.1",
