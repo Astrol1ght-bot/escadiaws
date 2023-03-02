@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 
-import { Authenticator } from '@aws-amplify/ui-react';
+import { I18n } from 'aws-amplify';
+import { Authenticator, translations } from '@aws-amplify/ui-react';
 
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@layout/Layout';
 import useAppStore from '@use-AppStore';
+
+I18n.putVocabularies(translations);
+I18n.setLanguage('es');
 
 export const SignIn: React.FC = () => {
   const cognitoUser = useAppStore((state) => state.cognitoUser);
@@ -16,7 +20,7 @@ export const SignIn: React.FC = () => {
 
   return (
     <Layout title="">
-      <Authenticator hideSignUp />
+      <Authenticator signUpAttributes={['name', 'phone_number']} />
     </Layout>
   );
 };

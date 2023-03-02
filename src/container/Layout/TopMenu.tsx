@@ -72,7 +72,7 @@ export const TopMenu: React.FC = () => {
             : {
                 type: 'button',
                 variant: 'link',
-                text: 'Iniciar Sesión',
+                text: 'Iniciar Sesión/Registrarse',
                 onClick: () => navigate('/profile/signin'),
               },
         ]}

@@ -78,7 +78,7 @@ export const LandingPage: React.FC = () => {
               {
                 id: 'thumbnail',
                 content: (item) => (
-                  <div to={''}>
+                  <div>
                     <img width="100%" src={item.thumbnail} />
                   </div>
                 ),
