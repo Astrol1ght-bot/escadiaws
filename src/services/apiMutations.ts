@@ -1,7 +1,7 @@
 import { GraphQLResult, GRAPHQL_AUTH_MODE } from '@aws-amplify/api-graphql';
 
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
-import awsExports from '@aws-exports';
+import awsExports from 'src/aws-exports';
 
 Amplify.configure(awsExports);
 

@@ -5,8 +5,8 @@ import { Amplify } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from 'react-use-cart';
 import styled from 'styled-components';
-import useAppStore from '@use-AppStore';
-import awsExports from '@aws-exports';
+import awsExports from 'src/aws-exports';
+import useAppStore from 'src/store/useAppStore';
 
 const TopNavCustom = styled(TopNavigation)`
   button[type='submit'] {
@@ -60,7 +60,7 @@ export const TopMenu: React.FC = () => {
           cognitoUser
             ? {
                 type: 'menu-dropdown',
-                text: `Profile`,
+                text: 'Profile',
                 iconName: 'user-profile',
                 items: authenticatedMenuItems,
                 onItemClick: (item) => {

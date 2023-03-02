@@ -1,18 +1,12 @@
+import { Container, Cards, Box, Button } from '@cloudscape-design/components';
 import React, { useEffect } from 'react';
-import {
-  Container,
-  Header,
-  Button,
-  Cards,
-  Box,
-} from '@cloudscape-design/components';
-import { Link, useNavigate } from 'react-router-dom';
-import { Course } from '@api-types';
-import { Layout } from '@layout/Layout';
-import { getMainCourses } from '@services/userSession';
-import useAppStore from '@use-AppStore';
+import { useNavigate, Link } from 'react-router-dom';
+import { Course } from 'src/API';
+import { Layout } from 'src/container/Layout/Layout';
 import { catalogBanner } from 'src/landing-page/Banner';
 import { topButtons } from 'src/landing-page/TopButtons';
+import { getMainCourses } from 'src/services/userSession';
+import useAppStore from 'src/store/useAppStore';
 
 export const CourseCatalog: React.FC = () => {
   const navigate = useNavigate();

@@ -2,13 +2,14 @@ import React from 'react';
 import { AppLayout, BreadcrumbGroup } from '@cloudscape-design/components';
 import { Amplify } from 'aws-amplify';
 import { ErrorBoundary } from 'react-error-boundary';
-import awsExports from '@aws-exports';
+
+import awsExports from 'src/aws-exports';
+import useAppStore from 'src/store/useAppStore';
 import { TopMenu } from './TopMenu';
 import { SideMenu } from './SideMenu';
 import { Footer } from './Footer';
 import { ContentHeader } from './ContentHeader';
 import { ErrorFallback } from '../DataManagement/ErrorFallback';
-import useAppStore from '@use-AppStore';
 
 Amplify.configure(awsExports);
 
@@ -43,9 +44,7 @@ export const Layout: React.FC<Props> = ({
         toolsHide
         navigation={<SideMenu />}
         navigationHide={!cognitoUser}
-        contentHeader={
-          <ContentHeader title={title} buttons={topButtons} banner={banner} />
-        }
+        contentHeader={<ContentHeader buttons={topButtons} banner={banner} />}
         contentType="form"
         headerSelector="#header"
         footerSelector="#footer"

@@ -1,14 +1,14 @@
-import React from 'react';
+import { Divider } from '@aws-amplify/ui-react';
 import {
   Box,
-  Button,
-  Cards,
   SpaceBetween,
+  Cards,
+  Button,
 } from '@cloudscape-design/components';
-import { Course } from '@api-types';
-import { Link, useNavigate } from 'react-router-dom';
-import { Divider } from '@aws-amplify/ui-react';
-import useAppStore from '@use-AppStore';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Course } from 'src/API';
+import useAppStore from 'src/store/useAppStore';
 
 export const SideMenu: React.FC = () => {
   const navigate = useNavigate();

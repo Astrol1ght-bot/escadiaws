@@ -3,7 +3,8 @@ import { Amplify } from 'aws-amplify';
 import useSWR, { KeyedMutator } from 'swr';
 import { GraphQLResult } from '@aws-amplify/api';
 import { GraphQLError } from 'graphql';
-import awsExports from '@aws-exports';
+
+import awsExports from 'src/aws-exports';
 import { getElement, getAllElements, getPublicElement } from './apiMutations';
 
 Amplify.configure(awsExports);

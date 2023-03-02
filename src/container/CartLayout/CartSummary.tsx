@@ -1,7 +1,8 @@
 import React from 'react';
 import { SplitPanel } from '@cloudscape-design/components';
 import { Amplify } from 'aws-amplify';
-import awsExports from '@aws-exports';
+
+import awsExports from 'src/aws-exports';
 import { CartItems } from './CartItems';
 
 Amplify.configure(awsExports);

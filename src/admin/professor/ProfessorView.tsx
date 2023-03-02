@@ -1,20 +1,19 @@
-import React from 'react';
 import { Heading, Flex } from '@aws-amplify/ui-react';
-import { useParams } from 'react-router-dom';
 import {
-  Box,
-  Button,
   Container,
-  Header,
   SpaceBetween,
+  Box,
+  Header,
   Table,
 } from '@cloudscape-design/components';
-import { Layout } from '@layout/Layout';
-import { getProfessor } from '@graphql/queries';
-import { GetProfessorQuery, Professor } from '@api-types';
-import useAppStore from '@use-AppStore';
-import { usePublicElement } from '@services/swrHooks';
-import { DataContainer } from '@data-management/DataContainer';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { GetProfessorQuery } from 'src/API';
+import { DataContainer } from 'src/container/DataManagement/DataContainer';
+import { Layout } from 'src/container/Layout/Layout';
+import { getProfessor } from 'src/graphql/queries';
+import { usePublicElement } from 'src/services/swrHooks';
+import useAppStore from 'src/store/useAppStore';
 
 export const ProfessorView: React.FC = () => {
   const cognitoUser = useAppStore((state) => state.cognitoUser);

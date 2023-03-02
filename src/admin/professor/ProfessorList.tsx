@@ -10,11 +10,11 @@ import {
   SpaceBetween,
   Table,
 } from '@cloudscape-design/components';
-import { ListProfessorsQuery } from '@api-types';
-import { listProfessors } from '@graphql/queries';
-import { Layout } from '@layout/Layout';
-import { useElements } from '@services/swrHooks';
-import { ErrorNotification } from '@data-management/ErrorNotification';
+import { ListProfessorsQuery } from 'src/API';
+import { ErrorNotification } from 'src/container/DataManagement/ErrorNotification';
+import { Layout } from 'src/container/Layout/Layout';
+import { listProfessors } from 'src/graphql/queries';
+import { useElements } from 'src/services/swrHooks';
 
 export const AdminProfessorList: React.FC = () => {
   const navigate = useNavigate();
@@ -52,11 +52,11 @@ export const AdminProfessorList: React.FC = () => {
                 </Button>
               ),
             },
-            {
-              id: 'cognitoId',
-              header: 'Cognito ID',
-              cell: (e) => `$${e?.cognitoId}`,
-            },
+            // {
+            //   id: 'cognitoId',
+            //   header: 'Cognito ID',
+            //   cell: (e) => `$${e?.cognitoId}`,
+            // },
             {
               id: 'update',
               header: 'Edit',
@@ -64,8 +64,8 @@ export const AdminProfessorList: React.FC = () => {
                 <Button
                   variant="link"
                   onClick={() => navigate(`/admin/professors/update/${e?.id}`)}
-                  iconSvg={<Icon name="edit"></Icon>}
-                ></Button>
+                  iconSvg={<Icon name="edit" />}
+                />
               ),
             },
           ]}
@@ -80,7 +80,7 @@ export const AdminProfessorList: React.FC = () => {
               </SpaceBetween>
             </Box>
           }
-          header={<Header></Header>}
+          header={<Header />}
         />
       </Container>
     </Layout>

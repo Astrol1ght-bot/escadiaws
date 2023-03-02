@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from '@cloudscape-design/components';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { getUserInfo } from '@services/userSession';
-import useAppStore from '@use-AppStore';
+
+import { getUserInfo } from 'src/services/userSession';
+import useAppStore from 'src/store/useAppStore';
 import { InitialStateLayout } from './InitialStateLayout';
 
 type Props = { children: React.ReactElement };

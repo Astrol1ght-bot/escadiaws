@@ -9,12 +9,12 @@ import {
   SpaceBetween,
   Table,
 } from '@cloudscape-design/components';
-import { Layout } from '@layout/Layout';
-import { getCourse } from '@graphql/queries';
-import { GetCourseQuery, Course } from '@api-types';
-import useAppStore from '@use-AppStore';
-import { usePublicElement } from '@services/swrHooks';
-import { DataContainer } from '@data-management/DataContainer';
+import { GetCourseQuery } from 'src/API';
+import { DataContainer } from 'src/container/DataManagement/DataContainer';
+import { Layout } from 'src/container/Layout/Layout';
+import { getCourse } from 'src/graphql/queries';
+import { usePublicElement } from 'src/services/swrHooks';
+import useAppStore from 'src/store/useAppStore';
 
 export const CourseView: React.FC = () => {
   const cognitoUser = useAppStore((state) => state.cognitoUser);

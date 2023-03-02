@@ -39,20 +39,20 @@
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OPTIONAL",
         "mfaTypes": [
           "TOTP"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -64,14 +64,14 @@
     "userPoolGroups": {
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "escadiauth",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
             "AppClientID",
             "IdentityPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "escadiauth"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -79,53 +79,11 @@
     }
   },
   "function": {},
-  "parameters": {
-    "AMPLIFY_function_escadiauthCustomMessage_EMAILMESSAGE": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_escadiauthCustomMessage_EMAILSUBJECT": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_escadiauthCustomMessage_REDIRECTURL": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_escadiauthCustomMessage_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_escadiauthCustomMessage_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "escadiauthCustomMessage"
-        }
-      ]
-    }
-  },
   "storage": {
     "storage": {
-      "service": "S3",
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "service": "S3"
     }
   }
 }

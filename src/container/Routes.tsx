@@ -4,12 +4,12 @@ import { createAdminCourseRoutes } from 'src/admin/course/admincourse.routes';
 import { createProfileRoutes } from 'src/user/profile/profile.routes';
 // import { createProfileRoutes } from '../user/personalData/profile/profile.routes';
 // import { createAddressRoutes } from '../user/personalData/delivery/address.routes';
+import { createLandingPageRoutes } from 'src/landing-page/landingpage.routes';
 import { createCourseRoutes } from '../user/course/course.routes';
 // import { createOrdersRoutes } from '../owner/orders/orders.routes';
 // import { createProductsRoutes } from '../owner/products/products.routes';
 
 import { createAdminProfessorRoutes } from '../admin/professor/adminprofessor.routes';
-import { createLandingPageRoutes } from 'src/landing-page/landingpage.routes';
 
 // const addressRoutes = createAddressRoutes();
 const profileRoutes = createProfileRoutes();

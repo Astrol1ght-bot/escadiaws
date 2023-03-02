@@ -1,12 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { updateCourse } from '@graphql/mutations';
-import { CreateCourseInput, GetCourseQuery } from '@api-types';
-import { Layout } from '@layout/Layout';
-import { getCourse } from '@graphql/queries';
-import { updateElement } from '@services/apiMutations';
-import { useElement } from '@services/swrHooks';
-import { DataContainer } from '@data-management/DataContainer';
+import { GetCourseQuery, CreateCourseInput } from 'src/API';
+import { DataContainer } from 'src/container/DataManagement/DataContainer';
+import { Layout } from 'src/container/Layout/Layout';
+import { updateCourse } from 'src/graphql/mutations';
+import { getCourse } from 'src/graphql/queries';
+import { updateElement } from 'src/services/apiMutations';
+import { useElement } from 'src/services/swrHooks';
+
 import { CourseForm } from './CourseForm';
 
 export const UpdateCourse: React.FC = () => {

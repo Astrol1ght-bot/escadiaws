@@ -13,7 +13,7 @@ import {
 } from '@aws-amplify/ui-react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { CreateCourseInput, GetCourseQuery } from '@api-types';
+import { CreateCourseInput, GetCourseQuery } from 'src/API';
 
 type Props = {
   isLoading: boolean;
@@ -52,7 +52,7 @@ export const CourseForm: React.FC<Props> = ({
         </SpaceBetween>
       }
     >
-      <Container header={<Header variant="h3"></Header>}>
+      <Container header={<Header variant="h3" />}>
         <SpaceBetween direction="vertical" size="l">
           <TextField
             label="Nombre"

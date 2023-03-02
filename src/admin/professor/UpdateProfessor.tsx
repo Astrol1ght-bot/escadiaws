@@ -1,12 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { updateProfessor } from '@graphql/mutations';
-import { CreateProfessorInput, GetProfessorQuery } from '@api-types';
-import { Layout } from '@layout/Layout';
-import { getProfessor } from '@graphql/queries';
-import { updateElement } from '@services/apiMutations';
-import { useElement } from '@services/swrHooks';
-import { DataContainer } from '@data-management/DataContainer';
+import { GetProfessorQuery, CreateProfessorInput } from 'src/API';
+import { DataContainer } from 'src/container/DataManagement/DataContainer';
+import { Layout } from 'src/container/Layout/Layout';
+import { updateProfessor } from 'src/graphql/mutations';
+import { getProfessor } from 'src/graphql/queries';
+import { updateElement } from 'src/services/apiMutations';
+import { useElement } from 'src/services/swrHooks';
+
 import { ProfesorForm } from './ProfessorForm';
 
 export const UpdateProfessor: React.FC = () => {

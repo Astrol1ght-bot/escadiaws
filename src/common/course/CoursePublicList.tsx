@@ -7,10 +7,10 @@ import {
   Box,
 } from '@cloudscape-design/components';
 import { Link, useNavigate } from 'react-router-dom';
-import { Course } from '@api-types';
-import { Layout } from '@layout/Layout';
-import { getMainCourses } from '@services/userSession';
-import useAppStore from '@use-AppStore';
+import { Course } from 'src/API';
+import { Layout } from 'src/container/Layout/Layout';
+import { getMainCourses } from 'src/services/userSession';
+import useAppStore from 'src/store/useAppStore';
 
 export const CourseCatalog: React.FC = () => {
   const navigate = useNavigate();

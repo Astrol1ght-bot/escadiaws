@@ -1,35 +1,24 @@
 {
-  "dev": {
+  "prod": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-escadi-dev-90353-authRole",
-      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-dev-90353-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-dev-90353-authRole",
+      "AuthRoleName": "amplify-escadi-prod-153730-authRole",
+      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-escadi-dev-90353-deployment",
-      "UnauthRoleName": "amplify-escadi-dev-90353-unauthRole",
-      "StackName": "amplify-escadi-dev-90353",
-      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-dev-90353/d1287650-a7c1-11ed-b74d-0eae06d1b85d",
-      "AmplifyAppId": "d2qktra0fp94ub",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-escadi-dev-90353-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "DeploymentBucketName": "amplify-escadi-prod-153730-deployment",
+      "UnauthRoleName": "amplify-escadi-prod-153730-unauthRole",
+      "StackName": "amplify-escadi-prod-153730",
+      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-prod-153730/250b3460-b910-11ed-8bb2-12e79114c1c5",
+      "AmplifyAppId": "d2qktra0fp94ub"
     },
     "categories": {
       "auth": {
         "escadiauth": {},
-        "userPoolGroups": {},
-        "true": {}
-      },
-      "function": {
-        "escadiauthCustomMessage": {
-          "REDIRECTURL": "escadi.aws@gmail.com",
-          "EMAILSUBJECT": "Escadi - Enlace de verificación",
-          "EMAILMESSAGE": "Este es su enlace de verificación",
-          "deploymentBucketName": "amplify-escadi-dev-90353-deployment",
-          "s3Key": "amplify-builds/escadiauthCustomMessage-576868734b73734a6755-build.zip"
-        }
-      },
-      "api": {
-        "apiEscadi": {}
+        "userPoolGroups": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {}
   }
 }

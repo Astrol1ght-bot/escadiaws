@@ -1,7 +1,7 @@
-import { Client, Course } from '@api-types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { Client, Course } from 'src/API';
 
 interface AppState {
   menuProducts: Course[];

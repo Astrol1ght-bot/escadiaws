@@ -7,10 +7,8 @@ import {
   Box,
 } from '@cloudscape-design/components';
 import { Link, useNavigate } from 'react-router-dom';
-import { Course } from '@api-types';
-import { Layout } from '@layout/Layout';
-import { getMainCourses } from '@services/userSession';
-import useAppStore from '@use-AppStore';
+
+import { Layout } from 'src/container/Layout/Layout';
 import { topButtons } from './TopButtons';
 import { banner } from './Banner';
 
@@ -91,7 +89,7 @@ export const LandingPage: React.FC = () => {
               },
             ],
           }}
-        ></Cards>
+        />
       </div>
     </Layout>
   );

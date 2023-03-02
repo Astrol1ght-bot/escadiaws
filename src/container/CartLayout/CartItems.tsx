@@ -11,7 +11,7 @@ import { Divider, Heading, StepperField } from '@aws-amplify/ui-react';
 import { Amplify } from 'aws-amplify';
 import { useCart } from 'react-use-cart';
 import { useNavigate } from 'react-router-dom';
-import awsExports from '@aws-exports';
+import awsExports from 'src/aws-exports';
 
 Amplify.configure(awsExports);
 

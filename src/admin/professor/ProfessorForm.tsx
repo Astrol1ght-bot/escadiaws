@@ -4,16 +4,11 @@ import Container from '@cloudscape-design/components/container';
 import Header from '@cloudscape-design/components/header';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
-import {
-  Divider,
-  Flex,
-  SwitchField,
-  TextField,
-  Text,
-} from '@aws-amplify/ui-react';
+
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { CreateProfessorInput, GetProfessorQuery } from '@api-types';
+import { TextField } from '@aws-amplify/ui-react';
+import { CreateProfessorInput, GetProfessorQuery } from 'src/API';
 
 type Props = {
   isLoading: boolean;
@@ -52,7 +47,7 @@ export const ProfesorForm: React.FC<Props> = ({
         </SpaceBetween>
       }
     >
-      <Container header={<Header variant="h3"></Header>}>
+      <Container header={<Header variant="h3" />}>
         <SpaceBetween direction="vertical" size="l">
           <TextField
             label="Nombre"

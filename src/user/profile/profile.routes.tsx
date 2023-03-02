@@ -1,5 +1,4 @@
 import React from 'react';
-import { Authenticator as Auth } from '@aws-amplify/ui-react';
 import { Route } from 'react-router-dom';
 import { SignIn } from './SignIn';
 

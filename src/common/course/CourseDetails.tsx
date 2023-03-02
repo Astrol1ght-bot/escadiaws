@@ -1,20 +1,12 @@
-import { GetCourseQuery } from '@api-types';
-import { Flex, Heading } from '@aws-amplify/ui-react';
-import {
-  Box,
-  Header,
-  SpaceBetween,
-  Table,
-} from '@cloudscape-design/components';
 import React from 'react';
+import { GetCourseQuery } from 'src/API';
 
 type CourseDetailsProps = {
   details?: GetCourseQuery;
 };
-export const CourseDetails: React.FC<CourseDetailsProps> = ({ details }) => {
-  return (
-    <>
-      {/* <Heading level={1}>{details?.getCourse?.name}</Heading>
+export const CourseDetails: React.FC<CourseDetailsProps> = ({ details }) => (
+  <>
+    {/* <Heading level={1}>{details?.getCourse?.name}</Heading>
       <Flex
         direction="row"
         justifyContent="flex-start"
@@ -63,6 +55,5 @@ export const CourseDetails: React.FC<CourseDetailsProps> = ({ details }) => {
           />
         </SpaceBetween>
       </Flex> */}
-    </>
-  );
-};
+  </>
+);

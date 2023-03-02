@@ -10,11 +10,11 @@ import {
   SpaceBetween,
   Table,
 } from '@cloudscape-design/components';
-import { ListCoursesQuery } from '@api-types';
-import { listCourses } from '@graphql/queries';
-import { Layout } from '@layout/Layout';
-import { useElements } from '@services/swrHooks';
-import { ErrorNotification } from '@data-management/ErrorNotification';
+import { ListCoursesQuery } from 'src/API';
+import { ErrorNotification } from 'src/container/DataManagement/ErrorNotification';
+import { Layout } from 'src/container/Layout/Layout';
+import { listCourses } from 'src/graphql/queries';
+import { useElements } from 'src/services/swrHooks';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
@@ -74,8 +74,8 @@ export const AdminCourseList: React.FC = () => {
                 <Button
                   variant="link"
                   onClick={() => navigate(`/admin/courses/update/${e?.id}`)}
-                  iconSvg={<Icon name="edit"></Icon>}
-                ></Button>
+                  iconSvg={<Icon name="edit" />}
+                />
               ),
             },
           ]}
@@ -90,7 +90,7 @@ export const AdminCourseList: React.FC = () => {
               </SpaceBetween>
             </Box>
           }
-          header={<Header></Header>}
+          header={<Header />}
         />
       </Container>
     </Layout>

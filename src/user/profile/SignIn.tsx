@@ -4,8 +4,8 @@ import { I18n } from 'aws-amplify';
 import { Authenticator, translations } from '@aws-amplify/ui-react';
 
 import { useNavigate } from 'react-router-dom';
-import { Layout } from '@layout/Layout';
-import useAppStore from '@use-AppStore';
+import useAppStore from 'src/store/useAppStore';
+import { Layout } from 'src/container/Layout/Layout';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('es');

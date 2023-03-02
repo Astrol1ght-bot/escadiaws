@@ -2,9 +2,10 @@ import { Amplify, Auth } from 'aws-amplify';
 
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import useSWR from 'swr';
-import { Client } from '@api-types';
-import { getClient, listCourses } from '@graphql/queries';
-import awsExports from '@aws-exports';
+
+import { Client } from 'src/API';
+import awsExports from 'src/aws-exports';
+import { getClient, listCourses } from 'src/graphql/queries';
 import { getElement, getAllPublicElements } from './apiMutations';
 
 Amplify.configure(awsExports);

@@ -5,8 +5,8 @@ import {
 } from '@cloudscape-design/components';
 import { Amplify } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
-import useAppStore from '@use-AppStore';
-import awsExports from '@aws-exports';
+import awsExports from 'src/aws-exports';
+import useAppStore from 'src/store/useAppStore';
 
 Amplify.configure(awsExports);
 

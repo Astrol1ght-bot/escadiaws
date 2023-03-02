@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { Layout } from '@layout/Layout';
-
-import { CreateProfessorInput } from '@api-types';
-import { createProfessor } from '@graphql/mutations';
-
-import { addElement } from '@services/apiMutations';
-import { ErrorNotification } from '@data-management/ErrorNotification';
+import { CreateProfessorInput } from 'src/API';
+import { ErrorNotification } from 'src/container/DataManagement/ErrorNotification';
+import { Layout } from 'src/container/Layout/Layout';
+import { createProfessor } from 'src/graphql/mutations';
+import { addElement } from 'src/services/apiMutations';
 import { ProfesorForm } from './ProfessorForm';
 
 export const CreateProfessor: React.FC = () => {

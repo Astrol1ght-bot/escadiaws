@@ -3,7 +3,7 @@ import AppLayout from '@cloudscape-design/components/app-layout';
 import { Amplify } from 'aws-amplify';
 import { Box, TopNavigation } from '@cloudscape-design/components';
 import styled from 'styled-components';
-import awsExports from '@aws-exports';
+import awsExports from 'src/aws-exports';
 
 Amplify.configure(awsExports);
 
