@@ -57,18 +57,18 @@ export const ProfessorView: React.FC = () => {
                       width: 20,
                       cell: (e) => <Heading level={1}>{`$${e.name}`}</Heading>,
                     },
-                    {
-                      id: 'cognitoId',
-                      header: 'CognitoId',
-                      width: 20,
-                      cell: (e) => e.cognitoId,
-                    },
+                    // {
+                    //   id: 'cognitoId',
+                    //   header: 'CognitoId',
+                    //   width: 20,
+                    //   cell: (e) => e.cognitoId,
+                    // },
                   ]}
                   items={[
                     {
                       id: data.getProfessor.id,
                       name: data.getProfessor.name,
-                      cognitoId: data.getProfessor.cognitoId,
+                      // cognitoId: data.getProfessor.cognitoId,
                     },
                   ]}
                   loadingText="Cargando Profesor..."

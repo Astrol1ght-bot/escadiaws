@@ -61,13 +61,13 @@ export const ProfesorForm: React.FC<Props> = ({
             errorMessage="Añade un nombre."
             defaultValue={course?.getProfessor?.name}
           />
-          <TextField
+          {/* <TextField
             label="Cognito id"
             {...register('cognitoId', { required: true })}
             hasError={errors.cognitoId && true}
             errorMessage="Añade un identificador de cognito."
             defaultValue={course?.getProfessor?.cognitoId}
-          />
+          /> */}
         </SpaceBetween>
       </Container>
     </Form>
