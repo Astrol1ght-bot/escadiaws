@@ -80,9 +80,6 @@ export const CourseCatalog: React.FC = () => {
             empty={
               <Box textAlign="center" color="inherit">
                 <b>No hay cursos</b>
-                <Box padding={{ bottom: 's' }} variant="p" color="inherit">
-                  Intenta añadir un curso nuevo.
-                </Box>
               </Box>
             }
           />
