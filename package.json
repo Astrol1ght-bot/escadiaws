@@ -65,8 +65,8 @@
   "lint-staged": {
     "*": [
       "prettier --list-different",
-      "yarn prettier:write",
-      "yarn eslint:fix"
+      "npm run prettier:write",
+      "npm run eslint:fix"
     ]
   }
 }
