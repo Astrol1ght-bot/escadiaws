@@ -15,10 +15,35 @@
       "auth": {
         "escadiauth": {},
         "userPoolGroups": {}
+      },
+      "storage": {
+        "storage": {}
       }
     }
   },
-  "dev": {
-    "awscloudformation": {}
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-escadi-develop-121021-authRole",
+      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-escadi-develop-121021-deployment",
+      "UnauthRoleName": "amplify-escadi-develop-121021-unauthRole",
+      "StackName": "amplify-escadi-develop-121021",
+      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-develop-121021/aa3b6e50-b9ee-11ed-bb18-1209a7a6d13f",
+      "AmplifyAppId": "d2qktra0fp94ub"
+    },
+    "categories": {
+      "auth": {
+        "escadiauth": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "apiEscadi": {}
+      },
+      "storage": {
+        "storage": {}
+      }
+    }
   }
 }
