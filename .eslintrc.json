@@ -22,7 +22,7 @@
         "camelcase": "error",
         "spaced-comment": "error",
         "no-duplicate-imports": "error",
-        "no-debugger":"off",
+        "no-debugger":"off"
     },
     "settings": {
       "import/resolver": {
