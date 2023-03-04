@@ -1,24 +1,23 @@
-import React, { useEffect } from 'react'
-import { Container, Header, Button, Cards, Box } from '@cloudscape-design/components'
-import { Link, useNavigate } from 'react-router-dom'
-import { Course } from 'src/API'
-import { Layout } from 'src/container/Layout/Layout'
-import { getMainCourses } from 'src/services/userSession'
-import useAppStore from 'src/store/useAppStore'
+import React, { useEffect } from 'react';
+import { Container, Header, Button, Cards, Box } from '@cloudscape-design/components';
+import { Link, useNavigate } from 'react-router-dom';
+import { Course } from 'src/API';
+import { Layout } from 'src/container/Layout/Layout';
+import { getMainCourses } from 'src/services/userSession';
+import useAppStore from 'src/store/useAppStore';
 
 export const CourseCatalog: React.FC = () => {
-  const navigate = useNavigate()
-  const isLogged = useAppStore((state) => state.isLogged)
-  const setCourses = useAppStore((state) => state.setCourses)
-  const { courses, isCoursesLoading, isCoursesError, isValidating } = getMainCourses(isLogged)
-  const catalogCourses = !isCoursesLoading ? courses?.data.listCourses.items : ([] as Course[])
+  const navigate = useNavigate();
+  const isLogged = useAppStore((state) => state.isLogged);
+  const setCourses = useAppStore((state) => state.setCourses);
+  const { courses, isCoursesLoading, isCoursesError, isValidating } = getMainCourses(isLogged);
+  const catalogCourses = !isCoursesLoading ? courses?.data.listCourses.items : ([] as Course[]);
 
   useEffect(() => {
     if (catalogCourses) {
-      debugger
-      setCourses(catalogCourses)
+      setCourses(catalogCourses);
     }
-  }, [catalogCourses])
+  }, [catalogCourses]);
 
   return (
     <Layout title='Cursos'>
@@ -80,5 +79,5 @@ export const CourseCatalog: React.FC = () => {
         )}
       </Container>
     </Layout>
-  )
-}
+  );
+};

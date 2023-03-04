@@ -59,7 +59,7 @@ export const TopMenu: React.FC = () => {
           cognitoUser
             ? {
                 type: 'menu-dropdown',
-                text: 'Profile',
+                text: 'Perfil',
                 iconName: 'user-profile',
                 items: authenticatedMenuItems,
                 onItemClick: (item) => {

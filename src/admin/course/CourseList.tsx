@@ -18,24 +18,20 @@ import { useElements } from 'src/services/swrHooks';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
-  const { data, isLoading, error, isValidating } =
-    useElements<ListCoursesQuery>(listCourses);
+  const { data, isLoading, error, isValidating } = useElements<ListCoursesQuery>(listCourses);
   const items = data?.listCourses?.items ? data.listCourses.items : [];
 
   return (
     <Layout
-      title="Cursos"
+      title='Cursos'
       topButtons={
-        <Button
-          variant="primary"
-          onClick={() => navigate('/admin/courses/create')}
-        >
+        <Button variant='primary' onClick={() => navigate('/admin/courses/create')}>
           Crear Nuevo Curso
         </Button>
       }
     >
       <Container>
-        <Heading level={1}>Lista de Cursos</Heading>
+        <Heading level={1}>Cursos</Heading>
         <Divider marginTop={20} marginBottom={20} />
         {error && <ErrorNotification errors={error} />}
         <Table
@@ -44,10 +40,7 @@ export const AdminCourseList: React.FC = () => {
               id: 'name',
               header: 'Name',
               cell: (e) => (
-                <Button
-                  variant="link"
-                  onClick={() => navigate(`/admin/courses/view/${e?.id}`)}
-                >
+                <Button variant='link' onClick={() => navigate(`/admin/courses/view/${e?.id}`)}>
                   {e?.name}
                 </Button>
               ),
@@ -72,20 +65,20 @@ export const AdminCourseList: React.FC = () => {
               header: 'Edit',
               cell: (e) => (
                 <Button
-                  variant="link"
+                  variant='link'
                   onClick={() => navigate(`/admin/courses/update/${e?.id}`)}
-                  iconSvg={<Icon name="edit" />}
+                  iconSvg={<Icon name='edit' />}
                 />
               ),
             },
           ]}
           items={items}
           loading={isLoading || isValidating}
-          loadingText="Cargando cursos..."
-          trackBy="id"
+          loadingText='Cargando cursos...'
+          trackBy='id'
           empty={
-            <Box textAlign="center" color="inherit">
-              <SpaceBetween direction="vertical" size="l">
+            <Box textAlign='center' color='inherit'>
+              <SpaceBetween direction='vertical' size='l'>
                 <b>No hay cursos.</b>
               </SpaceBetween>
             </Box>
