@@ -18,6 +18,16 @@
       },
       "storage": {
         "storage": {}
+      },
+      "api": {
+        "apiEscadi": {},
+        "AdminQueries": {}
+      },
+      "function": {
+        "AdminQueries0eccdb9d": {
+          "deploymentBucketName": "amplify-escadi-prod-153730-deployment",
+          "s3Key": "amplify-builds/AdminQueries0eccdb9d-535a3151736467554d2b-build.zip"
+        }
       }
     }
   },

@@ -1,6 +1,8 @@
 {
   "version": "1",
   "cognitoConfig": {
+    "identityPoolName": "escadiauth_identitypool_6f5ef709",
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "escadi8bfb0d00",
     "userPoolName": "escadi-auth-user-pool",
     "autoVerifiedAttributes": [
@@ -31,8 +33,6 @@
     ],
     "userpoolClientLambdaRole": "escadi8bfb0d00_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "identityPoolName": "escadiauth_identitypool_6f5ef709",
-    "allowUnauthenticatedIdentities": true,
     "sharedId": "8bfb0d00",
     "resourceName": "escadiauth",
     "authSelections": "identityPoolAndUserPool",
@@ -72,6 +72,7 @@
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "authProviders": []
+    "authProviders": [],
+    "adminQueryGroup": "Admins"
   }
 }

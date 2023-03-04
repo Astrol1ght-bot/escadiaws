@@ -1,5 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
+    "AdminQueries": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "apiEscadi": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
@@ -21,6 +26,15 @@ export type AmplifyDependentResourcesAttributes = {
       "ClientsGroupRole": "string",
       "ProfessorsGroupRole": "string",
       "StudentsGroupRole": "string"
+    }
+  },
+  "function": {
+    "AdminQueries0eccdb9d": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
     }
   },
   "storage": {
