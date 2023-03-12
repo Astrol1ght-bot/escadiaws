@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Escuela Centroamericana de Informatica e Idiomas",
+  "name": "Escadi",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://escadi-public-images.s3.amazonaws.com/logo.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "https://escadi-public-images.s3.amazonaws.com/logo.jpg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "https://escadi-public-images.s3.amazonaws.com/logo.jpg",
       "type": "image/png",
       "sizes": "512x512"
     }
