@@ -1,59 +1,114 @@
 import React from 'react';
 import { Divider, Heading } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  Container,
-  Header,
-  Icon,
-  SpaceBetween,
-  Table,
-} from '@cloudscape-design/components';
-import { ListCoursesQuery } from 'src/API';
+import { Box, Container, Header, Icon, SpaceBetween, Table } from '@cloudscape-design/components';
+import { DeleteCourseInput, ListCoursesQuery } from 'src/API';
 import { ErrorNotification } from 'src/container/DataManagement/ErrorNotification';
 import { Layout } from 'src/container/Layout/Layout';
 import { listCourses } from 'src/graphql/queries';
 import { useElements } from 'src/services/swrHooks';
+import { Button } from 'primereact/button';
+import { deleteElement } from 'src/services/apiMutations';
+import { deleteCourse } from 'src/graphql/mutations';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
   const { data, isLoading, error, isValidating } = useElements<ListCoursesQuery>(listCourses);
   const items = data?.listCourses?.items ? data.listCourses.items : [];
 
+  const deleteCourseHandler = (courseId?: string) => {
+    if (courseId) {
+      deleteElement(courseId, deleteCourse)
+        .then(() => {
+          navigate('/admin/courses', { replace: true });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
   return (
     <Layout
       title='Cursos'
       topButtons={
-        <Button variant='primary' onClick={() => navigate('/admin/courses/create')}>
-          Crear Nuevo Curso
-        </Button>
+        <Button onClick={() => navigate('/admin/courses/create')}>Crear Nuevo Curso</Button>
       }
     >
       <Container>
         <Heading level={1}>Cursos</Heading>
         <Divider marginTop={20} marginBottom={20} />
         {error && <ErrorNotification errors={error} />}
+        <DataTable value={items} loading={isLoading || isValidating}>
+          <Column
+            field='name'
+            header='Nombre'
+            body={(item) => (
+              <Button link onClick={() => navigate(`/admin/courses/view/${item?.id}`)}>
+                {item?.name}
+              </Button>
+            )}
+          ></Column>
+          <Column field='price' header='Precio' body={(item) => `$${item?.price}`}></Column>
+          <Column
+            field='name'
+            header='Nombre'
+            body={(item) => (
+              <Button link onClick={() => navigate(`/admin/courses/view/${item?.id}`)}>
+                {item?.name}
+              </Button>
+            )}
+          ></Column>
+          <Column
+            field='name'
+            header='Nombre'
+            body={(item) => (
+              <Button link onClick={() => navigate(`/admin/courses/view/${item?.id}`)}>
+                {item?.name}
+              </Button>
+            )}
+          ></Column>
+          <Column
+            field='name'
+            header='Nombre'
+            body={(item) => (
+              <Button link onClick={() => navigate(`/admin/courses/view/${item?.id}`)}>
+                {item?.name}
+              </Button>
+            )}
+          ></Column>
+          <Column
+            field='name'
+            header='Nombre'
+            body={(item) => (
+              <Button link onClick={() => navigate(`/admin/courses/view/${item?.id}`)}>
+                {item?.name}
+              </Button>
+            )}
+          ></Column>
+        </DataTable>
         <Table
           columnDefinitions={[
             {
               id: 'name',
-              header: 'Name',
+              header: 'Nombre',
               cell: (e) => (
-                <Button variant='link' onClick={() => navigate(`/admin/courses/view/${e?.id}`)}>
+                <Button link onClick={() => navigate(`/admin/courses/view/${e?.id}`)}>
                   {e?.name}
                 </Button>
               ),
             },
             {
               id: 'price',
-              header: 'Price',
+              header: 'Precio',
               cell: (e) => `$${e?.price}`,
             },
             {
               id: 'description',
-              header: 'Description',
-              cell: (e) => e?.description,
+              header: 'Descripción',
+              cell: (e) => <div style={{ maxWidth: '200px' }}>{e?.description}</div>,
             },
             {
               id: 'thumbnail',
@@ -62,12 +117,26 @@ export const AdminCourseList: React.FC = () => {
             },
             {
               id: 'update',
-              header: 'Edit',
+              header: '',
               cell: (e) => (
                 <Button
-                  variant='link'
                   onClick={() => navigate(`/admin/courses/update/${e?.id}`)}
-                  iconSvg={<Icon name='edit' />}
+                  className='pi pi-pencil'
+                  text
+                />
+              ),
+            },
+            {
+              id: 'remove',
+              header: '',
+              cell: (e) => (
+                <Button
+                  onClick={() => {
+                    deleteCourseHandler(e?.id);
+                  }}
+                  className='pi pi-trash'
+                  severity='danger'
+                  text
                 />
               ),
             },
