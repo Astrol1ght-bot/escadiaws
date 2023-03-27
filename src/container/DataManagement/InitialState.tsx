@@ -11,6 +11,7 @@ type Props = { children: React.ReactElement }
 export const InitialState: React.FC<Props> = ({ children }) => {
   const setCognitoUser = useAppStore((state) => state.setCognitoUser)
   const setIsAdmin = useAppStore((state) => state.setIsAdmin)
+  const setUserProfile = useAppStore((state) => state.setUserProfile);
   const setIsLogged = useAppStore((state) => state.setIsLogged)
   const { user } = useAuthenticator((context) => [context.user])
   const [stateUpdated, setStateUpdated] = useState(false)
@@ -22,6 +23,7 @@ export const InitialState: React.FC<Props> = ({ children }) => {
       setCognitoUser(userData?.user)
       setIsAdmin(userData?.isAdmin)
       setIsLogged(userData?.user !== undefined)
+      setUserProfile(userData?.user);
       setStateUpdated(true)
     }
   }, [userData, isUserLoading])

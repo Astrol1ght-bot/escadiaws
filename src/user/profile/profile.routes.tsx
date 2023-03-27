@@ -1,26 +1,19 @@
+import { Authenticator as Auth } from '@aws-amplify/ui-react';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { SignIn } from './SignIn';
+import { UserCourses } from './UserCourses';
 
 export const createProfileRoutes = () => {
   const routes = (
     <Route path="/profile">
-      {/* <Route
-        index
-        element={
-          <Auth>
-            <ClientView />
-          </Auth>
-        }
-      />
       <Route
-        path="create"
+      path="courses"
         element={
           <Auth>
-            <CreateClient />
+            <UserCourses />
           </Auth>
-        }
-      /> */}
+        } />
       <Route path="signin" element={<SignIn />} />
     </Route>
   );

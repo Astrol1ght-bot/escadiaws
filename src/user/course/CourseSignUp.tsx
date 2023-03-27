@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heading, Flex } from '@aws-amplify/ui-react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import { usePublicElement } from 'src/services/swrHooks';
 import useAppStore from 'src/store/useAppStore';
 
 export const CourseSignUp: React.FC = () => {
+  const navigate = useNavigate();
   const cognitoUser = useAppStore((state) => state.cognitoUser);
   const userAuth = cognitoUser !== undefined;
   const params = useParams();
@@ -95,6 +96,9 @@ export const CourseSignUp: React.FC = () => {
               alignContent="flex-start"
               wrap="nowrap"
               gap="1rem"
+              onClick={() =>
+                navigate(`/catalog/courses/enroll/${data.getCourse?.id}`)
+              }
             >
               <Button>Matricular</Button>
             </Flex>

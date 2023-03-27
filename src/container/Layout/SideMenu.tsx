@@ -15,48 +15,50 @@ export const SideMenu: React.FC = () => {
       <h2>Menu</h2>
       <SpaceBetween size='m'>
         {!isAdmin ? (
-          <Cards
-            cardDefinition={{
-              header: (p: Course) => (
-                <Box textAlign='center'>
-                  <Link to={`/product/${p.id}`}>
-                    <h2>{p.name}</h2>
-                  </Link>
-                </Box>
-              ),
-              sections: [
-                {
-                  id: 'thumbnail',
-                  content: (p) => (
-                    <Link to={`/product/${p.id}`}>
-                      <img width='100%' src={p.thumbnail} alt={p.name} />
-                    </Link>
-                  ),
-                },
-              ],
-            }}
-            cardsPerRow={[{ cards: 1 }, { minWidth: 500, cards: 3 }]}
-            items={menuProducts.map((course: Course) => ({
-              name: course?.name,
-              description: course?.description,
-              thumbnail: course?.thumbnail,
-              price: course?.price,
-              createdAt: course?.createdAt,
-              updatedAt: course?.updatedAt,
-              __typename: course?.__typename,
-              id: course?.id,
-            }))}
-            loadingText='Loading products'
-            trackBy='id'
-            empty={
-              <Box textAlign='center' color='inherit'>
-                <b>No products</b>
-                <Box padding={{ bottom: 's' }} variant='p' color='inherit'>
-                  No products to display.
-                </Box>
-              </Box>
-            }
-          />
+          <>
+          </>
+          // <Cards
+          //   cardDefinition={{
+          //     header: (p: Course) => (
+          //       <Box textAlign='center'>
+          //         <Link to={`/product/${p.id}`}>
+          //           <h2>{p.name}</h2>
+          //         </Link>
+          //       </Box>
+          //     ),
+          //     sections: [
+          //       {
+          //         id: 'thumbnail',
+          //         content: (p) => (
+          //           <Link to={`/product/${p.id}`}>
+          //             <img width='100%' src={p.thumbnail} alt={p.name} />
+          //           </Link>
+          //         ),
+          //       },
+          //     ],
+          //   }}
+          //   cardsPerRow={[{ cards: 1 }, { minWidth: 500, cards: 3 }]}
+          //   items={menuProducts.map((course: Course) => ({
+          //     name: course?.name,
+          //     description: course?.description,
+          //     thumbnail: course?.thumbnail,
+          //     price: course?.price,
+          //     createdAt: course?.createdAt,
+          //     updatedAt: course?.updatedAt,
+          //     __typename: course?.__typename,
+          //     id: course?.id,
+          //   }))}
+          //   loadingText='Loading products'
+          //   trackBy='id'
+          //   empty={
+          //     <Box textAlign='center' color='inherit'>
+          //       <b>No products</b>
+          //       <Box padding={{ bottom: 's' }} variant='p' color='inherit'>
+          //         No products to display.
+          //       </Box>
+          //     </Box>
+          //   }
+          // />
         ) : (
           <>
             <Divider orientation='horizontal' />

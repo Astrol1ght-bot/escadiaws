@@ -1,36 +1,4 @@
 {
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-escadi-prod-153730-authRole",
-      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-escadi-prod-153730-deployment",
-      "UnauthRoleName": "amplify-escadi-prod-153730-unauthRole",
-      "StackName": "amplify-escadi-prod-153730",
-      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-prod-153730/250b3460-b910-11ed-8bb2-12e79114c1c5",
-      "AmplifyAppId": "d2qktra0fp94ub"
-    },
-    "categories": {
-      "auth": {
-        "escadiauth": {},
-        "userPoolGroups": {}
-      },
-      "storage": {
-        "storage": {}
-      },
-      "api": {
-        "apiEscadi": {},
-        "AdminQueries": {}
-      },
-      "function": {
-        "AdminQueries0eccdb9d": {
-          "deploymentBucketName": "amplify-escadi-prod-153730-deployment",
-          "s3Key": "amplify-builds/AdminQueries0eccdb9d-535a3151736467554d2b-build.zip"
-        }
-      }
-    }
-  },
   "develop": {
     "awscloudformation": {
       "AuthRoleName": "amplify-escadi-develop-121021-authRole",
@@ -59,6 +27,38 @@
         "AdminQueries0eccdb9d": {
           "deploymentBucketName": "amplify-escadi-develop-121021-deployment",
           "s3Key": "amplify-builds/AdminQueries0eccdb9d-4a596546426731527452-build.zip"
+        }
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-escadi-prod-153730-authRole",
+      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-prod-153730-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-escadi-prod-153730-deployment",
+      "UnauthRoleName": "amplify-escadi-prod-153730-unauthRole",
+      "StackName": "amplify-escadi-prod-153730",
+      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-prod-153730/250b3460-b910-11ed-8bb2-12e79114c1c5",
+      "AmplifyAppId": "d2qktra0fp94ub"
+    },
+    "categories": {
+      "auth": {
+        "escadiauth": {},
+        "userPoolGroups": {}
+      },
+      "storage": {
+        "storage": {}
+      },
+      "api": {
+        "apiEscadi": {},
+        "AdminQueries": {}
+      },
+      "function": {
+        "AdminQueries0eccdb9d": {
+          "deploymentBucketName": "amplify-escadi-prod-153730-deployment",
+          "s3Key": "amplify-builds/AdminQueries0eccdb9d-535a3151736467554d2b-build.zip"
         }
       }
     }

@@ -34,6 +34,10 @@ export const TopMenu: React.FC = () => {
       id: 'sign-out',
       text: 'Sign Out',
     },
+    {
+      id: 'courses',
+      text: 'courses',
+    }
   ]
 
   return (
@@ -63,9 +67,12 @@ export const TopMenu: React.FC = () => {
                 iconName: 'user-profile',
                 items: authenticatedMenuItems,
                 onItemClick: (item) => {
-                  item.detail.id === 'sign-out' ? signOutUser() : navigate(`/${item.detail.id}`)
+                  item.detail.id === 'sign-out' ? signOutUser() : navigate(`/profile/${item.detail.id}`)
                 },
+                
+                
               }
+              
             : {
                 type: 'button',
                 variant: 'link',

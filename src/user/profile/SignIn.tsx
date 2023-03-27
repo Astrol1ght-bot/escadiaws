@@ -6,6 +6,11 @@ import { Authenticator, translations } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import useAppStore from 'src/store/useAppStore';
 import { Layout } from 'src/container/Layout/Layout';
+import { CreateStudentInput } from 'src/API';
+
+import { addElement } from '../../services/apiMutations';
+import { createStudent } from 'src/graphql/mutations';
+
 
 const dict = {
   es: {
@@ -73,15 +78,17 @@ I18n.putVocabularies(dict);
 I18n.setLanguage('es');
 
 export const SignIn: React.FC = () => {
-  const cognitoUser = useAppStore((state) => state.cognitoUser);
+  
+  const userProfile = useAppStore((state) => state.userProfile);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
-    if (cognitoUser) navigate('/');
-  }, [cognitoUser]);
+    if (userProfile) navigate('/');
+  }, [userProfile]);
 
   return (
-    <Layout title=''>
+    <Layout title='' >
       <Authenticator signUpAttributes={['name', 'phone_number']} />
     </Layout>
   );

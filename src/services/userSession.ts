@@ -5,9 +5,11 @@ import useSWR from 'swr';
 
 import awsExports from 'src/aws-exports';
 import { getElement, getAllPublicElements } from './apiMutations';
-import { listCourses } from 'src/graphql/queries';
+import { getStudent, listCourses } from 'src/graphql/queries';
 import useAppStore from 'src/store/useAppStore';
 import { UserData } from 'src/store/storeTypes';
+import { Student } from '@api-types';
+import { useState } from 'react';
 
 Amplify.configure(awsExports);
 
@@ -18,7 +20,16 @@ export const isAdmin = (user: any): boolean => {
   return isPartOfGroup ? isPartOfGroup.includes('Admins') : false;
 };
 
+
+export const getUserProfile = (
+  user: CognitoUser | undefined
+): Promise<Student | undefined> =>
+  getElement(user?.getUsername() ?? "", getStudent)
+    .then((response) => response.data?.getStudent)
+    .catch(() => undefined);
+
 export const getUserInfo = () => {
+  
   const fetcher = () =>
     getUserSession()
       .then((user) => {
