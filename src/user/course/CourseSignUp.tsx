@@ -34,6 +34,7 @@ export const CourseSignUp: React.FC = () => {
       ]}
     >
       <Container>
+
         {data?.getCourse && (
           <DataContainer
             isLoading={isLoading}

@@ -61,17 +61,12 @@ type Enrollment
     id: ID!
     student: Student @belongsTo
     course: [Course] @manyToMany(relationName: "CourseEnrollments")
-    enrollDetails: EnrollDetails!
     status: EnrollmentStatus!
     date: AWSDateTime!
     filekey: String!
-}
-
-type EnrollDetails {
     courseID: String!
     courseName: String!
     thumbnail: AWSURL!
-    courseKeyFIle: String!
     total: String!
 }
 

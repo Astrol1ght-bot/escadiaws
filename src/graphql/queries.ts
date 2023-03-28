@@ -12,6 +12,10 @@ export const getStudent = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -173,16 +177,13 @@ export const getEnrollment = /* GraphQL */ `
         }
         nextToken
       }
-      enrollDetails {
-        courseID
-        courseName
-        thumbnail
-        courseKeyFIle
-        total
-      }
       status
       date
       filekey
+      courseID
+      courseName
+      thumbnail
+      total
       createdAt
       updatedAt
       studentEnrollmentsId
@@ -206,16 +207,13 @@ export const listEnrollments = /* GraphQL */ `
         course {
           nextToken
         }
-        enrollDetails {
-          courseID
-          courseName
-          thumbnail
-          courseKeyFIle
-          total
-        }
         status
         date
         filekey
+        courseID
+        courseName
+        thumbnail
+        total
         createdAt
         updatedAt
         studentEnrollmentsId
@@ -260,16 +258,13 @@ export const getCourseEnrollments = /* GraphQL */ `
         course {
           nextToken
         }
-        enrollDetails {
-          courseID
-          courseName
-          thumbnail
-          courseKeyFIle
-          total
-        }
         status
         date
         filekey
+        courseID
+        courseName
+        thumbnail
+        total
         createdAt
         updatedAt
         studentEnrollmentsId
@@ -310,6 +305,10 @@ export const listCourseEnrollments = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -356,6 +355,10 @@ export const courseEnrollmentsByCourseId = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -402,6 +405,10 @@ export const courseEnrollmentsByEnrollmentId = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId

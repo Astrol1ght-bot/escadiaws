@@ -12,6 +12,10 @@ export const onCreateStudent = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -33,6 +37,10 @@ export const onUpdateStudent = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -54,6 +62,10 @@ export const onDeleteStudent = /* GraphQL */ `
           status
           date
           filekey
+          courseID
+          courseName
+          thumbnail
+          total
           createdAt
           updatedAt
           studentEnrollmentsId
@@ -269,16 +281,13 @@ export const onCreateEnrollment = /* GraphQL */ `
         }
         nextToken
       }
-      enrollDetails {
-        courseID
-        courseName
-        thumbnail
-        courseKeyFIle
-        total
-      }
       status
       date
       filekey
+      courseID
+      courseName
+      thumbnail
+      total
       createdAt
       updatedAt
       studentEnrollmentsId
@@ -309,16 +318,13 @@ export const onUpdateEnrollment = /* GraphQL */ `
         }
         nextToken
       }
-      enrollDetails {
-        courseID
-        courseName
-        thumbnail
-        courseKeyFIle
-        total
-      }
       status
       date
       filekey
+      courseID
+      courseName
+      thumbnail
+      total
       createdAt
       updatedAt
       studentEnrollmentsId
@@ -349,16 +355,13 @@ export const onDeleteEnrollment = /* GraphQL */ `
         }
         nextToken
       }
-      enrollDetails {
-        courseID
-        courseName
-        thumbnail
-        courseKeyFIle
-        total
-      }
       status
       date
       filekey
+      courseID
+      courseName
+      thumbnail
+      total
       createdAt
       updatedAt
       studentEnrollmentsId
@@ -403,16 +406,13 @@ export const onCreateCourseEnrollments = /* GraphQL */ `
         course {
           nextToken
         }
-        enrollDetails {
-          courseID
-          courseName
-          thumbnail
-          courseKeyFIle
-          total
-        }
         status
         date
         filekey
+        courseID
+        courseName
+        thumbnail
+        total
         createdAt
         updatedAt
         studentEnrollmentsId
@@ -460,16 +460,13 @@ export const onUpdateCourseEnrollments = /* GraphQL */ `
         course {
           nextToken
         }
-        enrollDetails {
-          courseID
-          courseName
-          thumbnail
-          courseKeyFIle
-          total
-        }
         status
         date
         filekey
+        courseID
+        courseName
+        thumbnail
+        total
         createdAt
         updatedAt
         studentEnrollmentsId
@@ -517,16 +514,13 @@ export const onDeleteCourseEnrollments = /* GraphQL */ `
         course {
           nextToken
         }
-        enrollDetails {
-          courseID
-          courseName
-          thumbnail
-          courseKeyFIle
-          total
-        }
         status
         date
         filekey
+        courseID
+        courseName
+        thumbnail
+        total
         createdAt
         updatedAt
         studentEnrollmentsId

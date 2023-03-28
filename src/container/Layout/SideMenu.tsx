@@ -68,6 +68,9 @@ export const SideMenu: React.FC = () => {
             <Button variant='link' onClick={() => navigate('/admin/users', { replace: true })}>
               Usuarios
             </Button>
+            <Button variant='link' onClick={() => navigate('/admin/enrollments', { replace: true })}>
+              Matriculas
+            </Button>
           </>
         )}
       </SpaceBetween>
