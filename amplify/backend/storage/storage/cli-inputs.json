@@ -3,13 +3,23 @@
   "policyUUID": "ea7ee923",
   "bucketName": "escadi-static-content",
   "storageAccess": "authAndGuest",
-  "guestAccess": [
-    "READ"
-  ],
-  "authAccess": [
-    "CREATE_AND_UPDATE",
-    "READ",
-    "DELETE"
-  ],
-  "triggerFunction": "NONE"
+  "guestAccess": [],
+  "authAccess": [],
+  "groupAccess": {
+    "Professors": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "Admins": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "Students": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ]
+  }
 }

@@ -5,7 +5,7 @@ import useSWR from 'swr';
 
 import awsExports from 'src/aws-exports';
 import { getElement, getAllPublicElements } from './apiMutations';
-import { getStudent, listCourses } from 'src/graphql/queries';
+import { getStudent, listCourses, listEnrollments } from 'src/graphql/queries';
 import useAppStore from 'src/store/useAppStore';
 import { UserData } from 'src/store/storeTypes';
 import { Student } from '@api-types';
@@ -15,21 +15,21 @@ Amplify.configure(awsExports);
 
 export const getUserSession = () => Auth.currentAuthenticatedUser().then((user) => user);
 
-export const isAdmin = (user: any): boolean => {
+export const hasRole = (user: any, role: string): boolean => {
   const isPartOfGroup = user.signInUserSession.accessToken.payload['cognito:groups'];
-  return isPartOfGroup ? isPartOfGroup.includes('Admins') : false;
+  return isPartOfGroup ? isPartOfGroup.includes(role) : false;
 };
 
+export const isAdmin = (user: any): boolean => hasRole(user, 'Admins');
+export const isProfessor = (user: any): boolean => hasRole(user, 'Professors');
+export const isStudent = (user: any): boolean => hasRole(user, 'Students');
 
-export const getUserProfile = (
-  user: CognitoUser | undefined
-): Promise<Student | undefined> =>
-  getElement(user?.getUsername() ?? "", getStudent)
+export const getUserProfile = (user: CognitoUser | undefined): Promise<Student | undefined> =>
+  getElement(user?.getUsername() ?? '', getStudent)
     .then((response) => response.data?.getStudent)
     .catch(() => undefined);
 
 export const getUserInfo = () => {
-  
   const fetcher = () =>
     getUserSession()
       .then((user) => {
@@ -37,6 +37,8 @@ export const getUserInfo = () => {
           return {
             user,
             isAdmin: isAdmin(user),
+            isProfessor: isProfessor(user),
+            isStudent: isStudent(user),
           };
         }
         throw new Error();
@@ -44,6 +46,8 @@ export const getUserInfo = () => {
       .catch(() => ({
         user: undefined,
         isAdmin: false,
+        isProfessor: false,
+        isStudent: false,
       }));
   const { data, error, mutate, isValidating } = useSWR('/', fetcher);
   return {
@@ -65,6 +69,19 @@ export const getMainCourses = (authUser: boolean) => {
     courses: data,
     isCoursesLoading: !error && !data,
     isCoursesError: error,
+    isValidating,
+  };
+};
+
+export const getMainStudent = (username: string) => {
+  const { data, error, isValidating } = useSWR(getStudent, (query) => getElement(username, query), {
+    revalidateOnFocus: false,
+  });
+
+  return {
+    student: data,
+    isStudentLoading: !error && !data,
+    isStudentError: error,
     isValidating,
   };
 };

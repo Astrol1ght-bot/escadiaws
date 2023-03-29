@@ -17,31 +17,16 @@ import useAppStore from '../../store/useAppStore';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
-  
+
   const isLogged = useAppStore((state) => state.isLogged);
-  const { courses, isCoursesLoading, isCoursesError, isValidating } =
-  getMainCourses(isLogged);
-const catalogCourses = !isCoursesLoading
-  ? courses?.data.listCourses.items
-  : ([] as Course[]);
+  const { courses, isCoursesLoading, isCoursesError, isValidating } = getMainCourses(isLogged);
+  const catalogCourses = !isCoursesLoading ? courses?.data.listCourses.items : ([] as Course[]);
 
   const removeOrder = (val) => {
     if (val) {
       deleteElement(val, deleteCourse)
         .then(() => window.location.reload())
         .catch((e) => console.log(e));
-    }
-  };
-
-  const deleteCourseHandler = (courseId?: string) => {
-    if (courseId) {
-      deleteElement(courseId, deleteCourse)
-        .then(() => {
-          navigate('/admin/courses', { replace: true });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     }
   };
 
@@ -55,7 +40,7 @@ const catalogCourses = !isCoursesLoading
       <Container>
         <Heading level={1}>Cursos</Heading>
         <Divider marginTop={20} marginBottom={20} />
-        <DataTable value={catalogCourses} >
+        <DataTable value={catalogCourses}>
           <Column
             field='name'
             header='Nombre'
