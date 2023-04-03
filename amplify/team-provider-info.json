@@ -27,6 +27,9 @@
         "AdminQueries0eccdb9d": {
           "deploymentBucketName": "amplify-escadi-develop-121021-deployment",
           "s3Key": "amplify-builds/AdminQueries0eccdb9d-4a596546426731527452-build.zip"
+        },
+        "escadiauthPostConfirmation": {
+          "GROUP": "Students"
         }
       }
     }
