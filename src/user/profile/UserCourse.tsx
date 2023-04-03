@@ -14,24 +14,25 @@ import { usePublicElement } from 'src/services/swrHooks';
 
 Amplify.configure(awsExports);
 
+type UserCourseParams = { id?: string | undefined };
+
 export const UserCourse: React.FC = () => {
   const isProfessor = useAppStore((state) => state.isProfessor);
-  const params = useParams();
+  const params = useParams<UserCourseParams>();
   const [files, setFiles] = useState<(string | undefined)[]>();
-
   const cognitoUser = useAppStore((state) => state.cognitoUser);
-  const userAuth = cognitoUser !== undefined;
-  const { data, isLoading, error, isValidating } = usePublicElement<GetCourseQuery>(
-    getCourse,
-    userAuth,
-    params.id,
-  );
+  const userAuth = Boolean(cognitoUser);
+  const {
+    data,
+    isLoading,
+    error,
+    isValidating,
+  } = usePublicElement<GetCourseQuery>(getCourse, userAuth, params.id);
 
   const getFiles = async () => {
-    const allFiles = (await Storage.list(`${params.id}`)).results
+    const allFiles = (await Storage.list(`${params.id}`))?.results
       .map((file) => file.key?.split('/')[1])
       .filter((file) => file);
-    console.log(allFiles);
     setFiles(allFiles);
   };
 
@@ -57,8 +58,8 @@ export const UserCourse: React.FC = () => {
       Array.from(val).map((file) =>
         Storage.put(`${courseId}/${file.name}`, file, {
           contentType: file.type,
-        }),
-      ),
+        })
+      )
     );
 
     await getFiles();
@@ -92,9 +93,12 @@ export const UserCourse: React.FC = () => {
           {files &&
             files.map((file) => (
               <div key={file}>
-                <Button severity='secondary' text onClick={() => downloadFile(file ?? '')}>
-                  <span className='pi pi-file' style={{ paddingRight: '10px' }}></span>
-                  {file}
+                <Button severity='secondary' text onClick= {() => downloadFile(file ?? "")}>
+                  <a
+                    className='pi pi-file'
+                    style={{ paddingRight: '10px', textDecoration: 'false'}}
+                  >{file}</a>
+                  
                 </Button>
               </div>
             ))}

@@ -4,17 +4,63 @@
 
 export type CreateStudentInput = {
   id?: string | null,
+  name?: string | null,
+  emai?: string | null,
 };
 
 export type ModelStudentConditionInput = {
+  name?: ModelStringInput | null,
+  emai?: ModelStringInput | null,
   and?: Array< ModelStudentConditionInput | null > | null,
   or?: Array< ModelStudentConditionInput | null > | null,
   not?: ModelStudentConditionInput | null,
 };
 
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type Student = {
   __typename: "Student",
   id: string,
+  name?: string | null,
+  emai?: string | null,
   enrollments?: ModelEnrollmentConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -99,6 +145,8 @@ export enum EnrollmentStatus {
 
 export type UpdateStudentInput = {
   id: string,
+  name?: string | null,
+  emai?: string | null,
 };
 
 export type DeleteStudentInput = {
@@ -125,46 +173,6 @@ export type ModelCourseConditionInput = {
   or?: Array< ModelCourseConditionInput | null > | null,
   not?: ModelCourseConditionInput | null,
   professorCoursesId?: ModelIDInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
 };
 
 export type ModelFloatInput = {
@@ -303,6 +311,8 @@ export type DeleteCourseEnrollmentsInput = {
 
 export type ModelStudentFilterInput = {
   id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  emai?: ModelStringInput | null,
   and?: Array< ModelStudentFilterInput | null > | null,
   or?: Array< ModelStudentFilterInput | null > | null,
   not?: ModelStudentFilterInput | null,
@@ -373,11 +383,28 @@ export enum ModelSortDirection {
 
 export type ModelSubscriptionStudentFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  emai?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionStudentFilterInput | null > | null,
   or?: Array< ModelSubscriptionStudentFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -401,21 +428,6 @@ export type ModelSubscriptionCourseFilterInput = {
   keyfile?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCourseFilterInput | null > | null,
   or?: Array< ModelSubscriptionCourseFilterInput | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionFloatInput = {
@@ -466,6 +478,8 @@ export type CreateStudentMutation = {
   createStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -498,6 +512,8 @@ export type UpdateStudentMutation = {
   updateStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -530,6 +546,8 @@ export type DeleteStudentMutation = {
   deleteStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -787,6 +805,8 @@ export type CreateEnrollmentMutation = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -831,6 +851,8 @@ export type UpdateEnrollmentMutation = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -875,6 +897,8 @@ export type DeleteEnrollmentMutation = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -947,6 +971,8 @@ export type CreateCourseEnrollmentsMutation = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1010,6 +1036,8 @@ export type UpdateCourseEnrollmentsMutation = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1073,6 +1101,8 @@ export type DeleteCourseEnrollmentsMutation = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1104,6 +1134,8 @@ export type GetStudentQuery = {
   getStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -1139,6 +1171,8 @@ export type ListStudentsQuery = {
     items:  Array< {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -1293,6 +1327,8 @@ export type GetEnrollmentQuery = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -1340,6 +1376,8 @@ export type ListEnrollmentsQuery = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1401,6 +1439,8 @@ export type GetCourseEnrollmentsQuery = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1577,6 +1617,8 @@ export type OnCreateStudentSubscription = {
   onCreateStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -1608,6 +1650,8 @@ export type OnUpdateStudentSubscription = {
   onUpdateStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -1639,6 +1683,8 @@ export type OnDeleteStudentSubscription = {
   onDeleteStudent?:  {
     __typename: "Student",
     id: string,
+    name?: string | null,
+    emai?: string | null,
     enrollments?:  {
       __typename: "ModelEnrollmentConnection",
       items:  Array< {
@@ -1889,6 +1935,8 @@ export type OnCreateEnrollmentSubscription = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -1932,6 +1980,8 @@ export type OnUpdateEnrollmentSubscription = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -1975,6 +2025,8 @@ export type OnDeleteEnrollmentSubscription = {
     student?:  {
       __typename: "Student",
       id: string,
+      name?: string | null,
+      emai?: string | null,
       enrollments?:  {
         __typename: "ModelEnrollmentConnection",
         nextToken?: string | null,
@@ -2046,6 +2098,8 @@ export type OnCreateCourseEnrollmentsSubscription = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2108,6 +2162,8 @@ export type OnUpdateCourseEnrollmentsSubscription = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2170,6 +2226,8 @@ export type OnDeleteCourseEnrollmentsSubscription = {
       student?:  {
         __typename: "Student",
         id: string,
+        name?: string | null,
+        emai?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,

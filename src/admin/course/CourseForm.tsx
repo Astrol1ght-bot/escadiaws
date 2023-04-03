@@ -39,7 +39,7 @@ export const CourseForm: React.FC<Props> = ({
       actions={
         <SpaceBetween direction="horizontal" size="xs">
           <Button variant="link" onClick={() => navigate('/admin/courses/')}>
-            Cancel
+            Cancelar
           </Button>
           <Button
             loading={isLoading}
@@ -47,7 +47,7 @@ export const CourseForm: React.FC<Props> = ({
             onClick={() => handleSubmit(onSubmit)()}
             variant="primary"
           >
-            {course ? 'Update' : 'Submit'}
+            {course ? 'Actualizar' : 'Crear'}
           </Button>
         </SpaceBetween>
       }

@@ -32,7 +32,7 @@ export const UpdateEnrollment: React.FC<Props> = ({ data, isLoading }) => {
     <EnrollmentForm
       isLoading={isLoading}
       onSubmit={(updateData) => updateProd(updateData)}
-      title="Update Order"
+      title=''
       order={data}
     />
   );

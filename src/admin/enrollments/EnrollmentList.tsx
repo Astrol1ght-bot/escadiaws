@@ -17,38 +17,56 @@ export const EnrollmentList: React.FC = () => {
     useElements<ListEnrollmentsQuery>(listEnrollments);
   const items = data?.listEnrollments?.items ? data.listEnrollments.items : [];
 
+  const formatDate = (date?: string) => {
+    if (date) {
+      const isoDate = new Date(date);
+      return isoDate.toLocaleDateString();
+    }
+    return '';
+  };
+
   return (
     <Layout title="Orders lists">
       <Container>
-        <Heading level={1}>Lista de Matriculas</Heading>
+        <Heading level={1}>Lista de Matrículas</Heading>
         <Divider marginTop={20} marginBottom={20} />
         {error && <ErrorNotification errors={error} />}
         <Table
           columnDefinitions={[
             {
               id: 'date',
-              header: 'Date',
-              cell: (e) => e?.createdAt,
+              header: 'Fecha',
+              cell: (e) => formatDate(e?.createdAt),
+            },
+            {
+              id: 'name',
+              header: 'Nombre del estudiante',
+              cell: (e) => e?.student?.name,
+            },
+            {
+              id: 'email',
+              header: 'Correo',
+              cell: (e) => e?.student?.emai,
             },
             {
               id: 'status',
-              header: 'Status',
+              header: 'Estado',
               cell: (e) => e?.status.toUpperCase(),
             },
             {
               id: 'total',
               header: 'Total',
-              cell: (e) => `$${e?.total}`,
+              cell: (e) => `₡${e?.total}`,
             },
             {
               id: 'view',
-              header: 'View',
+              header: '',
               cell: (e) => (
                 <Button
                   variant="link"
                   onClick={() => navigate(`/admin/enrollments/view/${e?.id}`)}
                 >
-                  View
+                  Detalles
                 </Button>
               ),
             },

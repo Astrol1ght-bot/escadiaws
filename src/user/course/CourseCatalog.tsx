@@ -46,7 +46,7 @@ export const CourseCatalog: React.FC = () => {
                 },
                 {
                   id: 'price',
-                  content: (p) => <h2 style={{ margin: 0 }}>${p.price}</h2>,
+                  content: (p) => <h2 style={{ margin: 0 }}>₡{p.price}</h2>,
                 },
                 {
                   id: 'link',

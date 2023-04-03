@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Heading, Flex } from '@aws-amplify/ui-react';
+import { Heading, Flex, useAuthenticator } from '@aws-amplify/ui-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container } from '@cloudscape-design/components';
 import {
@@ -26,6 +26,7 @@ import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { Button } from 'primereact/button';
 
+
 export const CourseEnroll: React.FC = () => {
   const setToogleState = useAppStore((state) => state.setToogleState);
   const navigate = useNavigate();
@@ -37,15 +38,20 @@ export const CourseEnroll: React.FC = () => {
   const [fileData, setFileData] = useState<File>();
   const [fileStatus, setFileStatus] = useState(false);
   const [laoading, setLoading] = useState(false);
+  const { user } = useAuthenticator((context) => [context.user]);
   const { data, error, isLoading, isValidating } = usePublicElement<GetCourseQuery>(
     getCourse,
     userAuth,
     params.id,
   );
   const [client, setClient] = useState<GetStudentQuery | null>(null);
+  
+
   const toast = useRef<Toast>(null);
   const userdata: CreateStudentInput = {
     id: cognitoUser?.getUsername(),
+    name: user.attributes?.name,
+    emai: user.attributes?.email
   };
 
   const enrollment: CreateEnrollmentInput = {
@@ -154,8 +160,14 @@ export const CourseEnroll: React.FC = () => {
                         checked={ingredient === 'sinpe'}
                       />
                       <label htmlFor='sinpe' className='ml-2'>
-                        Sinpe Movil
+                        Sinpe Móvil
+<br/>
+                        62103990
                       </label>
+                      <br/>
+                      <span>
+                        
+                      </span>
                     </div>
                   </div>
                 </Flex>
@@ -208,6 +220,7 @@ export const CourseEnroll: React.FC = () => {
                     alignContent='flex-start'
                     wrap='nowrap'
                     gap='1rem'
+                    marginLeft={"15%"}
                   >
                     <Button loading={laoading} onClick={makeEnrollment}>
                       Matricular

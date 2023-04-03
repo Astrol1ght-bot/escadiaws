@@ -13,7 +13,7 @@
       "TOTP"
     ],
     "smsAuthenticationMessage": "Escadi - Tu código de autenticación es {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
+    "smsVerificationMessage": "Su código de verificación es {####}",
     "emailVerificationSubject": "Escadi - Aqui está su código de verificación",
     "emailVerificationMessage": "Su código de verificación es {####}",
     "defaultPasswordPolicy": false,

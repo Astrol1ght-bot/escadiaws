@@ -11,8 +11,10 @@ import { CreateStudentInput } from 'src/API';
 import { addElement } from '../../services/apiMutations';
 import { createStudent } from 'src/graphql/mutations';
 
+I18n.putVocabularies(translations);
+I18n.setLanguage('es');
 
-const dict = {
+I18n.putVocabularies({
   es: {
     'Sign in to your account': 'Inicia sesión en tu cuenta',
     'Sign In': 'Iniciar sesión',
@@ -72,10 +74,12 @@ const dict = {
     'Resend Code': 'Reenviar Código',
     'Confirm Password': 'Confirmar Contraseña',
     'Name': 'Nombre',
+    'Please fill out this field.': 'Por favor llenar este campo.',
+    'Email': 'Correo electrónico',
   },
-};
-I18n.putVocabularies(dict);
-I18n.setLanguage('es');
+});
+// I18n.putVocabularies(dict);
+// I18n.setLanguage('es');
 
 export const SignIn: React.FC = () => {
   

@@ -56,6 +56,8 @@ export const UserCourses: React.FC = () => {
     });
   };
 
+  
+
   const uploadFile = async (val: File[], courseId: string) => {
     await Promise.all(
       Array.from(val).map((file) =>

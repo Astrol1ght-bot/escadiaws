@@ -28,7 +28,7 @@ export const InitialStateLayout: React.FC<Props> = ({ children }) => (
           overflowMenuBackIconAriaLabel: 'back-icon',
           overflowMenuDismissIconAriaLabel: 'dismiss-icon',
           overflowMenuTitleText: 'title-text',
-          overflowMenuTriggerText: 'trigger-text',
+          overflowMenuTriggerText: 'opciones',
           searchDismissIconAriaLabel: 'dismiss-search',
           searchIconAriaLabel: 'search-icon',
         }}

@@ -6,6 +6,8 @@ export const onCreateStudent = /* GraphQL */ `
   subscription OnCreateStudent($filter: ModelSubscriptionStudentFilterInput) {
     onCreateStudent(filter: $filter) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -31,6 +33,8 @@ export const onUpdateStudent = /* GraphQL */ `
   subscription OnUpdateStudent($filter: ModelSubscriptionStudentFilterInput) {
     onUpdateStudent(filter: $filter) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -56,6 +60,8 @@ export const onDeleteStudent = /* GraphQL */ `
   subscription OnDeleteStudent($filter: ModelSubscriptionStudentFilterInput) {
     onDeleteStudent(filter: $filter) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -265,6 +271,8 @@ export const onCreateEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -302,6 +310,8 @@ export const onUpdateEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -339,6 +349,8 @@ export const onDeleteEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -400,6 +412,8 @@ export const onCreateCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }
@@ -454,6 +468,8 @@ export const onUpdateCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }
@@ -508,6 +524,8 @@ export const onDeleteCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }

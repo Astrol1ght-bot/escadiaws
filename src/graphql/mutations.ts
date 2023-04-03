@@ -9,6 +9,8 @@ export const createStudent = /* GraphQL */ `
   ) {
     createStudent(input: $input, condition: $condition) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -37,6 +39,8 @@ export const updateStudent = /* GraphQL */ `
   ) {
     updateStudent(input: $input, condition: $condition) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -65,6 +69,8 @@ export const deleteStudent = /* GraphQL */ `
   ) {
     deleteStudent(input: $input, condition: $condition) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -287,6 +293,8 @@ export const createEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -325,6 +333,8 @@ export const updateEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -363,6 +373,8 @@ export const deleteEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -425,6 +437,8 @@ export const createCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }
@@ -480,6 +494,8 @@ export const updateCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }
@@ -535,6 +551,8 @@ export const deleteCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }

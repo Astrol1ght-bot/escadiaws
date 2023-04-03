@@ -37,34 +37,22 @@ export const EnrollmentView: React.FC = () => {
       title="Client's Order"
       topButtons={
         <Button loading={isLoading} onClick={removeOrder}>
-          Delete
+          Eliminar
         </Button>
       }
       breadCrumbs={[
-        { text: 'Enrollments', href: '/admin/enrollments' },
-        { text: 'Enrollments view', href: '#' },
+        { text: 'Matrículas', href: '/admin/enrollments' },
+        { text: 'Vista de matrícula', href: '#' },
       ]}
     >
       <DataContainer
         isLoading={isLoading}
         isValidating={isValidating}
         errors={error}
-        header={<Header variant="h2">Order details:</Header>}
+        header={<Header variant="h2">Detalles de la matrícula:</Header>}
       >
         {data?.getEnrollment && (
           <>
-            <Divider marginTop={20} marginBottom={20} />
-            <SpaceBetween direction="vertical" size="l">
-              <ColumnLayout columns={2}>
-                <Text>
-                  <strong>Total:</strong> {data.getEnrollment.total}
-                </Text>
-                <Text>
-                  <strong>Status:</strong> {data.getEnrollment.status.toUpperCase()}
-                </Text>
-              </ColumnLayout>
-            </SpaceBetween>
-            <Divider marginTop={20} marginBottom={20} />
             <UpdateEnrollment data={data} isLoading={isLoading} />
           </>
         )}

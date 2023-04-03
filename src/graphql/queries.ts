@@ -6,6 +6,8 @@ export const getStudent = /* GraphQL */ `
   query GetStudent($id: ID!) {
     getStudent(id: $id) {
       id
+      name
+      emai
       enrollments {
         items {
           id
@@ -36,6 +38,8 @@ export const listStudents = /* GraphQL */ `
     listStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -161,6 +165,8 @@ export const getEnrollment = /* GraphQL */ `
       id
       student {
         id
+        name
+        emai
         enrollments {
           nextToken
         }
@@ -201,6 +207,8 @@ export const listEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }
@@ -252,6 +260,8 @@ export const getCourseEnrollments = /* GraphQL */ `
         id
         student {
           id
+          name
+          emai
           createdAt
           updatedAt
         }

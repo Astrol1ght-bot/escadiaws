@@ -63,7 +63,7 @@ export const CourseSignUp: React.FC = () => {
                       id: 'price',
                       header: 'Precio',
                       width: 20,
-                      cell: (e) => <Heading level={1}>{`$${e.price}`}</Heading>,
+                      cell: (e) => <Heading level={1}>{`₡${e.price}`}</Heading>,
                     },
                     {
                       id: 'description',

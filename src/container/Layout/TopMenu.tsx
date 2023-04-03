@@ -31,8 +31,8 @@ export const TopMenu: React.FC = () => {
 
   const authenticatedMenuItems = [
     {
-      id: 'sign-out',
-      text: 'Sign Out',
+      id: 'cerrar sesion',
+      text: 'cerrar sesión',
     },
   ];
 
@@ -51,7 +51,7 @@ export const TopMenu: React.FC = () => {
           overflowMenuBackIconAriaLabel: 'back-icon',
           overflowMenuDismissIconAriaLabel: 'dismiss-icon',
           overflowMenuTitleText: 'title-text',
-          overflowMenuTriggerText: 'trigger-text',
+          overflowMenuTriggerText: 'opciones',
           searchDismissIconAriaLabel: 'dismiss-search',
           searchIconAriaLabel: 'search-icon',
         }}
@@ -63,7 +63,7 @@ export const TopMenu: React.FC = () => {
                 iconName: 'user-profile',
                 items: authenticatedMenuItems,
                 onItemClick: (item) => {
-                  item.detail.id === 'sign-out'
+                  item.detail.id === 'cerrar sesion'
                     ? signOutUser()
                     : navigate(`/profile/${item.detail.id}`);
                 },

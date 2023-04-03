@@ -50,7 +50,7 @@ export const AdminCourseList: React.FC = () => {
               </Button>
             )}
           ></Column>
-          <Column field='price' header='Precio' body={(item) => `$${item?.price}`}></Column>
+          <Column field='price' header='Precio' body={(item) => `₡${item?.price}`}></Column>
           <Column
             field='description'
             header='Descripción'
