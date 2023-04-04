@@ -87,6 +87,7 @@ export const getMainStudent = (username: string) => {
 };
 
 export const getUsersList = () => {
+  let usersList: UserData[];
   const fetcher = () =>
     listUsers()
       .then((users) => {
@@ -95,18 +96,40 @@ export const getUsersList = () => {
             id: user.Username,
             attributes: Object.fromEntries(user.Attributes.map((attr) => [attr.Name, attr.Value])),
           }));
-          const response: UserData[] = userAttributes?.map((user) => ({
+
+          usersList = userAttributes?.map((user) => ({
             id: user.id,
             name: user.attributes['name'],
             phoneNumber: user.attributes['phone_number'],
             email: user.attributes['email'],
           }));
-          return response;
+
+          return Promise.all(
+            users.Users?.map((user) =>
+              listGroupsForUser(user.Username).then((groups) => ({
+                id: user.Username,
+                groups: groups,
+              })),
+            ),
+          );
         }
         throw new Error();
       })
+      .then((groups) => {
+        usersList.forEach((user) => {
+          const userGroups = groups.find((group) => group.id === user.id).groups.Groups;
+          user.isAdmin = !!userGroups?.find((userGroup) => userGroup.GroupName === 'Admins');
+          user.isProfessor = !!userGroups?.find(
+            (userGroup) => userGroup.GroupName === 'Professors',
+          );
+          user.isStudent = !!userGroups?.find((userGroup) => userGroup.GroupName === 'Students');
+        });
+        return usersList;
+      })
       .catch(() => []);
+
   const { data, error, mutate, isValidating } = useSWR('/usersList', fetcher);
+
   return {
     usersList: data,
     isUsersListLoading: !error && !data,
@@ -129,6 +152,68 @@ const listUsers = () =>
         },
       };
       return API.get(apiName, path, myInit);
+    })
+    .then((response) => {
+      return response;
+    });
+
+const listGroupsForUser = (username) =>
+  Auth.currentSession()
+    .then((session) => {
+      const apiName = 'AdminQueries';
+      const path = '/listGroupsForUser?username=' + username;
+      const token = session.getAccessToken().getJwtToken();
+      const myInit = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      };
+      return API.get(apiName, path, myInit);
+    })
+    .then((response) => {
+      return response;
+    });
+
+export const removeUserFromGroup = (username, groupname) =>
+  Auth.currentSession()
+    .then((session) => {
+      const apiName = 'AdminQueries';
+      const path = '/removeUserFromGroup';
+      const token = session.getAccessToken().getJwtToken();
+      const myInit = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: {
+          username: username,
+          groupname: groupname,
+        },
+      };
+      return API.post(apiName, path, myInit);
+    })
+    .then((response) => {
+      return response;
+    });
+
+export const addUserToGroup = (username, groupname) =>
+  Auth.currentSession()
+    .then((session) => {
+      const apiName = 'AdminQueries';
+      const path = '/addUserToGroup';
+      const token = session.getAccessToken().getJwtToken();
+      const myInit = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: {
+          username: username,
+          groupname: groupname,
+        },
+      };
+      return API.post(apiName, path, myInit);
     })
     .then((response) => {
       return response;

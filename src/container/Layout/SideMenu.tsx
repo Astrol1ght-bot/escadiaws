@@ -18,6 +18,7 @@ export const SideMenu: React.FC = () => {
         {(isProfessor || isStudent) && (
           <>
             <Divider orientation='horizontal' />
+
             <Button variant='link' onClick={() => navigate('/profile/courses', { replace: true })}>
               Mis Cursos
             </Button>

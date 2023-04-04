@@ -103,15 +103,7 @@ export const createCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -125,7 +117,6 @@ export const createCourse = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      professorCoursesId
     }
   }
 `;
@@ -140,15 +131,7 @@ export const updateCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -162,7 +145,6 @@ export const updateCourse = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      professorCoursesId
     }
   }
 `;
@@ -177,15 +159,7 @@ export const deleteCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -194,88 +168,6 @@ export const deleteCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      professorCoursesId
-    }
-  }
-`;
-export const createProfessor = /* GraphQL */ `
-  mutation CreateProfessor(
-    $input: CreateProfessorInput!
-    $condition: ModelProfessorConditionInput
-  ) {
-    createProfessor(input: $input, condition: $condition) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateProfessor = /* GraphQL */ `
-  mutation UpdateProfessor(
-    $input: UpdateProfessorInput!
-    $condition: ModelProfessorConditionInput
-  ) {
-    updateProfessor(input: $input, condition: $condition) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteProfessor = /* GraphQL */ `
-  mutation DeleteProfessor(
-    $input: DeleteProfessorInput!
-    $condition: ModelProfessorConditionInput
-  ) {
-    deleteProfessor(input: $input, condition: $condition) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
         }
         nextToken
       }
@@ -419,19 +311,13 @@ export const createCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id
@@ -476,19 +362,13 @@ export const updateCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id
@@ -533,19 +413,13 @@ export const deleteCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id

@@ -91,15 +91,7 @@ export const onCreateCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -113,7 +105,6 @@ export const onCreateCourse = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      professorCoursesId
     }
   }
 `;
@@ -125,15 +116,7 @@ export const onUpdateCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -147,7 +130,6 @@ export const onUpdateCourse = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      professorCoursesId
     }
   }
 `;
@@ -159,15 +141,7 @@ export const onDeleteCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -176,85 +150,6 @@ export const onDeleteCourse = /* GraphQL */ `
           enrollmentId
           createdAt
           updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      professorCoursesId
-    }
-  }
-`;
-export const onCreateProfessor = /* GraphQL */ `
-  subscription OnCreateProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
-  ) {
-    onCreateProfessor(filter: $filter) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateProfessor = /* GraphQL */ `
-  subscription OnUpdateProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
-  ) {
-    onUpdateProfessor(filter: $filter) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteProfessor = /* GraphQL */ `
-  subscription OnDeleteProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
-  ) {
-    onDeleteProfessor(filter: $filter) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
         }
         nextToken
       }
@@ -394,19 +289,13 @@ export const onCreateCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id
@@ -450,19 +339,13 @@ export const onUpdateCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id
@@ -506,19 +389,13 @@ export const onDeleteCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id

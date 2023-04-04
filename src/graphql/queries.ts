@@ -58,15 +58,7 @@ export const getCourse = /* GraphQL */ `
       thumbnail
       description
       price
-      professor {
-        id
-        name
-        courses {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      professor
       keyfile
       enrollment {
         items {
@@ -80,7 +72,6 @@ export const getCourse = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      professorCoursesId
     }
   }
 `;
@@ -97,59 +88,9 @@ export const listCourses = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        professorCoursesId
-      }
-      nextToken
-    }
-  }
-`;
-export const getProfessor = /* GraphQL */ `
-  query GetProfessor($id: ID!) {
-    getProfessor(id: $id) {
-      id
-      name
-      courses {
-        items {
-          id
-          name
-          thumbnail
-          description
-          price
-          keyfile
-          createdAt
-          updatedAt
-          professorCoursesId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listProfessors = /* GraphQL */ `
-  query ListProfessors(
-    $filter: ModelProfessorFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProfessors(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        courses {
           nextToken
         }
         createdAt
@@ -242,19 +183,13 @@ export const getCourseEnrollments = /* GraphQL */ `
         thumbnail
         description
         price
-        professor {
-          id
-          name
-          createdAt
-          updatedAt
-        }
+        professor
         keyfile
         enrollment {
           nextToken
         }
         createdAt
         updatedAt
-        professorCoursesId
       }
       enrollment {
         id
@@ -305,10 +240,10 @@ export const listCourseEnrollments = /* GraphQL */ `
           thumbnail
           description
           price
+          professor
           keyfile
           createdAt
           updatedAt
-          professorCoursesId
         }
         enrollment {
           id
@@ -355,10 +290,10 @@ export const courseEnrollmentsByCourseId = /* GraphQL */ `
           thumbnail
           description
           price
+          professor
           keyfile
           createdAt
           updatedAt
-          professorCoursesId
         }
         enrollment {
           id
@@ -405,10 +340,10 @@ export const courseEnrollmentsByEnrollmentId = /* GraphQL */ `
           thumbnail
           description
           price
+          professor
           keyfile
           createdAt
           updatedAt
-          professorCoursesId
         }
         enrollment {
           id

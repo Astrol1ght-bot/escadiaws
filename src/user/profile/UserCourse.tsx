@@ -11,6 +11,7 @@ import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { getCourse } from 'src/graphql/queries';
 import { usePublicElement } from 'src/services/swrHooks';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure(awsExports);
 
@@ -22,12 +23,11 @@ export const UserCourse: React.FC = () => {
   const [files, setFiles] = useState<(string | undefined)[]>();
   const cognitoUser = useAppStore((state) => state.cognitoUser);
   const userAuth = Boolean(cognitoUser);
-  const {
-    data,
-    isLoading,
-    error,
-    isValidating,
-  } = usePublicElement<GetCourseQuery>(getCourse, userAuth, params.id);
+  const { data, isLoading, error, isValidating } = usePublicElement<GetCourseQuery>(
+    getCourse,
+    userAuth,
+    params.id,
+  );
 
   const getFiles = async () => {
     const allFiles = (await Storage.list(`${params.id}`))?.results
@@ -35,6 +35,8 @@ export const UserCourse: React.FC = () => {
       .filter((file) => file);
     setFiles(allFiles);
   };
+
+  const { user } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
     if (!files) {
@@ -58,8 +60,8 @@ export const UserCourse: React.FC = () => {
       Array.from(val).map((file) =>
         Storage.put(`${courseId}/${file.name}`, file, {
           contentType: file.type,
-        })
-      )
+        }),
+      ),
     );
 
     await getFiles();
@@ -78,27 +80,30 @@ export const UserCourse: React.FC = () => {
         <h1>{data?.getCourse?.name} | Archivos</h1>
         <Toast ref={toast}></Toast>
         <div className='flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2'>
-          {isProfessor && (
-            <FileUpload
-              maxFileSize={1000000}
-              mode='basic'
-              chooseLabel={'Subir Archivo(s)'}
-              auto
-              multiple
-              onSelect={(val) => uploadFile(val.files, params.id ?? '')}
-            />
-          )}
+          {isProfessor &&
+            user.attributes &&
+            data?.getCourse?.professor === user.attributes['name'] && (
+              <FileUpload
+                maxFileSize={1000000}
+                mode='basic'
+                chooseLabel={'Subir Archivo(s)'}
+                auto
+                multiple
+                onSelect={(val) => uploadFile(val.files, params.id ?? '')}
+              />
+            )}
         </div>
         <div style={{ paddingTop: '10px' }}>
           {files &&
             files.map((file) => (
               <div key={file}>
-                <Button severity='secondary' text onClick= {() => downloadFile(file ?? "")}>
+                <Button severity='secondary' text onClick={() => downloadFile(file ?? '')}>
                   <a
                     className='pi pi-file'
-                    style={{ paddingRight: '10px', textDecoration: 'false'}}
-                  >{file}</a>
-                  
+                    style={{ paddingRight: '10px', textDecoration: 'false' }}
+                  >
+                    {file}
+                  </a>
                 </Button>
               </div>
             ))}

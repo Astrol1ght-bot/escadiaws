@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Amplify, Storage } from 'aws-amplify';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Container, SpaceBetween } from '@cloudscape-design/components';
-import { Enrollment } from '../../API';
+import { Course, Enrollment } from '../../API';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Tag } from 'primereact/tag';
 import awsExports from '../../aws-exports';
 import { Layout } from '../../container/Layout/Layout';
 
-import { getMainStudent } from '../../services/userSession';
+import { getMainCourses, getMainStudent } from '../../services/userSession';
 import useAppStore from 'src/store/useAppStore';
 import { Toast } from 'primereact/toast';
 
@@ -20,14 +20,32 @@ export const UserCourses: React.FC = () => {
   const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
 
-  const { student, isStudentLoading, isStudentError, isValidating } = getMainStudent(
+  const { student, isStudentLoading, isStudentError } = getMainStudent(
     user?.username ? user.username : '',
   );
   const enrollments = !isStudentLoading
-    ? student?.data.getStudent.enrollments.items
+    ? student?.data.getStudent?.enrollments.items
     : ([] as Enrollment[]);
 
   const isProfessor = useAppStore((state) => state.isProfessor);
+
+  const { courses, isCoursesLoading, isCoursesError } = getMainCourses(true);
+
+  const catalogCourses = !isCoursesLoading
+    ? courses?.data.listCourses.items
+        .filter(
+          (item) => user?.attributes != undefined && item.professor === user?.attributes['name'],
+        )
+        .map((course) => ({
+          ...course,
+          courseID: course.id,
+          status: 'Profesor',
+          total: course.price,
+          courseName: course.name,
+        }))
+    : ([] as Enrollment[]);
+
+  console.log(catalogCourses);
 
   const getSeverity = (enrollment: Enrollment) => {
     switch (enrollment.status) {
@@ -46,29 +64,6 @@ export const UserCourses: React.FC = () => {
   };
 
   const toast = useRef<Toast>(null);
-
-  const showToast = () => {
-    toast?.current?.show({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Archivo(s) subido(s) con éxito',
-      life: 3000,
-    });
-  };
-
-  
-
-  const uploadFile = async (val: File[], courseId: string) => {
-    await Promise.all(
-      Array.from(val).map((file) =>
-        Storage.put(`${courseId}/${file.name}`, file, {
-          contentType: file.type,
-        }),
-      ),
-    );
-
-    showToast();
-  };
 
   const itemTemplate = (enrollment: Enrollment) => {
     return (
@@ -112,9 +107,10 @@ export const UserCourses: React.FC = () => {
   };
 
   return (
-    <Layout title='Historial de matrícula:'>
+    <Layout title=''>
       <Container>
-        <DataView value={enrollments} itemTemplate={itemTemplate} />
+        {enrollments && <DataView value={enrollments} itemTemplate={itemTemplate} />}
+        {catalogCourses && <DataView value={catalogCourses} itemTemplate={itemTemplate} />}
         <Box textAlign='center' color='inherit'>
           <SpaceBetween direction='vertical' size='l'>
             <Button onClick={() => navigate('/catalog/courses')} style={{ marginTop: '20px' }}>

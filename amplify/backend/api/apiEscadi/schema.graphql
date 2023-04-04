@@ -30,28 +30,10 @@ type Course
     thumbnail: AWSURL!
     description: String
     price: Float!
-    professor: Professor
+    professor: String!
     keyfile: String
     enrollment: [Enrollment] @manyToMany(relationName: "CourseEnrollments")
 }
-
-
-
-
-type Professor
-    @model
-    @auth(rules: [
-        {allow: owner, ownerField: "id", operations: [update]}
-        {allow: groups, groups: ["Admins"], operations: [create, update, delete]}
-        {allow: private, operations: [read]}
-    ])
-{
-    id: ID!
-    name: String!
-    courses: [Course] @hasMany
-}
-
-
 
 type Enrollment
     @model

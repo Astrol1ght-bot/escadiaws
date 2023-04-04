@@ -18,13 +18,15 @@ import { Layout } from 'src/container/Layout/Layout';
 import { listCourses } from 'src/graphql/queries';
 import { useElements } from 'src/services/swrHooks';
 import useAppStore from 'src/store/useAppStore';
-import { getUsersList } from 'src/services/userSession';
+import { addUserToGroup, getUsersList, removeUserFromGroup } from 'src/services/userSession';
+
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 export const AdminUserList = () => {
   const navigate = useNavigate();
   const setUsersList = useAppStore((state) => state.setUsersList);
 
-  const { usersList, isUserListError, isUsersListLoading, mutate } = getUsersList();
+  const { usersList, isUserListError, isUsersListLoading, mutate, isValidating } = getUsersList();
 
   useEffect(() => {
     if (!isUsersListLoading) {
@@ -33,6 +35,12 @@ export const AdminUserList = () => {
   }, [usersList, isUsersListLoading]);
 
   const [filterText, setFilterText] = useState<string>('');
+
+  const toggleCheckBox = (checked: boolean, userId: string, groupName: string) => {
+    Promise.resolve(
+      checked ? addUserToGroup(userId, groupName) : removeUserFromGroup(userId, groupName),
+    ).then((value) => mutate());
+  };
 
   return (
     <Layout title='Usuarios'>
@@ -68,17 +76,32 @@ export const AdminUserList = () => {
             {
               id: 'isAdmin',
               header: 'Admin',
-              cell: (e) => <Checkbox checked={true}></Checkbox>,
+              cell: (e) => (
+                <Checkbox
+                  checked={e.isAdmin}
+                  onChange={(x) => toggleCheckBox(x.detail.checked, e.id, 'Admins')}
+                ></Checkbox>
+              ),
             },
             {
               id: 'isProfessor',
               header: 'Profesor',
-              cell: (e) => <Checkbox checked={false}></Checkbox>,
+              cell: (e) => (
+                <Checkbox
+                  checked={e.isProfessor}
+                  onChange={(x) => toggleCheckBox(x.detail.checked, e.id, 'Professors')}
+                ></Checkbox>
+              ),
             },
             {
               id: 'isStudent',
               header: 'Estudiante',
-              cell: (e) => <Checkbox checked={false}></Checkbox>,
+              cell: (e) => (
+                <Checkbox
+                  checked={e.isStudent}
+                  onChange={(x) => toggleCheckBox(x.detail.checked, e.id, 'Students')}
+                ></Checkbox>
+              ),
             },
           ]}
           items={usersList ?? []}
@@ -93,17 +116,20 @@ export const AdminUserList = () => {
             </Box>
           }
           header={<Header />}
-          filter={
-            <TextFilter
-              filteringPlaceholder='Busca usuarios'
-              filteringText={filterText}
-              onChange={(e) => setFilterText(e.detail.filteringText)}
-            />
-          }
         />
-        <div style={{ paddingTop: '1rem', textAlign: 'right' }}>
-          <Button>Guardar</Button>
-        </div>
+        {isValidating && !isUsersListLoading && (
+          <div
+            style={{
+              position: 'fixed',
+              top: '40%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: '9999',
+            }}
+          >
+            <ProgressSpinner style={{ flex: 1, alignSelf: 'center' }}></ProgressSpinner>
+          </div>
+        )}
       </Container>
     </Layout>
   );

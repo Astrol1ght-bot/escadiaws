@@ -131,6 +131,48 @@
       "service": "Lambda"
     }
   },
+  "parameters": {
+    "AMPLIFY_function_AdminQueries0eccdb9d_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueries0eccdb9d"
+        }
+      ]
+    },
+    "AMPLIFY_function_AdminQueries0eccdb9d_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueries0eccdb9d"
+        }
+      ]
+    },
+    "AMPLIFY_function_escadiauthPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "escadiauthPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_escadiauthPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "escadiauthPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_escadiauthPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "escadiauthPostConfirmation"
+        }
+      ]
+    }
+  },
   "storage": {
     "storage": {
       "dependsOn": [

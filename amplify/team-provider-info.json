@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-escadi-develop-121021-unauthRole",
       "StackName": "amplify-escadi-develop-121021",
       "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-develop-121021/aa3b6e50-b9ee-11ed-bb18-1209a7a6d13f",
-      "AmplifyAppId": "d2qktra0fp94ub"
+      "AmplifyAppId": "d2qktra0fp94ub",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-escadi-develop-121021-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -29,7 +30,9 @@
           "s3Key": "amplify-builds/AdminQueries0eccdb9d-4a596546426731527452-build.zip"
         },
         "escadiauthPostConfirmation": {
-          "GROUP": "Students"
+          "GROUP": "Students",
+          "deploymentBucketName": "amplify-escadi-develop-121021-deployment",
+          "s3Key": "amplify-builds/escadiauthPostConfirmation-7443387a6e44654d6846-build.zip"
         }
       }
     }

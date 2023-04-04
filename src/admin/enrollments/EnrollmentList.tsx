@@ -26,7 +26,7 @@ export const EnrollmentList: React.FC = () => {
   };
 
   return (
-    <Layout title="Orders lists">
+    <Layout title='Orders lists'>
       <Container>
         <Heading level={1}>Lista de Matrículas</Heading>
         <Divider marginTop={20} marginBottom={20} />
@@ -49,6 +49,11 @@ export const EnrollmentList: React.FC = () => {
               cell: (e) => e?.student?.emai,
             },
             {
+              id: 'curso',
+              header: 'Curso',
+              cell: (e) => e?.courseName,
+            },
+            {
               id: 'status',
               header: 'Estado',
               cell: (e) => e?.status.toUpperCase(),
@@ -62,10 +67,7 @@ export const EnrollmentList: React.FC = () => {
               id: 'view',
               header: '',
               cell: (e) => (
-                <Button
-                  variant="link"
-                  onClick={() => navigate(`/admin/enrollments/view/${e?.id}`)}
-                >
+                <Button variant='link' onClick={() => navigate(`/admin/enrollments/view/${e?.id}`)}>
                   Detalles
                 </Button>
               ),
@@ -73,16 +75,16 @@ export const EnrollmentList: React.FC = () => {
           ]}
           items={items}
           loading={isLoading || isValidating}
-          loadingText="Loading resources"
-          trackBy="id"
+          loadingText='Loading resources'
+          trackBy='id'
           empty={
-            <Box textAlign="center" color="inherit">
-              <SpaceBetween direction="vertical" size="l">
+            <Box textAlign='center' color='inherit'>
+              <SpaceBetween direction='vertical' size='l'>
                 <b>No hay matrículas</b>
               </SpaceBetween>
             </Box>
           }
-          header={<Header>Items in Cart</Header>}
+          header={<Header>Matriculas</Header>}
         />
       </Container>
     </Layout>

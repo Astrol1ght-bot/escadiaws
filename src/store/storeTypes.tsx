@@ -3,4 +3,7 @@ export type UserData = {
   name: string;
   email: string;
   phoneNumber: string;
+  isAdmin: boolean;
+  isProfessor: boolean;
+  isStudent: boolean;
 };

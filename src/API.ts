@@ -113,27 +113,11 @@ export type Course = {
   thumbnail: string,
   description?: string | null,
   price: number,
-  professor?: Professor | null,
+  professor: string,
   keyfile?: string | null,
   enrollment?: ModelCourseEnrollmentsConnection | null,
   createdAt: string,
   updatedAt: string,
-  professorCoursesId?: string | null,
-};
-
-export type Professor = {
-  __typename: "Professor",
-  id: string,
-  name: string,
-  courses?: ModelCourseConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type ModelCourseConnection = {
-  __typename: "ModelCourseConnection",
-  items:  Array<Course | null >,
-  nextToken?: string | null,
 };
 
 export enum EnrollmentStatus {
@@ -159,8 +143,8 @@ export type CreateCourseInput = {
   thumbnail: string,
   description?: string | null,
   price: number,
+  professor: string,
   keyfile?: string | null,
-  professorCoursesId?: string | null,
 };
 
 export type ModelCourseConditionInput = {
@@ -168,11 +152,11 @@ export type ModelCourseConditionInput = {
   thumbnail?: ModelStringInput | null,
   description?: ModelStringInput | null,
   price?: ModelFloatInput | null,
+  professor?: ModelStringInput | null,
   keyfile?: ModelStringInput | null,
   and?: Array< ModelCourseConditionInput | null > | null,
   or?: Array< ModelCourseConditionInput | null > | null,
   not?: ModelCourseConditionInput | null,
-  professorCoursesId?: ModelIDInput | null,
 };
 
 export type ModelFloatInput = {
@@ -187,54 +171,17 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type UpdateCourseInput = {
   id: string,
   name?: string | null,
   thumbnail?: string | null,
   description?: string | null,
   price?: number | null,
+  professor?: string | null,
   keyfile?: string | null,
-  professorCoursesId?: string | null,
 };
 
 export type DeleteCourseInput = {
-  id: string,
-};
-
-export type CreateProfessorInput = {
-  id?: string | null,
-  name: string,
-};
-
-export type ModelProfessorConditionInput = {
-  name?: ModelStringInput | null,
-  and?: Array< ModelProfessorConditionInput | null > | null,
-  or?: Array< ModelProfessorConditionInput | null > | null,
-  not?: ModelProfessorConditionInput | null,
-};
-
-export type UpdateProfessorInput = {
-  id: string,
-  name?: string | null,
-};
-
-export type DeleteProfessorInput = {
   id: string,
 };
 
@@ -267,6 +214,22 @@ export type ModelEnrollmentConditionInput = {
 export type ModelEnrollmentStatusInput = {
   eq?: EnrollmentStatus | null,
   ne?: EnrollmentStatus | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type UpdateEnrollmentInput = {
@@ -330,24 +293,16 @@ export type ModelCourseFilterInput = {
   thumbnail?: ModelStringInput | null,
   description?: ModelStringInput | null,
   price?: ModelFloatInput | null,
+  professor?: ModelStringInput | null,
   keyfile?: ModelStringInput | null,
   and?: Array< ModelCourseFilterInput | null > | null,
   or?: Array< ModelCourseFilterInput | null > | null,
   not?: ModelCourseFilterInput | null,
-  professorCoursesId?: ModelIDInput | null,
 };
 
-export type ModelProfessorFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  and?: Array< ModelProfessorFilterInput | null > | null,
-  or?: Array< ModelProfessorFilterInput | null > | null,
-  not?: ModelProfessorFilterInput | null,
-};
-
-export type ModelProfessorConnection = {
-  __typename: "ModelProfessorConnection",
-  items:  Array<Professor | null >,
+export type ModelCourseConnection = {
+  __typename: "ModelCourseConnection",
+  items:  Array<Course | null >,
   nextToken?: string | null,
 };
 
@@ -425,6 +380,7 @@ export type ModelSubscriptionCourseFilterInput = {
   thumbnail?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
   price?: ModelSubscriptionFloatInput | null,
+  professor?: ModelSubscriptionStringInput | null,
   keyfile?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCourseFilterInput | null > | null,
   or?: Array< ModelSubscriptionCourseFilterInput | null > | null,
@@ -440,12 +396,6 @@ export type ModelSubscriptionFloatInput = {
   between?: Array< number | null > | null,
   in?: Array< number | null > | null,
   notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionProfessorFilterInput = {
-  name?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
-  or?: Array< ModelSubscriptionProfessorFilterInput | null > | null,
 };
 
 export type ModelSubscriptionEnrollmentFilterInput = {
@@ -584,17 +534,7 @@ export type CreateCourseMutation = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -610,7 +550,6 @@ export type CreateCourseMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
-    professorCoursesId?: string | null,
   } | null,
 };
 
@@ -627,17 +566,7 @@ export type UpdateCourseMutation = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -653,7 +582,6 @@ export type UpdateCourseMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
-    professorCoursesId?: string | null,
   } | null,
 };
 
@@ -670,17 +598,7 @@ export type DeleteCourseMutation = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -691,100 +609,6 @@ export type DeleteCourseMutation = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-  } | null,
-};
-
-export type CreateProfessorMutationVariables = {
-  input: CreateProfessorInput,
-  condition?: ModelProfessorConditionInput | null,
-};
-
-export type CreateProfessorMutation = {
-  createProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateProfessorMutationVariables = {
-  input: UpdateProfessorInput,
-  condition?: ModelProfessorConditionInput | null,
-};
-
-export type UpdateProfessorMutation = {
-  updateProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteProfessorMutationVariables = {
-  input: DeleteProfessorInput,
-  condition?: ModelProfessorConditionInput | null,
-};
-
-export type DeleteProfessorMutation = {
-  deleteProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -949,13 +773,7 @@ export type CreateCourseEnrollmentsMutation = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -963,7 +781,6 @@ export type CreateCourseEnrollmentsMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -1014,13 +831,7 @@ export type UpdateCourseEnrollmentsMutation = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -1028,7 +839,6 @@ export type UpdateCourseEnrollmentsMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -1079,13 +889,7 @@ export type DeleteCourseEnrollmentsMutation = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -1093,7 +897,6 @@ export type DeleteCourseEnrollmentsMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -1196,17 +999,7 @@ export type GetCourseQuery = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -1222,7 +1015,6 @@ export type GetCourseQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
-    professorCoursesId?: string | null,
   } | null,
 };
 
@@ -1242,71 +1034,10 @@ export type ListCoursesQuery = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      professorCoursesId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetProfessorQueryVariables = {
-  id: string,
-};
-
-export type GetProfessorQuery = {
-  getProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListProfessorsQueryVariables = {
-  filter?: ModelProfessorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListProfessorsQuery = {
-  listProfessors?:  {
-    __typename: "ModelProfessorConnection",
-    items:  Array< {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -1417,13 +1148,7 @@ export type GetCourseEnrollmentsQuery = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -1431,7 +1156,6 @@ export type GetCourseEnrollmentsQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -1485,10 +1209,10 @@ export type ListCourseEnrollmentsQuery = {
         thumbnail: string,
         description?: string | null,
         price: number,
+        professor: string,
         keyfile?: string | null,
         createdAt: string,
         updatedAt: string,
-        professorCoursesId?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
@@ -1534,10 +1258,10 @@ export type CourseEnrollmentsByCourseIdQuery = {
         thumbnail: string,
         description?: string | null,
         price: number,
+        professor: string,
         keyfile?: string | null,
         createdAt: string,
         updatedAt: string,
-        professorCoursesId?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
@@ -1583,10 +1307,10 @@ export type CourseEnrollmentsByEnrollmentIdQuery = {
         thumbnail: string,
         description?: string | null,
         price: number,
+        professor: string,
         keyfile?: string | null,
         createdAt: string,
         updatedAt: string,
-        professorCoursesId?: string | null,
       },
       enrollment:  {
         __typename: "Enrollment",
@@ -1720,17 +1444,7 @@ export type OnCreateCourseSubscription = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -1746,7 +1460,6 @@ export type OnCreateCourseSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
-    professorCoursesId?: string | null,
   } | null,
 };
 
@@ -1762,17 +1475,7 @@ export type OnUpdateCourseSubscription = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -1788,7 +1491,6 @@ export type OnUpdateCourseSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
-    professorCoursesId?: string | null,
   } | null,
 };
 
@@ -1804,17 +1506,7 @@ export type OnDeleteCourseSubscription = {
     thumbnail: string,
     description?: string | null,
     price: number,
-    professor?:  {
-      __typename: "Professor",
-      id: string,
-      name: string,
-      courses?:  {
-        __typename: "ModelCourseConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    professor: string,
     keyfile?: string | null,
     enrollment?:  {
       __typename: "ModelCourseEnrollmentsConnection",
@@ -1825,97 +1517,6 @@ export type OnDeleteCourseSubscription = {
         enrollmentId: string,
         createdAt: string,
         updatedAt: string,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    professorCoursesId?: string | null,
-  } | null,
-};
-
-export type OnCreateProfessorSubscriptionVariables = {
-  filter?: ModelSubscriptionProfessorFilterInput | null,
-};
-
-export type OnCreateProfessorSubscription = {
-  onCreateProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateProfessorSubscriptionVariables = {
-  filter?: ModelSubscriptionProfessorFilterInput | null,
-};
-
-export type OnUpdateProfessorSubscription = {
-  onUpdateProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteProfessorSubscriptionVariables = {
-  filter?: ModelSubscriptionProfessorFilterInput | null,
-};
-
-export type OnDeleteProfessorSubscription = {
-  onDeleteProfessor?:  {
-    __typename: "Professor",
-    id: string,
-    name: string,
-    courses?:  {
-      __typename: "ModelCourseConnection",
-      items:  Array< {
-        __typename: "Course",
-        id: string,
-        name: string,
-        thumbnail: string,
-        description?: string | null,
-        price: number,
-        keyfile?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        professorCoursesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2076,13 +1677,7 @@ export type OnCreateCourseEnrollmentsSubscription = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -2090,7 +1685,6 @@ export type OnCreateCourseEnrollmentsSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -2140,13 +1734,7 @@ export type OnUpdateCourseEnrollmentsSubscription = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -2154,7 +1742,6 @@ export type OnUpdateCourseEnrollmentsSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
@@ -2204,13 +1791,7 @@ export type OnDeleteCourseEnrollmentsSubscription = {
       thumbnail: string,
       description?: string | null,
       price: number,
-      professor?:  {
-        __typename: "Professor",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
+      professor: string,
       keyfile?: string | null,
       enrollment?:  {
         __typename: "ModelCourseEnrollmentsConnection",
@@ -2218,7 +1799,6 @@ export type OnDeleteCourseEnrollmentsSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
-      professorCoursesId?: string | null,
     },
     enrollment:  {
       __typename: "Enrollment",
