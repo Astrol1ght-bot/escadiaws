@@ -7,3 +7,8 @@ export type UserData = {
   isProfessor: boolean;
   isStudent: boolean;
 };
+
+export type Image = {
+  id: string;
+  url: string;
+};

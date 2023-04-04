@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Heading, Flex, useAuthenticator } from '@aws-amplify/ui-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container } from '@cloudscape-design/components';
@@ -26,7 +26,6 @@ import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { Button } from 'primereact/button';
 
-
 export const CourseEnroll: React.FC = () => {
   const setToogleState = useAppStore((state) => state.setToogleState);
   const navigate = useNavigate();
@@ -45,13 +44,12 @@ export const CourseEnroll: React.FC = () => {
     params.id,
   );
   const [client, setClient] = useState<GetStudentQuery | null>(null);
-  
 
   const toast = useRef<Toast>(null);
   const userdata: CreateStudentInput = {
     id: cognitoUser?.getUsername(),
     name: user.attributes?.name,
-    emai: user.attributes?.email
+    emai: user.attributes?.email,
   };
 
   const enrollment: CreateEnrollmentInput = {
@@ -64,6 +62,17 @@ export const CourseEnroll: React.FC = () => {
     total: data?.getCourse?.price.toString() ?? '',
     thumbnail: data?.getCourse?.thumbnail ?? '',
   };
+
+  const [image, setImage] = useState<string>();
+
+  const getImageUrl = async (name) => {
+    const url = await Storage.get('thumbnails/' + name);
+    setImage(url);
+  };
+
+  useEffect(() => {
+    if (!image && data?.getCourse?.thumbnail) getImageUrl(data?.getCourse?.thumbnail);
+  }, [data]);
 
   const makeEnrollment = async () => {
     if (!fileData) return;
@@ -79,7 +88,7 @@ export const CourseEnroll: React.FC = () => {
     );
 
     enrollment.filekey = key; // set filekey here
-
+    console.log(enrollment);
     if (cognitoUser?.getUsername()) {
       getElement(cognitoUser?.getUsername(), getStudent)
         .then((response) => {
@@ -161,13 +170,11 @@ export const CourseEnroll: React.FC = () => {
                       />
                       <label htmlFor='sinpe' className='ml-2'>
                         Sinpe Móvil
-<br/>
+                        <br />
                         62103990
                       </label>
-                      <br/>
-                      <span>
-                        
-                      </span>
+                      <br />
+                      <span></span>
                     </div>
                   </div>
                 </Flex>
@@ -191,7 +198,7 @@ export const CourseEnroll: React.FC = () => {
                       marginLeft={'20%'}
                       marginTop={'10px'}
                     >
-                      <img width='50%' src={data.getCourse.thumbnail} alt={data.getCourse.name} />
+                      <img width='50%' src={image} alt={data.getCourse.name} />
                     </Flex>
                   </SplitterPanel>
                 </Splitter>
@@ -204,13 +211,13 @@ export const CourseEnroll: React.FC = () => {
                   <FileUpload
                     onSelect={(e) => uploadFile(e.files?.[0])}
                     accept='image/*'
-                    maxFileSize={1000000}
                     emptyTemplate={
                       <p className='m-0'>Arrastra la imágen de tu comprobante aquí!</p>
                     }
                     uploadLabel={'Subir Imágen'}
                     chooseLabel={'Seleccionar Imágen'}
                     cancelLabel={'Cancelar'}
+                    auto
                   />
 
                   <Flex
@@ -220,7 +227,7 @@ export const CourseEnroll: React.FC = () => {
                     alignContent='flex-start'
                     wrap='nowrap'
                     gap='1rem'
-                    marginLeft={"15%"}
+                    marginLeft={'15%'}
                   >
                     <Button loading={laoading} onClick={makeEnrollment}>
                       Matricular

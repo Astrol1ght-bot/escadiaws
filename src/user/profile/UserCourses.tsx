@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Amplify, Storage } from 'aws-amplify';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ import { Layout } from '../../container/Layout/Layout';
 import { getMainCourses, getMainStudent } from '../../services/userSession';
 import useAppStore from 'src/store/useAppStore';
 import { Toast } from 'primereact/toast';
+import { Image } from 'src/store/storeTypes';
 
 Amplify.configure(awsExports);
 
@@ -45,8 +46,6 @@ export const UserCourses: React.FC = () => {
         }))
     : ([] as Enrollment[]);
 
-  console.log(catalogCourses);
-
   const getSeverity = (enrollment: Enrollment) => {
     switch (enrollment.status) {
       case 'pendiente':
@@ -63,7 +62,36 @@ export const UserCourses: React.FC = () => {
     }
   };
 
-  const toast = useRef<Toast>(null);
+  const [imageCoursesMap, setImageCoursesMap] = useState<Image[]>();
+  const [imageEnrollmentsMap, setImageEnrollmentsMap] = useState<Image[]>();
+
+  const getImageUrl = async (name) => {
+    return await Storage.get('thumbnails/' + name);
+  };
+
+  useEffect(() => {
+    if (catalogCourses.length > 0 && !imageCoursesMap) {
+      Promise.all(
+        catalogCourses?.map((item) =>
+          getImageUrl(item.thumbnail).then((result) => ({ id: item.thumbnail, url: result })),
+        ),
+      ).then((r) => {
+        setImageCoursesMap(r);
+      });
+    }
+  }, [catalogCourses, imageCoursesMap]);
+
+  useEffect(() => {
+    if (enrollments.length > 0 && !imageEnrollmentsMap) {
+      Promise.all(
+        enrollments?.map((item) =>
+          getImageUrl(item.thumbnail).then((result) => ({ id: item.thumbnail, url: result })),
+        ),
+      ).then((r) => {
+        setImageEnrollmentsMap(r);
+      });
+    }
+  }, [enrollments, imageEnrollmentsMap]);
 
   const itemTemplate = (enrollment: Enrollment) => {
     return (
@@ -71,7 +99,10 @@ export const UserCourses: React.FC = () => {
         <div className='flex flex-column xl:flex-row xl:align-items-start p-4 gap-4'>
           <img
             className='w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round'
-            src={enrollment.thumbnail}
+            src={
+              imageCoursesMap?.find((i) => i.id == enrollment.thumbnail)?.url ??
+              imageEnrollmentsMap?.find((i) => i.id == enrollment.thumbnail)?.url
+            }
             alt={enrollment.courseName}
           />
 
@@ -109,8 +140,10 @@ export const UserCourses: React.FC = () => {
   return (
     <Layout title=''>
       <Container>
-        {enrollments && <DataView value={enrollments} itemTemplate={itemTemplate} />}
-        {catalogCourses && <DataView value={catalogCourses} itemTemplate={itemTemplate} />}
+        {enrollments.length > 0 && <DataView value={enrollments} itemTemplate={itemTemplate} />}
+        {catalogCourses.length > 0 && (
+          <DataView value={catalogCourses} itemTemplate={itemTemplate} />
+        )}
         <Box textAlign='center' color='inherit'>
           <SpaceBetween direction='vertical' size='l'>
             <Button onClick={() => navigate('/catalog/courses')} style={{ marginTop: '20px' }}>

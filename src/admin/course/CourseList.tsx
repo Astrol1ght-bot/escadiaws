@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Storage } from 'aws-amplify';
 import { Divider, Heading } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Container, Header, Icon, SpaceBetween, Table } from '@cloudscape-design/components';
@@ -14,6 +15,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { getMainCourses } from '../../services/userSession';
 import useAppStore from '../../store/useAppStore';
+import { Image } from 'src/store/storeTypes';
 
 export const AdminCourseList: React.FC = () => {
   const navigate = useNavigate();
@@ -29,6 +31,24 @@ export const AdminCourseList: React.FC = () => {
         .catch((e) => console.log(e));
     }
   };
+
+  const [imageMap, setImageMap] = useState<Image[]>([]);
+
+  const getImageUrl = async (name) => {
+    return await Storage.get('thumbnails/' + name);
+  };
+
+  useEffect(() => {
+    if (courses?.data.listCourses.items) {
+      Promise.all(
+        courses?.data.listCourses.items.map((item) =>
+          getImageUrl(item.thumbnail).then((result) => ({ id: item.thumbnail, url: result })),
+        ),
+      ).then((r) => {
+        setImageMap(r);
+      });
+    }
+  }, [courses, imageMap]);
 
   return (
     <Layout
@@ -59,8 +79,15 @@ export const AdminCourseList: React.FC = () => {
           <Column
             field='thumbnail'
             header='Thumbnail'
-            body={(item) => <img width={50} src={item?.thumbnail} alt={item?.thumbnail} />}
+            body={(item) => (
+              <img
+                width={50}
+                src={imageMap.find((i) => i.id == item?.thumbnail)?.url}
+                alt={item?.thumbnail}
+              />
+            )}
           ></Column>
+          <Column field='professor' header='Profesor' body={(item) => item?.professor}></Column>
           <Column
             header=''
             body={(item) => (

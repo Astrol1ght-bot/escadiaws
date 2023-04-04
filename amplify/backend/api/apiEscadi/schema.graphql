@@ -27,7 +27,7 @@ type Course
 {
     id: ID!
     name: String!
-    thumbnail: AWSURL!
+    thumbnail: String!
     description: String
     price: Float!
     professor: String!
@@ -50,7 +50,7 @@ type Enrollment
     filekey: String!
     courseID: String!
     courseName: String!
-    thumbnail: AWSURL!
+    thumbnail: String!
     total: String!
 }
 
