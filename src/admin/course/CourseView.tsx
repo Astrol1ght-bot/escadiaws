@@ -1,14 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Heading, Flex } from '@aws-amplify/ui-react';
 import { useParams } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  Container,
-  Header,
-  SpaceBetween,
-  Table,
-} from '@cloudscape-design/components';
+import { Box, Button, Container, Header, SpaceBetween, Table } from '@cloudscape-design/components';
+import { Storage } from 'aws-amplify';
 import { GetCourseQuery } from 'src/API';
 import { DataContainer } from 'src/container/DataManagement/DataContainer';
 import { Layout } from 'src/container/Layout/Layout';
@@ -21,12 +15,26 @@ export const CourseView: React.FC = () => {
   const userAuth = cognitoUser !== undefined;
   const params = useParams();
 
-  const { data, isLoading, error, isValidating } =
-    usePublicElement<GetCourseQuery>(getCourse, userAuth, params.id);
+  const { data, isLoading, error, isValidating } = usePublicElement<GetCourseQuery>(
+    getCourse,
+    userAuth,
+    params.id,
+  );
+
+  const [image, setImage] = useState<string>();
+
+  const getImageUrl = async (name) => {
+    const url = await Storage.get('thumbnails/' + name);
+    setImage(url);
+  };
+
+  useEffect(() => {
+    if (!image && data?.getCourse?.thumbnail) getImageUrl(data?.getCourse?.thumbnail);
+  }, [data]);
 
   return (
     <Layout
-      title=""
+      title=''
       breadCrumbs={[
         { text: 'Todos los Cursos', href: '/admin/courses' },
         { text: data?.getCourse?.name || '', href: '#' },
@@ -34,40 +42,33 @@ export const CourseView: React.FC = () => {
     >
       <Container>
         {data?.getCourse && (
-          <DataContainer
-            isLoading={isLoading}
-            isValidating={isValidating}
-            errors={error}
-          >
+          <DataContainer isLoading={isLoading} isValidating={isValidating} errors={error}>
             <Heading level={1}>{data.getCourse.name}</Heading>
             <Flex
-              direction="row"
-              justifyContent="flex-start"
-              alignItems="stretch"
-              alignContent="flex-start"
-              wrap="nowrap"
-              gap="1rem"
+              direction='row'
+              justifyContent='flex-start'
+              alignItems='stretch'
+              alignContent='flex-start'
+              wrap='nowrap'
+              gap='1rem'
             >
-              <img
-                width="40%"
-                src={data.getCourse.thumbnail}
-                alt={data.getCourse.name}
-              />
+              <img width='40%' src={image} alt={data.getCourse.name} />
 
-              <SpaceBetween direction="vertical" size="xxl">
+              <SpaceBetween direction='vertical' size='xxl'>
                 <Table
                   columnDefinitions={[
                     {
                       id: 'price',
                       header: 'Precio',
                       width: 20,
-                      cell: (e) => <Heading level={1}>{`$${e.price}`}</Heading>,
+                      cell: (e) => <Heading level={1}>{`₡${e.price}`}</Heading>,
                     },
                     {
                       id: 'description',
                       header: 'Descripción',
-                      width: 20,
+                      width: 50,
                       cell: (e) => e.description,
+                      maxWidth: '400px',
                     },
                   ]}
                   items={[
@@ -77,10 +78,10 @@ export const CourseView: React.FC = () => {
                       description: data.getCourse.description,
                     },
                   ]}
-                  loadingText="Cargando curso..."
-                  trackBy="id"
+                  loadingText='Cargando curso...'
+                  trackBy='id'
                   empty={
-                    <Box textAlign="center" color="inherit">
+                    <Box textAlign='center' color='inherit'>
                       <b>No se encontró el curso.</b>
                     </Box>
                   }

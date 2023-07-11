@@ -13,7 +13,7 @@
       "TOTP"
     ],
     "smsAuthenticationMessage": "Escadi - Tu código de autenticación es {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
+    "smsVerificationMessage": "Su código de verificación es {####}",
     "emailVerificationSubject": "Escadi - Aqui está su código de verificación",
     "emailVerificationMessage": "Su código de verificación es {####}",
     "defaultPasswordPolicy": false,
@@ -42,7 +42,11 @@
     ],
     "userPoolGroups": true,
     "adminQueries": false,
-    "triggers": {},
+    "triggers": {
+      "PostConfirmation": [
+        "add-to-group"
+      ]
+    },
     "hostedUI": false,
     "userPoolGroupList": [
       "Clients",
@@ -67,12 +71,26 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "permissions": [],
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "escadiauthPostConfirmation",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "permissions": [
+      "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
+    ],
     "parentStack": {
       "Ref": "AWS::StackId"
     },
     "authProviders": [],
-    "adminQueryGroup": "Admins"
+    "adminQueryGroup": "Admins",
+    "thirdPartyAuth": false,
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"escadiauthPostConfirmation\"\n  }\n]"
   }
 }

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Authenticator as Auth } from '@aws-amplify/ui-react'
-import { Route } from 'react-router-dom'
-import { AdminUserList } from './UserList'
+import React from 'react';
+import { Authenticator as Auth } from '@aws-amplify/ui-react';
+import { Route } from 'react-router-dom';
+import { AdminUserList } from './UserList';
 
-export const createAdminCourseRoutes = () => {
+export const createAdminUserRoutes = () => {
   const routes = (
     <Route path='/admin/users'>
       <Route
@@ -15,6 +15,6 @@ export const createAdminCourseRoutes = () => {
         }
       />
     </Route>
-  )
-  return { routes }
-}
+  );
+  return { routes };
+};

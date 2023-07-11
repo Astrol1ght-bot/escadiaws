@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-import { I18n } from 'aws-amplify'
-import { Authenticator, translations } from '@aws-amplify/ui-react'
+import { I18n } from 'aws-amplify';
+import { Authenticator, translations } from '@aws-amplify/ui-react';
 
-import { useNavigate } from 'react-router-dom'
-import useAppStore from 'src/store/useAppStore'
-import { Layout } from 'src/container/Layout/Layout'
+import { useNavigate } from 'react-router-dom';
+import useAppStore from 'src/store/useAppStore';
+import { Layout } from 'src/container/Layout/Layout';
+import { CreateStudentInput } from 'src/API';
 
-const dict = {
+import { addElement } from '../../services/apiMutations';
+import { createStudent } from 'src/graphql/mutations';
+
+I18n.putVocabularies(translations);
+I18n.setLanguage('es');
+
+I18n.putVocabularies({
   es: {
     'Sign in to your account': 'Inicia sesión en tu cuenta',
     'Sign In': 'Iniciar sesión',
@@ -18,6 +25,7 @@ const dict = {
     'Password *': 'Contraseña *',
     Password: 'Contraseña',
     'Enter your Password': 'Ingresa tu Contraseña',
+    'Enter your Email': 'Ingresa tu Correo',
     'Enter your Username': 'Ingresa tu usuario',
     'No account?': '¿No tienes una cuenta?',
     'Create account': 'Crea una cuenta',
@@ -36,14 +44,14 @@ const dict = {
     Verify: 'Verificar',
     'Verify Contact': 'Verificar contacto',
     Skip: 'Omitir',
-    'Lost your code?\'': '¿Perdiste tu código?',
+    "Lost your code?'": '¿Perdiste tu código?',
     Resend: 'Reenviar',
-    'Forgot Password?': '¿Olvidaste tu contraseña?',
+    'Forgot your password?': '¿Olvidaste tu contraseña?',
     'You will receive a verification code': 'Recibirás un codigo de verificación',
     Code: 'Código',
     'Account recovery requires verified contact information':
       'La recuperación de la cuenta requiere información de contacto verificada',
-    'User does not exist': 'El usuario no existe',
+    'User does not exist.': 'El usuario no existe',
     'User already exists': 'El usuario ya existe',
     'Incorrect username or password': 'Nombre de usuario o contraseña incorrecta',
     'Invalid password format': 'Formato de contraseña inválido',
@@ -59,22 +67,33 @@ const dict = {
     'Have an account? ': '¿Ya tienes un cuenta?',
     'Send Code': 'Enviar código',
     'Back to Sign In': 'Regresa al inicio de sesión',
+    'Please confirm your Password': 'Confirma tu Contraseña',
+    'Enter your Name': 'Ingresa tu nombre',
+    'Enter your Phone Number': 'Ingresa tu Número de Teléfono',
+    'Phone Number': 'Número de Teléfono',
+    'Resend Code': 'Reenviar Código',
+    'Confirm Password': 'Confirmar Contraseña',
+    'Name': 'Nombre',
+    'Please fill out this field.': 'Por favor llenar este campo.',
+    'Email': 'Correo electrónico',
   },
-}
-I18n.putVocabularies(dict)
-I18n.setLanguage('es')
+});
+// I18n.putVocabularies(dict);
+// I18n.setLanguage('es');
 
 export const SignIn: React.FC = () => {
-  const cognitoUser = useAppStore((state) => state.cognitoUser)
-  const navigate = useNavigate()
+  
+  const userProfile = useAppStore((state) => state.userProfile);
+  const navigate = useNavigate();
 
+  
   useEffect(() => {
-    if (cognitoUser) navigate('/')
-  }, [cognitoUser])
+    if (userProfile) navigate('/');
+  }, [userProfile]);
 
   return (
-    <Layout title=''>
+    <Layout title='' >
       <Authenticator signUpAttributes={['name', 'phone_number']} />
     </Layout>
-  )
-}
+  );
+};

@@ -2,6 +2,96 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createStudent = /* GraphQL */ `
+  mutation CreateStudent(
+    $input: CreateStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    createStudent(input: $input, condition: $condition) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStudent = /* GraphQL */ `
+  mutation UpdateStudent(
+    $input: UpdateStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    updateStudent(input: $input, condition: $condition) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStudent = /* GraphQL */ `
+  mutation DeleteStudent(
+    $input: DeleteStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    deleteStudent(input: $input, condition: $condition) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createCourse = /* GraphQL */ `
   mutation CreateCourse(
     $input: CreateCourseInput!
@@ -13,6 +103,18 @@ export const createCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -29,6 +131,18 @@ export const updateCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -45,45 +159,291 @@ export const deleteCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const createProfessor = /* GraphQL */ `
-  mutation CreateProfessor(
-    $input: CreateProfessorInput!
-    $condition: ModelProfessorConditionInput
+export const createEnrollment = /* GraphQL */ `
+  mutation CreateEnrollment(
+    $input: CreateEnrollmentInput!
+    $condition: ModelEnrollmentConditionInput
   ) {
-    createProfessor(input: $input, condition: $condition) {
+    createEnrollment(input: $input, condition: $condition) {
       id
-      name
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const updateEnrollment = /* GraphQL */ `
+  mutation UpdateEnrollment(
+    $input: UpdateEnrollmentInput!
+    $condition: ModelEnrollmentConditionInput
+  ) {
+    updateEnrollment(input: $input, condition: $condition) {
+      id
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const deleteEnrollment = /* GraphQL */ `
+  mutation DeleteEnrollment(
+    $input: DeleteEnrollmentInput!
+    $condition: ModelEnrollmentConditionInput
+  ) {
+    deleteEnrollment(input: $input, condition: $condition) {
+      id
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const createCourseEnrollments = /* GraphQL */ `
+  mutation CreateCourseEnrollments(
+    $input: CreateCourseEnrollmentsInput!
+    $condition: ModelCourseEnrollmentsConditionInput
+  ) {
+    createCourseEnrollments(input: $input, condition: $condition) {
+      id
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateProfessor = /* GraphQL */ `
-  mutation UpdateProfessor(
-    $input: UpdateProfessorInput!
-    $condition: ModelProfessorConditionInput
+export const updateCourseEnrollments = /* GraphQL */ `
+  mutation UpdateCourseEnrollments(
+    $input: UpdateCourseEnrollmentsInput!
+    $condition: ModelCourseEnrollmentsConditionInput
   ) {
-    updateProfessor(input: $input, condition: $condition) {
+    updateCourseEnrollments(input: $input, condition: $condition) {
       id
-      name
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteProfessor = /* GraphQL */ `
-  mutation DeleteProfessor(
-    $input: DeleteProfessorInput!
-    $condition: ModelProfessorConditionInput
+export const deleteCourseEnrollments = /* GraphQL */ `
+  mutation DeleteCourseEnrollments(
+    $input: DeleteCourseEnrollmentsInput!
+    $condition: ModelCourseEnrollmentsConditionInput
   ) {
-    deleteProfessor(input: $input, condition: $condition) {
+    deleteCourseEnrollments(input: $input, condition: $condition) {
       id
-      name
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }

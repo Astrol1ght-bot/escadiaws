@@ -19,13 +19,21 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "alwaysStrict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "paths": {
       "crypto": [
         "../../node_modules/crypto-js"
       ],
+      "@api-types": ["src/API"],
+      "@aws-exports": ["src/aws-exports"],
+      "@layout/*": ["src/container/Layout/*"],
+      "@graphql/*": ["src/graphql/*"],
+      "@use-AppStore": ["src/store/useAppStore"],
+      "@services/*": ["src/services/*"],
+      "@data-management/*": ["src/container/DataManagement/*"],
+      "@cart-layout/*": ["src/container/CartLayout/*"]
     },
   },
   "include": ["src", "test"]

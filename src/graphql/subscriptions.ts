@@ -2,6 +2,87 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateStudent = /* GraphQL */ `
+  subscription OnCreateStudent($filter: ModelSubscriptionStudentFilterInput) {
+    onCreateStudent(filter: $filter) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStudent = /* GraphQL */ `
+  subscription OnUpdateStudent($filter: ModelSubscriptionStudentFilterInput) {
+    onUpdateStudent(filter: $filter) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStudent = /* GraphQL */ `
+  subscription OnDeleteStudent($filter: ModelSubscriptionStudentFilterInput) {
+    onDeleteStudent(filter: $filter) {
+      id
+      name
+      emai
+      enrollments {
+        items {
+          id
+          status
+          date
+          filekey
+          courseID
+          courseName
+          thumbnail
+          total
+          createdAt
+          updatedAt
+          studentEnrollmentsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCourse = /* GraphQL */ `
   subscription OnCreateCourse($filter: ModelSubscriptionCourseFilterInput) {
     onCreateCourse(filter: $filter) {
@@ -10,6 +91,18 @@ export const onCreateCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -23,6 +116,18 @@ export const onUpdateCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -36,42 +141,285 @@ export const onDeleteCourse = /* GraphQL */ `
       thumbnail
       description
       price
+      professor
+      keyfile
+      enrollment {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreateProfessor = /* GraphQL */ `
-  subscription OnCreateProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
+export const onCreateEnrollment = /* GraphQL */ `
+  subscription OnCreateEnrollment(
+    $filter: ModelSubscriptionEnrollmentFilterInput
   ) {
-    onCreateProfessor(filter: $filter) {
+    onCreateEnrollment(filter: $filter) {
       id
-      name
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const onUpdateEnrollment = /* GraphQL */ `
+  subscription OnUpdateEnrollment(
+    $filter: ModelSubscriptionEnrollmentFilterInput
+  ) {
+    onUpdateEnrollment(filter: $filter) {
+      id
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const onDeleteEnrollment = /* GraphQL */ `
+  subscription OnDeleteEnrollment(
+    $filter: ModelSubscriptionEnrollmentFilterInput
+  ) {
+    onDeleteEnrollment(filter: $filter) {
+      id
+      student {
+        id
+        name
+        emai
+        enrollments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      course {
+        items {
+          id
+          courseId
+          enrollmentId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      date
+      filekey
+      courseID
+      courseName
+      thumbnail
+      total
+      createdAt
+      updatedAt
+      studentEnrollmentsId
+    }
+  }
+`;
+export const onCreateCourseEnrollments = /* GraphQL */ `
+  subscription OnCreateCourseEnrollments(
+    $filter: ModelSubscriptionCourseEnrollmentsFilterInput
+  ) {
+    onCreateCourseEnrollments(filter: $filter) {
+      id
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateProfessor = /* GraphQL */ `
-  subscription OnUpdateProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
+export const onUpdateCourseEnrollments = /* GraphQL */ `
+  subscription OnUpdateCourseEnrollments(
+    $filter: ModelSubscriptionCourseEnrollmentsFilterInput
   ) {
-    onUpdateProfessor(filter: $filter) {
+    onUpdateCourseEnrollments(filter: $filter) {
       id
-      name
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteProfessor = /* GraphQL */ `
-  subscription OnDeleteProfessor(
-    $filter: ModelSubscriptionProfessorFilterInput
+export const onDeleteCourseEnrollments = /* GraphQL */ `
+  subscription OnDeleteCourseEnrollments(
+    $filter: ModelSubscriptionCourseEnrollmentsFilterInput
   ) {
-    onDeleteProfessor(filter: $filter) {
+    onDeleteCourseEnrollments(filter: $filter) {
       id
-      name
+      courseId
+      enrollmentId
+      course {
+        id
+        name
+        thumbnail
+        description
+        price
+        professor
+        keyfile
+        enrollment {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      enrollment {
+        id
+        student {
+          id
+          name
+          emai
+          createdAt
+          updatedAt
+        }
+        course {
+          nextToken
+        }
+        status
+        date
+        filekey
+        courseID
+        courseName
+        thumbnail
+        total
+        createdAt
+        updatedAt
+        studentEnrollmentsId
+      }
       createdAt
       updatedAt
     }

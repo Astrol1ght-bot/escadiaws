@@ -1,4 +1,42 @@
 {
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-escadi-develop-121021-authRole",
+      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-escadi-develop-121021-deployment",
+      "UnauthRoleName": "amplify-escadi-develop-121021-unauthRole",
+      "StackName": "amplify-escadi-develop-121021",
+      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-develop-121021/aa3b6e50-b9ee-11ed-bb18-1209a7a6d13f",
+      "AmplifyAppId": "d2qktra0fp94ub",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-escadi-develop-121021-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "escadiauth": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "apiEscadi": {},
+        "AdminQueries": {}
+      },
+      "storage": {
+        "storage": {}
+      },
+      "function": {
+        "AdminQueries0eccdb9d": {
+          "deploymentBucketName": "amplify-escadi-develop-121021-deployment",
+          "s3Key": "amplify-builds/AdminQueries0eccdb9d-4a596546426731527452-build.zip"
+        },
+        "escadiauthPostConfirmation": {
+          "GROUP": "Students",
+          "deploymentBucketName": "amplify-escadi-develop-121021-deployment",
+          "s3Key": "amplify-builds/escadiauthPostConfirmation-7443387a6e44654d6846-build.zip"
+        }
+      }
+    }
+  },
   "prod": {
     "awscloudformation": {
       "AuthRoleName": "amplify-escadi-prod-153730-authRole",
@@ -28,31 +66,6 @@
           "deploymentBucketName": "amplify-escadi-prod-153730-deployment",
           "s3Key": "amplify-builds/AdminQueries0eccdb9d-535a3151736467554d2b-build.zip"
         }
-      }
-    }
-  },
-  "develop": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-escadi-develop-121021-authRole",
-      "UnauthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::555296628964:role/amplify-escadi-develop-121021-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-escadi-develop-121021-deployment",
-      "UnauthRoleName": "amplify-escadi-develop-121021-unauthRole",
-      "StackName": "amplify-escadi-develop-121021",
-      "StackId": "arn:aws:cloudformation:us-east-1:555296628964:stack/amplify-escadi-develop-121021/aa3b6e50-b9ee-11ed-bb18-1209a7a6d13f",
-      "AmplifyAppId": "d2qktra0fp94ub"
-    },
-    "categories": {
-      "auth": {
-        "escadiauth": {},
-        "userPoolGroups": {}
-      },
-      "api": {
-        "apiEscadi": {}
-      },
-      "storage": {
-        "storage": {}
       }
     }
   }

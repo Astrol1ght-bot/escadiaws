@@ -12,8 +12,10 @@ import { CourseForm } from './CourseForm';
 
 export const UpdateCourse: React.FC = () => {
   const params = useParams();
-  const { data, isLoading, error, isValidating, mutate } =
-    useElement<GetCourseQuery>(getCourse, params.id);
+  const { data, isLoading, error, isValidating, mutate } = useElement<GetCourseQuery>(
+    getCourse,
+    params.id,
+  );
   const courseQuery = data?.getCourse ? data : null;
 
   const update = (updateData: CreateCourseInput) => {
@@ -25,22 +27,18 @@ export const UpdateCourse: React.FC = () => {
 
   return (
     <Layout
-      title="Editar"
+      title='Editar'
       breadCrumbs={[
         { text: 'Catálogo de Cursos', href: '/admin/courses' },
         { text: courseQuery?.getCourse?.name || '', href: '#' },
       ]}
     >
-      <DataContainer
-        isLoading={isLoading}
-        isValidating={isValidating}
-        errors={error}
-      >
+      <DataContainer isLoading={isLoading} isValidating={isValidating} errors={error}>
         {courseQuery && (
           <CourseForm
             isLoading={isLoading || isValidating}
             onSubmit={(prodData) => update(prodData)}
-            title=""
+            title=''
             course={courseQuery}
           />
         )}
